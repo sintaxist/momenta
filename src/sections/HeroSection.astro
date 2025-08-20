@@ -1,0 +1,51 @@
+---
+import { HeroParticles } from '@/components/HeroParticles';
+import { AnimatedMockup } from '@/components/AnimatedMockup';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
+import { HeroCTAButton } from '@/components/HeroCTAButton';
+---
+<section id="hero" class="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
+  <HeroParticles client:load />
+  
+  <div class="absolute inset-0">
+    <div class="absolute top-20 left-10 w-96 h-96 rounded-full opacity-10 bg-indigo-500 blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-10 bg-purple-500 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 w-60 h-60 rounded-full opacity-5 bg-pink-500 blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-8">
+        <div class="space-y-6">
+          <h1 class="text-5xl lg:text-7xl text-gray-900 leading-tight" style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700 }}>
+            Experiencias Digitales. <span class="text-indigo-600">Ejecución Excepcional.</span>
+          </h1>
+          <p class="text-xl text-gray-600 leading-relaxed max-w-lg" style={{ fontFamily: 'Sora, sans-serif', fontWeight: 400 }}>
+            Diseño y desarrollo de plataformas interactivas para eventos que definen el estándar de la industria.
+          </p>
+        </div>
+        
+        <HeroCTAButton client:visible />
+        
+        <div class="flex space-x-12 pt-8">
+          <div class="text-center">
+            <AnimatedCounter to={5} suffix="+" client:visible className="text-3xl text-gray-900 mb-2" style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700 }} />
+            <div class="text-gray-500 text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>Años de Experiencia</div>
+          </div>
+          <div class="text-center">
+            <AnimatedCounter to={50} suffix="+" client:visible className="text-3xl text-gray-900 mb-2" style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700 }} />
+            <div class="text-gray-500 text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>Proyectos Completados</div>
+          </div>
+          <div class="text-center">
+            <AnimatedCounter to={100} suffix="%" client:visible className="text-3xl text-gray-900 mb-2" style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700 }} />
+            <div class="text-gray-500 text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>Satisfacción del Cliente</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-center lg:justify-end">
+        <AnimatedMockup client:visible />
+      </div>
+    </div>
+  </div>
+</section>

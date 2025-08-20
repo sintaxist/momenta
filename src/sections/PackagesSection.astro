@@ -1,0 +1,145 @@
+---
+import { SectionParticles } from '@/components/SectionParticles';
+import { ScheduleButton } from '@/components/ScheduleButton';
+
+const icons = {
+  Check: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>`,
+  Star: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  Crown: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M12 16h.01"/></svg>`,
+  Sparkles: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.9 1.9-1 .8-2.2.4-.4 2.2-.8 1L3 12l1.9 1.9.8 1 .4 2.2 2.2.4 1 .8 1.9 1.9 1.9-1.9 1-.8 2.2-.4.4-2.2.8-1 1.9-1.9-1.9-1.9-.8-1-.4-2.2-2.2-.4-1-.8Z"/><path d="M18 6h.01"/><path d="M6 18h.01"/></svg>`,
+};
+
+const packages = [
+  { id: 1, name: "Esencial", icon: icons.Sparkles, originalPrice: "$3,125", discountedPrice: "$2,500", description: "Perfecto para eventos íntimos con funcionalidades básicas", features: ["Invitación digital personalizada", "RSVP automatizado", "Hasta 100 invitados", "Galería de fotos básica", "Soporte por email", "1 revisión de diseño"], popular: false, savings: "$625" },
+  { id: 2, name: "Premium", icon: icons.Crown, originalPrice: "$5,625", discountedPrice: "$4,500", description: "La elección perfecta para eventos que buscan la excelencia", features: ["Todo lo incluido en Esencial", "Hasta 500 invitados", "Agenda interactiva", "Tickets digitales con QR", "Analytics avanzado", "Playlist colaborativa", "Soporte prioritario 24/7", "3 revisiones de diseño", "Integración con redes sociales"], popular: true, savings: "$1,125" },
+  { id: 3, name: "Luxury", icon: icons.Star, originalPrice: "$9,375", discountedPrice: "$7,500", description: "Experiencia completa sin límites para eventos extraordinarios", features: ["Todo lo incluido en Premium", "Invitados ilimitados", "Diseño 100% personalizado", "Múltiples idiomas", "Streaming en vivo", "Concierge digital", "Dashboard administrativo", "Revisiones ilimitadas", "Consultor dedicado", "Implementación en 48h"], popular: false, savings: "$1,875" }
+];
+---
+
+<section id="paquetes" class="py-32 px-6 relative overflow-hidden">
+  <SectionParticles 
+    client:visible
+    density="medium" 
+    colors={['#10b981', '#f59e0b', '#ec4899']}
+    speed={0.1}
+  />
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="text-center mb-8" transition:animate="fade">
+      <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-blue-100 text-emerald-700 px-6 py-3 rounded-full border border-emerald-200 shadow-lg">
+        <span class="text-lg">🎉</span>
+        <span class="font-sora font-semibold">
+          Promoción de Lanzamiento: 20% de Descuento
+        </span>
+      </div>
+    </div>
+
+    <div class="text-center mb-20" transition:animate="fade delay-200">
+      <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
+        Una Inversión en la <span class="text-indigo-600">Perfección</span>
+      </h2>
+      <p class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Cada paquete está diseñado para diferentes niveles de sofisticación, pero todos comparten el mismo compromiso con la calidad excepcional.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 items-end">
+      {packages.map((pkg, index) => (
+        <div class={`relative group ${pkg.popular ? 'lg:-mb-8' : ''}`} transition:animate="fade slide-in-from-bottom" style={`transition-delay: ${index * 150}ms`}>
+          {pkg.popular && (
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+              <div class="font-sora bg-indigo-600 text-white px-6 py-2 rounded-full text-sm shadow-lg flex items-center">
+                <Fragment set:html={icons.Star} />
+                <span class="ml-1">Más Popular</span>
+              </div>
+            </div>
+          )}
+
+          <div class="absolute -top-2 -right-2 z-20">
+            <div class="font-sora bg-emerald-500 text-white px-3 py-1 rounded-full text-xs shadow-lg">
+              Ahorra {pkg.savings}
+            </div>
+          </div>
+
+          <div class={`relative p-8 rounded-3xl backdrop-blur-xl border transition-all duration-300 h-full flex flex-col
+            ${pkg.popular ? 'bg-white/50 border-indigo-200 shadow-2xl' : 'bg-white/30 border-white/30 hover:border-white/50 shadow-lg'}
+            group-hover:scale-105 group-hover:-translate-y-2`
+          }>
+            <div class="flex-grow">
+              <div class="text-center mb-8">
+                <div class={`inline-flex p-4 rounded-2xl mb-4 transition-transform duration-300 group-hover:rotate-6 ${ pkg.popular ? 'bg-indigo-600' : 'bg-gray-500' }`}>
+                  <Fragment set:html={pkg.icon} />
+                </div>
+                
+                <h3 class={`font-sora font-bold text-2xl mb-2 ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
+                  {pkg.name}
+                </h3>
+                
+                <p class="font-sora text-gray-600 text-sm mb-4">
+                  {pkg.description}
+                </p>
+                
+                <div class="mb-6">
+                  <div class="text-lg text-gray-400 line-through mb-1">{pkg.originalPrice}</div>
+                  <span class={`font-sora font-bold text-4xl ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
+                    {pkg.discountedPrice}
+                  </span>
+                  <span class="text-gray-600 text-sm ml-2">MXN</span>
+                </div>
+              </div>
+
+              <div class="space-y-4 mb-8">
+                {pkg.features.map((feature) => (
+                  <div class="flex items-start space-x-3">
+                    <div class={`p-1 rounded-full mt-0.5 shrink-0 ${ pkg.popular ? 'bg-indigo-500' : 'bg-gray-500' }`}>
+                      <Fragment set:html={icons.Check} />
+                    </div>
+                    <span class="font-sora text-gray-700 text-sm leading-relaxed">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="space-y-3 mt-auto">
+              <button class={`js-scroll-to-contact w-full h-11 inline-flex items-center justify-center rounded-md text-sm font-sora font-semibold transition-all duration-500 
+                ${pkg.popular ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg' : 'bg-white/50 border border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
+                Me Interesa
+              </button>
+              <ScheduleButton client:visible variant="secondary" size="sm" className="w-full">
+                Consulta {pkg.name}
+              </ScheduleButton>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-20" transition:animate="fade delay-500">
+      <p class="font-sora text-gray-600 mb-6">
+        ¿Necesitas algo personalizado? Hablemos sobre tu proyecto específico.
+      </p>
+      <ScheduleButton client:visible variant="floating" size="lg">
+        Consulta Personalizada Gratuita
+      </ScheduleButton>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Script para el botón "Me Interesa"
+  const contactButtons = document.querySelectorAll('.js-scroll-to-contact');
+  contactButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+<style>
+  /* Los iconos SVG de Lucide se colorean con la propiedad 'color' de CSS */
+  .lucide-sparkles, .lucide-crown, .lucide-star {
+    color: white;
+  }
+</style>
