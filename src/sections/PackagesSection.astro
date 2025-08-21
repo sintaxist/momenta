@@ -1,6 +1,4 @@
 ---
-import { SectionParticles } from '@/components/SectionParticles';
-import { ScheduleButton } from '@/components/ScheduleButton';
 
 const icons = {
   Check: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>`,
@@ -17,12 +15,6 @@ const packages = [
 ---
 
 <section id="paquetes" class="py-32 px-6 relative overflow-hidden">
-  <SectionParticles 
-    client:visible
-    density="medium" 
-    colors={['#10b981', '#f59e0b', '#ec4899']}
-    speed={0.1}
-  />
 
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-8" transition:animate="fade">
@@ -107,9 +99,9 @@ const packages = [
                 ${pkg.popular ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg' : 'bg-white/50 border border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
                 Me Interesa
               </button>
-              <ScheduleButton client:visible variant="secondary" size="sm" className="w-full">
+              {/* <ScheduleButton client:visible variant="secondary" size="sm" className="w-full">
                 Consulta {pkg.name}
-              </ScheduleButton>
+              </ScheduleButton> */}
             </div>
           </div>
         </div>
@@ -120,9 +112,9 @@ const packages = [
       <p class="font-sora text-gray-600 mb-6">
         ¿Necesitas algo personalizado? Hablemos sobre tu proyecto específico.
       </p>
-      <ScheduleButton client:visible variant="floating" size="lg">
+      <!-- <ScheduleButton client:visible variant="floating" size="lg">
         Consulta Personalizada Gratuita
-      </ScheduleButton>
+      </ScheduleButton> -->
     </div>
   </div>
 </section>

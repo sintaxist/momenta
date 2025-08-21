@@ -1,6 +1,4 @@
 ---
-import { SectionParticles } from '@/components/SectionParticles';
-import { ScheduleButton } from '@/components/ScheduleButton';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
 const projects = [
   {
@@ -39,13 +37,6 @@ const projects = [
 ---
 
 <section id="demos" class="py-32 px-6 relative overflow-hidden">
-  <SectionParticles 
-    client:visible
-    density="low" 
-    colors={['#8b5cf6', '#ec4899', '#6366f1']}
-    speed={0.1}
-  />
-
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-20">
       <h2 class="text-4xl lg:text-6xl text-gray-900 mb-6" style="font-family: 'Sora', sans-serif; font-weight: 700;">
@@ -55,9 +46,9 @@ const projects = [
         Cada proyecto es una experiencia única, diseñada para superar expectativas y crear momentos memorables.
       </p>
       
-      <ScheduleButton client:visible variant="secondary" size="lg">
+      <!-- <ScheduleButton client:visible variant="secondary" size="lg">
         Discutir Mi Proyecto
-      </ScheduleButton>
+      </ScheduleButton> -->
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

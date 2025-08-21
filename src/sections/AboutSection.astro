@@ -1,7 +1,4 @@
 ---
-// src/components/AboutSection.astro
-import { SectionParticles } from '@/components/SectionParticles';
-import { ScheduleButton } from '@/components/ScheduleButton';
 
 // Obtenemos el código SVG de los iconos para usarlos directamente
 const icons = {
@@ -12,12 +9,6 @@ const icons = {
 ---
 
 <section id="sobre-mi" class="py-32 px-6 relative overflow-hidden">
-  <SectionParticles 
-    client:visible
-    density="medium" 
-    colors={['#6366f1', '#8b5cf6', '#3b82f6']}
-    speed={0.15}
-  />
 
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -53,9 +44,9 @@ const icons = {
         </div>
 
         <div class="pt-4">
-          <ScheduleButton client:visible variant="primary" size="lg">
+          <!-- <ScheduleButton client:visible variant="primary" size="lg">
             Agenda tu Consulta Gratuita
-          </ScheduleButton>
+          </ScheduleButton> -->
         </div>
       </div>
 

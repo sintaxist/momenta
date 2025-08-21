@@ -1,11 +1,11 @@
 ---
-import { HeroParticles } from '@/components/HeroParticles';
+import HeroParticles from '@/components/HeroParticles.astro';
 import { AnimatedMockup } from '@/components/AnimatedMockup';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
 import { HeroCTAButton } from '@/components/HeroCTAButton';
 ---
 <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
-  <HeroParticles client:load />
+  <HeroParticles />
   
   <div class="absolute inset-0">
     <div class="absolute top-20 left-10 w-96 h-96 rounded-full opacity-10 bg-indigo-500 blur-3xl"></div>
