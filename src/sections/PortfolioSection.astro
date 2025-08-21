@@ -1,110 +1,74 @@
 ---
+import PortfolioCard from '@/components/PortfolioCard.astro';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
+import Button from '@/components/ui/Button.astro';
+import ScheduleButton from '@/components/ScheduleButton.astro';
+
+// Se mantiene el icono de cerrar
+const iconX = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+const iconExternalLink = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>`;
+
 const projects = [
-  {
-    id: 1,
-    title: "Boda Elegante",
-    category: "Boda Premium",
-    image: "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    description: "Invitación digital interactiva con RSVP automatizado, galería de fotos y lista de regalos integrada. Diseño elegante con animaciones personalizadas y confirmación de asistencia en tiempo real.",
-    features: ["RSVP Automatizado", "Galería Interactiva", "Lista de Regalos", "Confirmación en Tiempo Real"]
-  },
-  {
-    id: 2,
-    title: "Premios Monarca",
-    category: "Evento Corporativo",
-    image: "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    description: "Plataforma completa para ceremonias de premiación con gestión de nominados, votación en línea y transmisión en vivo. Sistema de tickets digitales con códigos QR únicos.",
-    features: ["Gestión de Nominados", "Votación en Línea", "Tickets Digitales", "Transmisión en Vivo"]
-  },
-  {
-    id: 3,
-    title: "XV Años Luxury",
-    category: "Celebración Personal",
-    image: "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080",
-    description: "Experiencia digital completa para quinceañeras con cronómetro interactivo, playlist colaborativa y álbum de recuerdos compartido. Diseño personalizable con temas únicos.",
-    features: ["Cronómetro Interactivo", "Playlist Colaborativa", "Álbum de Recuerdos", "Diseño Personalizable"]
-  },
-  {
-    id: 4,
-    title: "Corporate Summit",
-    category: "Evento Empresarial",
-    image: "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    description: "Plataforma integral para conferencias corporativas con agenda interactiva, networking digital y sistema de feedback en tiempo real. Dashboard de analytics para organizadores.",
-    features: ["Agenda Interactiva", "Networking Digital", "Feedback en Tiempo Real", "Analytics Dashboard"]
-  }
+  { id: 1, title: "Boda Elegante", category: "Boda Premium", image: "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080", description: "Invitación digital interactiva con RSVP automatizado, galería de fotos y lista de regalos integrada. Diseño elegante con animaciones personalizadas y confirmación de asistencia en tiempo real.", features: ["RSVP Automatizado", "Galería Interactiva", "Lista de Regalos", "Confirmación en Tiempo Real"] },
+  { id: 2, title: "Premios Monarca", category: "Evento Corporativo", image: "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080", description: "Plataforma completa para ceremonias de premiación con gestión de nominados, votación en línea y transmisión en vivo. Sistema de tickets digitales con códigos QR únicos.", features: ["Gestión de Nominados", "Votación en Línea", "Tickets Digitales", "Transmisión en Vivo"] },
+  { id: 3, title: "XV Años Luxury", category: "Celebración Personal", image: "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080", description: "Experiencia digital completa para quinceañeras con cronómetro interactivo, playlist colaborativa y álbum de recuerdos compartido. Diseño personalizable con temas únicos.", features: ["Cronómetro Interactivo", "Playlist Colaborativa", "Álbum de Recuerdos", "Diseño Personalizable"] },
+  { id: 4, title: "Corporate Summit", category: "Evento Empresarial", image: "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080", description: "Plataforma integral para conferencias corporativas con agenda interactiva, networking digital y sistema de feedback en tiempo real. Dashboard de analytics para organizadores.", features: ["Agenda Interactiva", "Networking Digital", "Feedback en Tiempo Real", "Analytics Dashboard"] }
 ];
 ---
 
-<section id="demos" class="py-32 px-6 relative overflow-hidden">
+<section id="demos" class="py-32 px-6 relative">
+  <div class="absolute inset-0">
+    <div class="absolute top-20 left-10 w-96 h-96 rounded-full opacity-20 bg-indigo-500 blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-20 bg-purple-500 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 w-60 h-60 rounded-full opacity-10 bg-pink-500 blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
+  </div>
+
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-20">
-      <h2 class="text-4xl lg:text-6xl text-gray-900 mb-6" style="font-family: 'Sora', sans-serif; font-weight: 700;">
+      <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
         Portafolio <span class="text-indigo-600">Interactivo</span>
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8" style="font-family: 'Sora', sans-serif; font-weight: 400;">
+      <p class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
         Cada proyecto es una experiencia única, diseñada para superar expectativas y crear momentos memorables.
       </p>
-      
-      <!-- <ScheduleButton client:visible variant="secondary" size="lg">
-        Discutir Mi Proyecto
-      </ScheduleButton> -->
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {projects.map((project) => (
-        <div class="group cursor-pointer project-card" data-project-id={project.id}>
-          <div class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-white/50 transition-all duration-500 shadow-lg hover:shadow-xl">
-            <div class="aspect-[4/3] overflow-hidden relative">
-              <ImageWithFallback client:visible src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div class="absolute inset-0 bg-indigo-600/20 backdrop-blur-sm flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div class="text-white text-sm bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2" style="font-family: 'Sora', sans-serif;">
-                  Clic para ver detalles
-                </div>
-              </div>
-            </div>
-            <div class="p-4">
-              <span class="text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200" style="font-family: 'Sora', sans-serif;">
-                {project.category}
-              </span>
-              <h3 class="text-lg text-gray-900 mt-2 group-hover:text-indigo-600 transition-colors duration-300" style="font-family: 'Sora', sans-serif; font-weight: 600;">
-                {project.title}
-              </h3>
-            </div>
-          </div>
-        </div>
+    <ul class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {projects.map((project, index) => (
+        <PortfolioCard project={project} index={index} />
       ))}
-    </div>
+    </ul>
   </div>
 
   <div id="project-modal" class="modal-backdrop">
     <div class="modal-content">
       <div class="flex items-start justify-between mb-8">
         <div>
-          <h3 id="modal-title" class="text-3xl text-gray-900 mb-2" style="font-family: 'Sora', sans-serif; font-weight: 700;"></h3>
-          <span id="modal-category" class="text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200" style="font-family: 'Sora', sans-serif;"></span>
+          <h3 id="modal-title" class="font-sora font-bold text-3xl text-gray-900 mb-2"></h3>
+          <span id="modal-category" class="font-sora text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200"></span>
         </div>
         <button id="modal-close-btn" class="text-gray-600 hover:bg-gray-100 p-2 rounded-full flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <Fragment set:html={iconX} />
         </button>
       </div>
       <div class="grid lg:grid-cols-2 gap-8">
-        <img id="modal-image" src="" alt="" class="w-full aspect-[4/3] object-cover rounded-2xl"/>
+        <ImageWithFallback client:load id="modal-image" src="" alt="" className="w-full aspect-[4/3] object-cover rounded-2xl"/>
         <div class="flex flex-col justify-between">
           <div class="space-y-6">
-            <p id="modal-description" class="text-gray-700 leading-relaxed" style="font-family: 'Sora', sans-serif; font-weight: 400;"></p>
+            <p id="modal-description" class="font-sora font-normal text-gray-700 leading-relaxed"></p>
             <div>
-              <h4 class="text-lg text-gray-900 mb-4" style="font-family: 'Sora', sans-serif; font-weight: 600;">Características Principales</h4>
+              <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">Características Principales</h4>
               <div id="modal-features" class="grid grid-cols-2 gap-3"></div>
             </div>
           </div>
           <div class="space-y-3 mt-6">
-            <a href="#" class="inline-flex items-center justify-center w-full bg-indigo-600 text-white hover:bg-indigo-700 h-11 px-8 rounded-md" style="font-family: 'Sora', sans-serif; font-weight: 500;">
-                Explorar Demo en Vivo
-             </a>
-             <button class="inline-flex items-center justify-center w-full bg-white/20 backdrop-blur-xl border border-indigo-200 text-indigo-600 hover:bg-indigo-50 h-11 px-8 rounded-md" style="font-family: 'Sora', sans-serif; font-weight: 500;">
-                Crear Algo Similar
-             </button>
+            <Button as="a" href="#" className="w-full bg-indigo-600 text-white hover:bg-indigo-700 font-sora font-medium">
+              <Fragment set:html={iconExternalLink} />
+              <span class="ml-2">Explorar Demo en Vivo</span>
+            </Button>
+            <ScheduleButton variant="secondary" className="w-full">
+              Crear Algo Similar
+            </ScheduleButton>
           </div>
         </div>
       </div>
@@ -113,67 +77,58 @@ const projects = [
 </section>
 
 <script define:vars={{ projects }}>
-  // Obtenemos los datos de los proyectos desde el frontmatter de Astro
   const allProjects = projects;
-
-  // Seleccionamos todos los elementos necesarios del DOM
+  const portfolioSection = document.getElementById('demos');
   const projectCards = document.querySelectorAll('.project-card');
   const modal = document.getElementById('project-modal');
-  const modalContent = modal.querySelector('.modal-content');
+  const modalTitle = document.getElementById('modal-title');
+  const modalCategory = document.getElementById('modal-category');
+  const modalImage = document.getElementById('modal-image');
+  const modalDescription = document.getElementById('modal-description');
+  const featuresContainer = document.getElementById('modal-features');
   const closeModalBtn = document.getElementById('modal-close-btn');
 
-  // Función para abrir el modal
   function openModal(projectId) {
     const project = allProjects.find(p => p.id === projectId);
     if (!project) return;
-
-    // Llenamos el modal con la información del proyecto
-    modal.querySelector('#modal-title').textContent = project.title;
-    modal.querySelector('#modal-category').textContent = project.category;
-    modal.querySelector('#modal-image').src = project.image;
-    modal.querySelector('#modal-image').alt = project.title;
-    modal.querySelector('#modal-description').textContent = project.description;
     
-    const featuresContainer = modal.querySelector('#modal-features');
-    featuresContainer.innerHTML = ''; // Limpiamos las características anteriores
+    modalTitle.textContent = project.title;
+    modalCategory.textContent = project.category;
+    modalImage.src = project.image;
+    modalImage.alt = project.title;
+    modalDescription.textContent = project.description;
+    
+    featuresContainer.innerHTML = '';
     project.features.forEach(feature => {
       featuresContainer.innerHTML += `
         <div class="flex items-center space-x-2">
           <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></div>
-          <span class="text-gray-600 text-sm" style="font-family: 'Sora', sans-serif;">${feature}</span>
+          <span class="text-gray-600 text-sm font-sora">${feature}</span>
         </div>
       `;
     });
 
-    // Mostramos el modal
     modal.classList.add('is-visible');
-    document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+    document.body.style.overflow = 'hidden';
   }
 
-  // Función para cerrar el modal
   function closeModal() {
     modal.classList.remove('is-visible');
     document.body.style.overflow = '';
   }
 
-  // Añadimos el evento de clic a cada tarjeta
-  projectCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const projectId = parseInt(card.dataset.projectId, 10);
-      openModal(projectId);
-    });
+  portfolioSection.addEventListener('open-modal', (event) => {
+    const projectId = event.detail.id;
+    openModal(projectId);
   });
 
-  // Eventos para cerrar el modal
   closeModalBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (event) => {
-    // Si se hace clic en el fondo oscuro y no en el contenido, se cierra
     if (event.target === modal) {
       closeModal();
     }
   });
 
-  // Cerrar el modal con la tecla Escape
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && modal.classList.contains('is-visible')) {
       closeModal();
@@ -192,15 +147,12 @@ const projects = [
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    
-    /* Estado inicial (oculto) */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
   }
 
   .modal-backdrop.is-visible {
-    /* Estado visible */
     opacity: 1;
     pointer-events: auto;
   }
@@ -209,14 +161,12 @@ const projects = [
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 1.5rem;
     padding: 2rem;
-    max-width: 56rem; /* max-w-5xl */
+    max-width: 56rem;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    
-    /* Animación de entrada/salida */
     transform: scale(0.95);
     transition: transform 0.3s ease-in-out;
   }

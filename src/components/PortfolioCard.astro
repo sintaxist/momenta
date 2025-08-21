@@ -1,0 +1,36 @@
+---
+import type { projectType } from '@/types/portfolio';
+import { ImageWithFallback } from '@/components/ImageWithFallback';
+
+// Definimos la interfaz para el prop que este componente recibirá
+export interface Props {
+  project: projectType;
+  index: number;
+}
+const { project, index } = Astro.props;
+---
+
+<li 
+  class="group cursor-pointer project-card animate-on-scroll"
+  style={`transition-delay: ${index * 150}ms;`}
+  onclick={`this.dispatchEvent(new CustomEvent('open-modal', {detail: {id: ${project.id}}}));`}
+>
+  <div class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-white/50 transition-all duration-500 shadow-lg hover:shadow-xl">
+    <div class="aspect-[4/3] overflow-hidden relative">
+      <ImageWithFallback client:visible src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+      <div class="absolute inset-0 bg-indigo-600/20 backdrop-blur-sm flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="font-sora text-white text-sm bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2">
+          Clic para ver detalles
+        </div>
+      </div>
+    </div>
+    <div class="p-4">
+      <span class="font-sora text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200">
+        {project.category}
+      </span>
+      <h3 class="font-sora font-semibold text-lg text-gray-900 mt-2 group-hover:text-indigo-600 transition-colors duration-300">
+        {project.title}
+      </h3>
+    </div>
+  </div>
+</li>
