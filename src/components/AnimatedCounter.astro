@@ -1,0 +1,63 @@
+---
+// src/components/AnimatedCounter.astro (versión simplificada)
+interface Props {
+  from?: number;
+  to: number;
+  duration?: number;
+  suffix?: string;
+  className?: string;
+}
+
+const { 
+  from = 0, 
+  to, 
+  duration = 2000,
+  suffix = '', 
+  className,
+} = Astro.props;
+---
+
+<span
+  class:list={["animated-counter", className]}
+  data-from={from}
+  data-to={to}
+  data-duration={duration}
+  data-suffix={suffix}
+>
+  {from}{suffix}
+</span>
+
+<script>
+  const animateCount = (el: HTMLElement, from: number, to: number, duration: number, suffix: string) => {
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const current = Math.floor(progress * (to - from) + from);
+      el.textContent = current.toLocaleString('en-US') + suffix;
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        const from = parseInt(el.dataset.from || '0', 10);
+        const to = parseInt(el.dataset.to || '0', 10);
+        const duration = parseInt(el.dataset.duration || '2000', 10);
+        const suffix = el.dataset.suffix || '';
+        
+        animateCount(el, from, to, duration, suffix);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.animated-counter').forEach(counter => {
+    observer.observe(counter);
+  });
+</script>

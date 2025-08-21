@@ -1,134 +1,115 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { ImageWithFallback } from '@/components/ImageWithFallback';
+'use client';
 
-const projectVideos = [
+import { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'motion/react';
+
+const projectData = [
   {
     title: "Boda Elegante",
-    image: "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    video: "https://videos.pexels.com/video-files/7989667/7989667-hd_1080_1920_25fps.mp4"
   },
   {
     title: "Premios Monarca",
-    image: "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    video: "https://videos.pexels.com/video-files/5925286/5925286-uhd_1440_2560_24fps.mp4"
   },
   {
     title: "XV Años Luxury",
-    image: "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080"
+    video: "https://videos.pexels.com/video-files/5390857/5390857-uhd_1440_2732_30fps.mp4"
   }
 ];
 
 export function AnimatedMockup() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const controls = useAnimation();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % projectVideos.length);
-    }, 4000);
+      setCurrentIndex((prev) => (prev + 1) % projectData.length);
+    }, 4000); // Cambiamos cada 4 segundos
 
     return () => clearInterval(interval);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-    setMousePosition({ x: x * 5, y: y * 5 });
-  };
+  useEffect(() => {
+    // Una animación sutil cuando el video cambia
+    controls.start({
+      scale: [1, 1.02, 1],
+      rotateY: [0, 3, 0],
+      transition: { duration: 0.6, ease: "easeInOut" }
+    });
+  }, [currentIndex, controls]);
 
   return (
     <motion.div
       className="relative"
-      onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1, delay: 0.5 }}
     >
+      {/* Elementos flotantes decorativos (bajo consumo) */}
       <motion.div
-        className="absolute inset-0 rounded-3xl opacity-60"
-        style={{
-          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))',
-          filter: 'blur(40px)',
-          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`
-        }}
-        animate={{
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
-      <motion.div
-        className="relative z-10 bg-white/20 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-white/30"
-        style={{
-          transform: `perspective(1000px) rotateX(${mousePosition.y * 0.3}deg) rotateY(${mousePosition.x * 0.3}deg) translateZ(0px)`
-        }}
-        animate={{
-          y: [0, -5, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        className="absolute -top-8 -left-8 bg-indigo-500/80 p-3 rounded-xl shadow-lg"
+        animate={{ y: [-5, 5, -5] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-2 relative overflow-hidden border border-white/20">
-          <div className="aspect-[9/16] w-64 relative bg-white/5 rounded-xl overflow-hidden border border-white/10">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.8 }}
-              className="absolute inset-0"
-            >
-              <ImageWithFallback
-                src={projectVideos[currentIndex].image}
-                alt={projectVideos[currentIndex].title}
-                className="w-full h-full object-cover"
-              />
-              
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
-                <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
-                  <div className="text-white text-sm mb-1" style={{ fontFamily: 'Sora, sans-serif', fontWeight: 600 }}>
-                    {projectVideos[currentIndex].title}
-                  </div>
-                  <div className="text-white/80 text-xs" style={{ fontFamily: 'Sora, sans-serif' }}>
-                    Invitación Digital
-                  </div>
+        <div className="w-6 h-6 bg-white/20 rounded-sm"></div>
+      </motion.div>
+
+      <motion.div
+        className="absolute -bottom-12 -right-12 bg-purple-500/80 p-4 rounded-2xl shadow-xl"
+        animate={{ y: [5, -5, 5], rotate: [2, -2, 2] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="font-sora text-white text-sm font-semibold">RSVP</div>
+      </motion.div>
+
+      {/* Marco del teléfono */}
+      <motion.div
+        animate={controls}
+        className="relative w-80 h-[580px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-700"
+      >
+        {/* Pantalla */}
+        <div className="w-full h-full bg-black rounded-[2.2rem] overflow-hidden relative">
+          
+          {/* Contenido del video */}
+          <motion.div
+            key={currentIndex}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <video
+              src={projectData[currentIndex].video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          
+          {/* Overlay con información y controles */}
+          <div className="absolute inset-0 flex flex-col justify-between">
+            {/* Controles de ventana (como en tu mockup original) */}
+            <div className="flex space-x-1.5 p-4">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+
+            {/* Overlay con título (como en tu mockup original) */}
+            <div className="p-4 bg-gradient-to-t from-black/60 to-transparent">
+              <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                <div className="font-sora text-white text-sm font-semibold mb-1">
+                  {projectData[currentIndex].title}
                 </div>
-              </div>
-            </motion.div>
-            
-            <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-              <div className="flex space-x-1">
-                <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                <div className="w-3 h-3 rounded-full bg-green-400"></div>
-              </div>
-              <div className="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-md border border-white/30">
-                <div className="text-white/70 text-xs" style={{ fontFamily: 'Sora, sans-serif' }}>
-                  Live Preview
+                <div className="font-sora text-white/80 text-xs">
+                  Invitación Digital
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div className="flex justify-center mt-3 space-x-2">
-          {projectVideos.map((_, index) => (
-            <motion.div
-              key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-indigo-500' : 'bg-white/30'
-              }`}
-              initial={{ scale: 0.8 }}
-              animate={{ scale: index === currentIndex ? 1.2 : 0.8 }}
-            />
-          ))}
         </div>
       </motion.div>
     </motion.div>

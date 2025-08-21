@@ -43,7 +43,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --brand-indigo: #4f46e5; 
+  --brand-indigo: #4f46e5;
 }
 
 .dark {
@@ -191,4 +191,16 @@
 
 html {
   font-size: var(--font-size);
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  /* CAMBIO: Usamos una transición con una curva personalizada para un efecto más profesional */
+  transition: opacity 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.animate-on-scroll.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
