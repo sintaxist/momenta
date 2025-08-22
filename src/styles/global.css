@@ -204,12 +204,3 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
-
-.lucide-sparkles,
-.lucide-crown,
-.lucide-star,
-.lucide-check,
-.lucide-users,
-.lucide-calendar {
-  color: white;
-}
