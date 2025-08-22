@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button.astro";
 const menuItems = [
   { id: "demos", label: "Demos" },
   { id: "features", label: "Features" },
-  { id: "sobre-mi", label: "Sobre Mí" },
+  { id: "sobre-mi", label: "Nosotros" },
   { id: "paquetes", label: "Paquetes" },
   { id: "contacto", label: "Contacto" },
 ];
@@ -205,11 +205,15 @@ const icons = {
       updateUnderline(activeDesktopLink);
     }
 
-    const observer = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting)
-            setActiveLink(entry.target.getAttribute("id") as string);
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.getAttribute('id');
+                // ✅ SOLUCIÓN: Verificamos que sectionId no sea null antes de usarlo.
+                if (sectionId) {
+                    setActiveLink(sectionId);
+                }
+            }
         });
       },
       { rootMargin: "-40% 0px -40% 0px" }
