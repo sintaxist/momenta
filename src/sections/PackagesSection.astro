@@ -16,7 +16,7 @@ const packages = [
   <PackagesParticles />
 
   <div class="max-w-7xl mx-auto relative z-10">
-    <div class="text-center mb-8 animate-on-scroll">
+    <div class="text-center mb-16 animate-on-scroll">
       <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-blue-100 text-emerald-700 px-6 py-3 rounded-full border border-emerald-200 shadow-lg text-center">
         <span class="text-lg">🎉</span>
         <span class="font-sora font-semibold">
@@ -25,7 +25,7 @@ const packages = [
       </div>
     </div>
 
-    <div class="text-center mb-20">
+    <div class="text-center mb-32">
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
         Una Inversión en la <span class="text-indigo-600">Perfección</span>
       </h2>
@@ -34,7 +34,7 @@ const packages = [
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-3 gap-8 lg:items-stretch">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:items-stretch">
       {packages.map((pkg, index) => (
         <PackageCard pkg={pkg} index={index} />
       ))}

@@ -13,7 +13,7 @@ const stats = [
 
 <section
   id="hero"
-  class="relative min-h-screen flex items-center justify-center px-6 pt-40 pb-20 lg:pt-32 lg:pb-20"
+  class="relative min-h-screen flex items-center justify-center px-6 pt-40 pb-20 lg:pt-32 lg:pb-20 overflow-x-clip"
 >
   <HeroParticles />
 
@@ -79,7 +79,7 @@ const stats = [
         </div>
 
         <ul
-          class="flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-4 pt-8"
+          class="flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-8 pt-8"
         >
           {
             stats.map((stat, index) => (
@@ -90,7 +90,7 @@ const stats = [
                 <AnimatedCounter
                   to={stat.to}
                   suffix={stat.suffix}
-                  className="font-sora font-bold text-3xl text-gray-900 mb-2"
+                  className="font-sora font-bold text-3xl text-gray-900"
                 />
                 <div class="font-sora text-gray-500 text-sm">{stat.label}</div>
               </li>

@@ -30,11 +30,11 @@ const allFeatures = [
 <div class="w-full bg-white/50 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-lg overflow-hidden animate-on-scroll">
   <div class="overflow-x-auto">
     <table class="w-full text-sm text-left">
-      <thead class="bg-white/60">
+      <thead class="bg-[var(--brand-indigo)] text-white font-bold">
         <tr>
-          <th class="font-sora font-semibold text-gray-800 p-4 lg:p-6 w-1/3">Características</th>
+          <th class="p-4 lg:p-6 w-1/3 text-base">Características</th>
           {packageNames.map(name => (
-            <th class="font-sora font-semibold text-gray-800 p-4 lg:p-6 text-center">{name}</th>
+            <th class="p-4 lg:p-6 text-center text-base">{name}</th>
           ))}
         </tr>
       </thead>
@@ -44,19 +44,19 @@ const allFeatures = [
             <td class="font-sora font-medium text-gray-700 p-4 lg:p-6">{row.feature}</td>
             
             <td class="p-4 lg:p-6 text-center">
-              {row.esencial === true && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Check} /></div>}
+              {row.esencial === true && <div class="w-6 h-6 mx-auto text-emerald-500"><Fragment set:html={Icons.Check} /></div>}
               {row.esencial === false && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Dash} /></div>}
               {typeof row.esencial === 'string' && <span class="font-sora font-semibold text-gray-800">{row.esencial}</span>}
             </td>
 
             <td class="p-4 lg:p-6 text-center">
-              {row.premium === true && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Check} /></div>}
+              {row.premium === true && <div class="w-6 h-6 mx-auto text-emerald-500"><Fragment set:html={Icons.Check} /></div>}
               {row.premium === false && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Dash} /></div>}
               {typeof row.premium === 'string' && <span class="font-sora font-semibold text-gray-800">{row.premium}</span>}
             </td>
 
             <td class="p-4 lg:p-6 text-center">
-              {row.luxury === true && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Check} /></div>}
+              {row.luxury === true && <div class="w-6 h-6 mx-auto text-emerald-500"><Fragment set:html={Icons.Check} /></div>}
               {row.luxury === false && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Dash} /></div>}
               {typeof row.luxury === 'string' && <span class="font-sora font-semibold text-gray-800">{row.luxury}</span>}
             </td>
