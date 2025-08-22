@@ -1,171 +1,256 @@
 ---
-import ScheduleButton from '@/components/ScheduleButton.astro';
+import Button from "@/components/ui/Button.astro";
 
 const menuItems = [
-    { id: "demos", label: "Demos" },
-    { id: "features", label: "Features" },
-    { id: "sobre-mi", label: "Sobre Mí" },
-    { id: "paquetes", label: "Paquetes" },
-    { id: "contacto", label: "Contacto" },
+  { id: "demos", label: "Demos" },
+  { id: "features", label: "Features" },
+  { id: "sobre-mi", label: "Sobre Mí" },
+  { id: "paquetes", label: "Paquetes" },
+  { id: "contacto", label: "Contacto" },
 ];
 
 const icons = {
-    Menu: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`,
-    X: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`,
+  Menu: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`,
+  X: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`,
 };
 ---
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-    <div class="max-w-7xl mx-auto py-4 px-6">
-        <div class="flex items-center justify-between">
-            <div class="font-sora text-lg lg:text-xl tracking-wider text-gray-900 font-semibold">
-                <a href="#hero" id="logo-link">ALEJANDRO CANEK</a>
-            </div>
 
-            <nav id="desktop-nav" class="hidden md:flex items-center justify-center gap-x-6 lg:gap-x-8 relative">
-                {menuItems.map(item => (
-                    <a href={`#${item.id}`} class="nav-link font-sora text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-300 capitalize tracking-wide py-2" data-nav-link={item.id}>
-                        {item.label}
-                    </a>
-                ))}
-                <div id="nav-underline" class="nav-underline"></div>
-            </nav>
+<header
+  id="main-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+>
+  <div class="max-w-7xl mx-auto py-4 px-6">
+    <div class="flex items-center justify-between">
+      <div
+        class="font-sora text-lg lg:text-xl tracking-wider text-gray-900 font-semibold"
+      >
+        <a href="#hero" id="logo-link">ALEJANDRO CANEK</a>
+      </div>
 
-            <div class="hidden md:flex">
-                <ScheduleButton size="sm" />
-            </div>
+      <nav
+        id="desktop-nav"
+        class="hidden md:flex items-center justify-center gap-x-6 lg:gap-x-8 relative"
+      >
+        {
+          menuItems.map((item) => (
+            <a
+              href={`#${item.id}`}
+              class="nav-link font-sora text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-300 capitalize tracking-wide py-2"
+              data-nav-link={item.id}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+        <div id="nav-underline" class="nav-underline"></div>
+      </nav>
 
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50">
-                <span id="menu-icon"><Fragment set:html={icons.Menu} /></span>
-                <span id="close-icon" class="hidden"><Fragment set:html={icons.X} /></span>
-            </button>
-        </div>
+      <div class="hidden md:flex">
+        <Button
+          href="https://calendly.com/alejandrocanek"
+          target="_blank"
+          size="md"
+          icon="calendar"
+        >
+          Agendar Meeting
+        </Button>
+      </div>
 
-        <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden">
-            <div class="bg-white/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 shadow-xl p-6">
-                <nav class="space-y-2">
-                    {menuItems.map((item) => (
-                        <a href={`#${item.id}`} class="nav-link mobile-nav-link" data-nav-link={item.id}>
-                            {item.label}
-                        </a>
-                    ))}
-                    <div class="pt-4 border-t border-gray-200">
-                        <div class="mobile-schedule-button w-full">
-                             <ScheduleButton className="w-full justify-center rounded-lg" />
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50"
+      >
+        <span id="menu-icon"><Fragment set:html={icons.Menu} /></span>
+        <span id="close-icon" class="hidden"
+          ><Fragment set:html={icons.X} /></span
+        >
+      </button>
     </div>
+
+    <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden">
+      <div
+        class="bg-white/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 shadow-xl p-6"
+      >
+        <nav class="space-y-2">
+          {
+            menuItems.map((item) => (
+              <a
+                href={`#${item.id}`}
+                class="nav-link mobile-nav-link"
+                data-nav-link={item.id}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <div class="pt-4 border-t border-gray-200">
+            <Button
+              href="https://calendly.com/alejandrocanek"
+              target="_blank"
+              className="w-full"
+              icon="calendar"
+            >
+              Agendar Meeting
+            </Button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('main-header') as HTMLElement | null;
-    const logoLink = document.getElementById('logo-link') as HTMLAnchorElement | null;
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement | null;
-    const mobileNavPanel = document.getElementById('mobile-nav-panel') as HTMLDivElement | null;
-    const menuIcon = document.getElementById('menu-icon') as HTMLSpanElement | null;
-    const closeIcon = document.getElementById('close-icon') as HTMLSpanElement | null;
-    const allNavLinks = document.querySelectorAll('a.nav-link');
-    const desktopNavLinks = document.querySelectorAll('#desktop-nav a.nav-link');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-panel a.nav-link');
-    const navUnderline = document.getElementById('nav-underline') as HTMLDivElement | null;
-    const sections = document.querySelectorAll('section[id]');
-    
-    if (!header || !mobileMenuBtn || !mobileNavPanel || !menuIcon || !closeIcon || !navUnderline || !logoLink) {
-        console.error("Error: No se encontraron algunos elementos esenciales del header.");
-        return;
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.getElementById("main-header") as HTMLElement | null;
+    const logoLink = document.getElementById(
+      "logo-link"
+    ) as HTMLAnchorElement | null;
+    const mobileMenuBtn = document.getElementById(
+      "mobile-menu-btn"
+    ) as HTMLButtonElement | null;
+    const mobileNavPanel = document.getElementById(
+      "mobile-nav-panel"
+    ) as HTMLDivElement | null;
+    const menuIcon = document.getElementById(
+      "menu-icon"
+    ) as HTMLSpanElement | null;
+    const closeIcon = document.getElementById(
+      "close-icon"
+    ) as HTMLSpanElement | null;
+    const allNavLinks = document.querySelectorAll("a.nav-link");
+    const desktopNavLinks = document.querySelectorAll(
+      "#desktop-nav a.nav-link"
+    );
+    const mobileNavLinks = document.querySelectorAll(
+      ".mobile-nav-panel a.nav-link"
+    );
+    const navUnderline = document.getElementById(
+      "nav-underline"
+    ) as HTMLDivElement | null;
+    const sections = document.querySelectorAll("section[id]");
+
+    if (
+      !header ||
+      !mobileMenuBtn ||
+      !mobileNavPanel ||
+      !menuIcon ||
+      !closeIcon ||
+      !navUnderline ||
+      !logoLink
+    ) {
+      console.error(
+        "Error: No se encontraron algunos elementos esenciales del header."
+      );
+      return;
     }
 
     function closeMobileMenu(): void {
-        mobileNavPanel?.classList.remove('is-open');
-        menuIcon?.classList.remove('hidden');
-        closeIcon?.classList.add('hidden');
-        document.body.style.overflow = '';
+      mobileNavPanel?.classList.remove("is-open");
+      menuIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+      document.body.style.overflow = "";
     }
 
-    mobileMenuBtn.addEventListener('click', () => {
-        const isOpen = mobileNavPanel.classList.toggle('is-open');
-        menuIcon.classList.toggle('hidden', isOpen);
-        closeIcon.classList.toggle('hidden', !isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    
-    logoLink.addEventListener('click', (event: Event) => {
-        event.preventDefault();
-        document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+    mobileMenuBtn.addEventListener("click", () => {
+      const isOpen = mobileNavPanel.classList.toggle("is-open");
+      menuIcon.classList.toggle("hidden", isOpen);
+      closeIcon.classList.toggle("hidden", !isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
-    allNavLinks.forEach(link => {
-        link.addEventListener('click', (event: Event) => {
-            event.preventDefault();
-            const targetId = (link as HTMLAnchorElement).getAttribute('href')?.substring(1);
-            if(targetId) {
-                document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-            }
-            if (mobileNavPanel.classList.contains('is-open')) {
-                setTimeout(() => closeMobileMenu(), 150);
-            }
-        });
+    logoLink.addEventListener("click", (event: Event) => {
+      event.preventDefault();
+      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
     });
-    
-    function updateUnderline(activeLink: HTMLElement | null): void {
-        if (!activeLink || !navUnderline) {
-            if(navUnderline) navUnderline.style.width = '0px';
-            return;
+
+    allNavLinks.forEach((link) => {
+      link.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+        const targetId = (link as HTMLAnchorElement)
+          .getAttribute("href")
+          ?.substring(1);
+        if (targetId) {
+          document
+            .getElementById(targetId)
+            ?.scrollIntoView({ behavior: "smooth" });
         }
-        navUnderline.style.left = `${activeLink.offsetLeft}px`;
-        navUnderline.style.width = `${activeLink.offsetWidth}px`;
+        if (mobileNavPanel.classList.contains("is-open")) {
+          setTimeout(() => closeMobileMenu(), 150);
+        }
+      });
+    });
+
+    function updateUnderline(activeLink: HTMLElement | null): void {
+      if (!activeLink || !navUnderline) {
+        if (navUnderline) navUnderline.style.width = "0px";
+        return;
+      }
+      navUnderline.style.left = `${activeLink.offsetLeft}px`;
+      navUnderline.style.width = `${activeLink.offsetWidth}px`;
     }
 
     function setActiveLink(sectionId: string): void {
-        let activeDesktopLink: HTMLElement | null = null;
-        desktopNavLinks.forEach(link => {
-            const isTarget = link.getAttribute('data-nav-link') === sectionId;
-            link.classList.toggle('is-active', isTarget);
-            if (isTarget) activeDesktopLink = link as HTMLElement;
-        });
+      let activeDesktopLink: HTMLElement | null = null;
+      desktopNavLinks.forEach((link) => {
+        const isTarget = link.getAttribute("data-nav-link") === sectionId;
+        link.classList.toggle("is-active", isTarget);
+        if (isTarget) activeDesktopLink = link as HTMLElement;
+      });
 
-        mobileNavLinks.forEach(link => {
-            const isTarget = link.getAttribute('data-nav-link') === sectionId;
-            link.classList.toggle('is-active', isTarget);
-        });
-        
-        updateUnderline(activeDesktopLink);
+      mobileNavLinks.forEach((link) => {
+        const isTarget = link.getAttribute("data-nav-link") === sectionId;
+        link.classList.toggle("is-active", isTarget);
+      });
+
+      updateUnderline(activeDesktopLink);
     }
-    
-    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) setActiveLink(entry.target.getAttribute('id') as string);
-        });
-    }, { rootMargin: '-40% 0px -40% 0px' });
 
-    sections.forEach(section => observer.observe(section));
-    
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting)
+            setActiveLink(entry.target.getAttribute("id") as string);
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
     let resizeTimeout: number;
-    window.addEventListener('resize', () => {
-        window.clearTimeout(resizeTimeout);
-        resizeTimeout = window.setTimeout(() => {
-            if (window.innerWidth >= 768 && mobileNavPanel.classList.contains('is-open')) {
-                closeMobileMenu();
-            }
-            const activeLink = document.querySelector('#desktop-nav a.nav-link.is-active') as HTMLElement | null;
-            updateUnderline(activeLink);
-        }, 100);
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        if (
+          window.innerWidth >= 768 &&
+          mobileNavPanel.classList.contains("is-open")
+        ) {
+          closeMobileMenu();
+        }
+        const activeLink = document.querySelector(
+          "#desktop-nav a.nav-link.is-active"
+        ) as HTMLElement | null;
+        updateUnderline(activeLink);
+      }, 100);
     });
 
-    const scrolledClasses = ['bg-white/80', 'backdrop-blur-xl', 'border-b', 'border-gray-200/50', 'shadow-lg'];
+    const scrolledClasses = [
+      "bg-white/80",
+      "backdrop-blur-xl",
+      "border-b",
+      "border-gray-200/50",
+      "shadow-lg",
+    ];
     const handleScroll = () => {
-        if (window.scrollY > 50) {
-            header.classList.add(...scrolledClasses);
-        } else {
-            header.classList.remove(...scrolledClasses);
-        }
+      if (window.scrollY > 50) {
+        header.classList.add(...scrolledClasses);
+      } else {
+        header.classList.remove(...scrolledClasses);
+      }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-});
+  });
 </script>
 
 <style>
@@ -173,7 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 
   a.nav-link.is-active {
@@ -186,7 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
     height: 2px;
     background-color: var(--brand-indigo);
     border-radius: 1px;
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+    transition:
+      left 0.3s ease-in-out,
+      width 0.3s ease-in-out;
   }
 
   .mobile-nav-panel {
@@ -195,35 +284,48 @@ document.addEventListener('DOMContentLoaded', () => {
     max-height: 0;
     opacity: 0;
     transform: translateY(-1rem);
-    transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease, visibility 0.4s, margin-top 0.4s ease;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.4s,
+      margin-top 0.4s ease;
   }
-  
+
   .mobile-nav-panel.is-open {
     visibility: visible;
     margin-top: 1rem;
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
-    transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease, visibility 0s, margin-top 0.4s ease;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0s,
+      margin-top 0.4s ease;
   }
-  
+
   .mobile-nav-link {
     display: block;
     width: 100%;
     text-align: left;
     color: var(--muted-foreground);
     padding: 0.5rem 1rem;
-    font-family: 'Sora', sans-serif;
+    font-family: "Sora", sans-serif;
     font-weight: 500;
     border-radius: var(--radius-lg, 0.625rem);
-    transition: color 0.3s, background-color 0.3s;
+    transition:
+      color 0.3s,
+      background-color 0.3s;
   }
-  
-  .mobile-nav-link:hover, .mobile-nav-link.is-active {
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.is-active {
     color: var(--brand-indigo);
     background-color: rgba(239, 246, 255, 1);
   }
-  
+
   .mobile-schedule-button button {
     border-radius: var(--radius-lg, 0.625rem) !important;
   }

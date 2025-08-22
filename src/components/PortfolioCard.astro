@@ -13,7 +13,7 @@ const { project, index } = Astro.props;
 <li 
   class="group cursor-pointer project-card animate-on-scroll"
   style={`transition-delay: ${index * 150}ms;`}
-  onclick={`this.dispatchEvent(new CustomEvent('open-modal', {detail: {id: ${project.id}}}));`}
+   onclick={`this.dispatchEvent(new CustomEvent('open-modal', {detail: {id: ${project.id}}, bubbles: true}));`}
 >
   <div class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-white/50 transition-all duration-500 shadow-lg hover:shadow-xl">
     <div class="aspect-[4/3] overflow-hidden relative">

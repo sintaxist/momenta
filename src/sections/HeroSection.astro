@@ -1,77 +1,116 @@
 ---
-import HeroParticles from '@/components/HeroParticles.astro';
-import Mockup from '@/components/Mockup.astro';
-import Button from '@/components/ui/Button.astro';
-import AnimatedCounter from '@/components/AnimatedCounter.astro'; 
+import HeroParticles from "@/components/HeroParticles.astro";
+import Mockup from "@/components/Mockup.astro";
+import Button from "@/components/ui/Button.astro";
+import AnimatedCounter from "@/components/AnimatedCounter.astro";
 
 const stats = [
-  { to: 5, suffix: '+', label: 'Años de Experiencia' },
-  { to: 50, suffix: '+', label: 'Proyectos Completados' },
-  { to: 100, suffix: '%', label: 'Satisfacción del Cliente' }
+  { to: 5, suffix: "+", label: "Años de Experiencia" },
+  { to: 50, suffix: "+", label: "Proyectos Completados" },
+  { to: 100, suffix: "%", label: "Satisfacción del Cliente" },
 ];
 ---
-<section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-40 pb-20 lg:pt-32 lg:pb-20 overflow-hidden">
+
+<section
+  id="hero"
+  class="relative min-h-screen flex items-center justify-center px-6 pt-40 pb-20 lg:pt-32 lg:pb-20"
+>
   <HeroParticles />
-  
+
   <div class="absolute inset-0">
-    <div class="absolute top-20 left-10 w-96 h-96 rounded-full opacity-20 bg-indigo-500 blur-3xl"></div>
-    <div class="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-20 bg-purple-500 blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 w-60 h-60 rounded-full opacity-10 bg-pink-500 blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
+    <div
+      class="absolute top-20 left-10 w-96 h-96 rounded-full opacity-20 bg-indigo-500 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-20 bg-purple-500 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute top-1/2 left-1/2 w-60 h-60 rounded-full opacity-10 bg-pink-500 blur-2xl transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
   </div>
-  
+
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="grid lg:grid-cols-5 gap-24 items-center">
-      
-      <article class="space-y-12 lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
+      <article
+        class="space-y-10 lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left"
+      >
         <div class="space-y-6">
-          <h1 class="font-sora font-bold text-5xl lg:text-7xl text-gray-900 leading-tight animate-on-scroll">
-            Experiencias Digitales. <span class="text-indigo-600">Ejecución Excepcional.</span>
+          <h1
+            class="font-sora font-bold text-5xl lg:text-7xl text-gray-900 leading-tight animate-on-scroll"
+          >
+            Experiencias Digitales. <span class="text-indigo-600"
+              >Ejecución Excepcional.</span
+            >
           </h1>
-          <p class="font-sora font-normal text-xl text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0 animate-on-scroll" 
+          <p
+            class="font-sora font-normal text-xl text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0 animate-on-scroll"
             style="transition-delay: 200ms;"
           >
-            Diseño y desarrollo de plataformas interactivas para eventos que definen el estándar de la industria.
+            Diseño y desarrollo de plataformas interactivas para eventos que
+            definen el estándar de la industria.
           </p>
-        </div>
-        
-        <div class="animate-on-scroll" style="transition-delay: 400ms;">
-          <Button
-            id="hero-cta-btn"
-            as="button"
-            size="lg"
-            className="bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-indigo-500/25 font-sora font-medium"
+          <div
+            class="animate-on-scroll flex flex-col sm:flex-row gap-3 sm:gap-4"
+            style="transition-delay: 400ms;"
           >
-            Cotizar Mi Evento
-          </Button>
-        </div>
-        
-        <ul class="flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-4 pt-8">
-          {stats.map((stat, index) => (
-            <li 
-              class="text-center animate-on-scroll" 
-              style={`transition-delay: ${600 + index * 200}ms;`}
+            <!-- Botón principal -->
+            <Button
+              id="hero-cta-btn"
+              size="lg"
+              variant="primary"
+              class="flex-1"
             >
-              <AnimatedCounter
-                to={stat.to}
-                suffix={stat.suffix}
-                className="font-sora font-bold text-3xl text-gray-900 mb-2"
-              />
-              <div class="font-sora text-gray-500 text-sm">{stat.label}</div>
-            </li>
-          ))}
+              Cotizar Mi Evento
+            </Button>
+
+            <!-- Botón secundario -->
+            <Button
+              id="hero-demo-btn"
+              size="lg"
+              variant="secondary"
+              class="flex-1"
+            >
+              Ver Demos
+            </Button>
+          </div>
+        </div>
+
+        <ul
+          class="flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-4 pt-8"
+        >
+          {
+            stats.map((stat, index) => (
+              <li
+                class="text-center animate-on-scroll"
+                style={`transition-delay: ${600 + index * 200}ms;`}
+              >
+                <AnimatedCounter
+                  to={stat.to}
+                  suffix={stat.suffix}
+                  className="font-sora font-bold text-3xl text-gray-900 mb-2"
+                />
+                <div class="font-sora text-gray-500 text-sm">{stat.label}</div>
+              </li>
+            ))
+          }
         </ul>
       </article>
-      
+
       <div class="lg:col-span-2 flex justify-center lg:justify-end">
         <Mockup />
       </div>
-
     </div>
   </div>
 </section>
 
 <script>
-  document.getElementById('hero-cta-btn')?.addEventListener('click', () => {
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById("hero-cta-btn")?.addEventListener("click", () => {
+    document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
+  });
+  document.getElementById("hero-demo-btn")?.addEventListener("click", () => {
+    document.getElementById("demos")?.scrollIntoView({ behavior: "smooth" });
   });
 </script>

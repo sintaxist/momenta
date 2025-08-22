@@ -3,10 +3,10 @@
 
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/Input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+// import { Textarea } from '@/components/ui/textarea';
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/Label';
 import { Send } from 'lucide-react';
 
@@ -83,7 +83,7 @@ export function ContactForm() {
               <Label htmlFor="phone" className="font-sora text-gray-900">Teléfono</Label>
               <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange('phone', e.target.value)} className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500" placeholder="+52 (55) 1234-5678" />
             </div>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="eventType" className="font-sora text-gray-900">Tipo de Evento *</Label>
               <Select required value={formData.eventType} onValueChange={(value) => handleInputChange('eventType', value)}>
                 <SelectTrigger className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500">
@@ -97,16 +97,16 @@ export function ContactForm() {
                   <SelectItem value="otro">Otro</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
           </div>
           <div className="space-y-2">
             <Label htmlFor="message" className="font-sora text-gray-900">Mensaje *</Label>
-            <Textarea id="message" value={formData.message} onChange={(e) => handleInputChange('message', e.target.value)} required rows={4} className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500 resize-none" placeholder="Cuéntanos sobre tu evento..." />
+            {/* <Textarea id="message" value={formData.message} onChange={(e) => handleInputChange('message', e.target.value)} required rows={4} className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500 resize-none" placeholder="Cuéntanos sobre tu evento..." /> */}
           </div>
-          <Button type="submit" disabled={isSubmitting} className="font-sora font-semibold w-full bg-indigo-600 text-white hover:bg-indigo-700 py-3">
+          {/* <Button type="submit" disabled={isSubmitting} className="font-sora font-semibold w-full bg-indigo-600 text-white hover:bg-indigo-700 py-3">
             <Send size={16} className="mr-2" />
             <span>{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}</span>
-          </Button>
+          </Button> */}
         </form>
       )}
     </div>
