@@ -1,6 +1,7 @@
 ---
 import PortfolioCard from "@/components/PortfolioCard.astro";
 import PortfolioModal from "@/components/PortfolioModal.astro";
+import Button from "@/components/ui/Button.astro";
 
 const projects = [
   {
@@ -9,7 +10,8 @@ const projects = [
     category: "Boda Premium",
     image:
       "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
+    // videoUrl:
+    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Invitación digital interactiva con RSVP automatizado, galería de fotos y lista de regalos integrada. Diseño elegante con animaciones personalizadas y confirmación de asistencia en tiempo real.",
     features: [
@@ -25,7 +27,8 @@ const projects = [
     category: "Evento Corporativo",
     image:
       "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
+    // videoUrl:
+    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Plataforma completa para ceremonias de premiación con gestión de nominados, votación en línea y transmisión en vivo. Sistema de tickets digitales con códigos QR únicos.",
     features: [
@@ -41,7 +44,8 @@ const projects = [
     category: "Celebración Personal",
     image:
       "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080",
-    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
+    // videoUrl:
+    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Experiencia digital completa para quinceañeras con cronómetro interactivo, playlist colaborativa y álbum de recuerdos compartido. Diseño personalizable con temas únicos.",
     features: [
@@ -57,7 +61,8 @@ const projects = [
     category: "Evento Empresarial",
     image:
       "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
+    // videoUrl:
+    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Plataforma integral para conferencias corporativas con agenda interactiva, networking digital y sistema de feedback en tiempo real. Dashboard de analytics para organizadores.",
     features: [
@@ -67,25 +72,63 @@ const projects = [
       "Analytics Dashboard",
     ],
   },
+  {
+    id: 5,
+    title: "Gala Benéfica",
+    category: "Evento Social",
+    image:
+      "https://images.unsplash.com/photo-1520853535233-945938139599?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80",
+    demoUrl: "#",
+    description:
+      "Solución elegante para galas con subastas en línea y sistema de donaciones integrado.",
+    features: ["Subastas en Vivo", "Sistema de Donaciones", "Mapa de Mesas"],
+  },
+  {
+    id: 6,
+    title: "Festival de Música",
+    category: "Evento Masivo",
+    image:
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80",
+    demoUrl: "#",
+    description:
+      "Plataforma para festivales con horarios de artistas, mapa interactivo y notificaciones push.",
+    features: ["Horarios Dinámicos", "Mapa Interactivo", "Notificaciones Push"],
+  },
+  {
+    id: 7,
+    title: "Bautizo Moderno",
+    category: "Celebración Personal",
+    image:
+      "https://images.unsplash.com/photo-1604933938283-a9248e104523?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80",
+    demoUrl: "#",
+    description:
+      "Invitación digital con temática moderna, confirmación de padrinos y álbum de fotos familiar.",
+    features: ["Confirmación de Padrinos", "Álbum Familiar", "Diseño Moderno"],
+  },
+  {
+    id: 8,
+    title: "Lanzamiento de Producto",
+    category: "Evento Corporativo",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80",
+    demoUrl: "#",
+    description:
+      "Plataforma para lanzamientos de producto con registro de prensa y demos interactivas.",
+    features: [
+      "Registro de Prensa",
+      "Demos Interactivas",
+      "Kit de Medios Digital",
+    ],
+  },
 ];
 ---
 
 <section id="demos" class="py-32 px-6 relative">
   <div class="absolute inset-0">
-    <div
-      class="absolute top-20 left-10 w-96 h-96 rounded-full opacity-20 bg-indigo-500 blur-3xl"
-    >
-    </div>
-    <div
-      class="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-20 bg-purple-500 blur-3xl"
-    >
-    </div>
-    <div
-      class="absolute top-1/2 left-1/2 w-60 h-60 rounded-full opacity-10 bg-pink-500 blur-2xl transform -translate-x-1/2 -translate-y-1/2"
-    >
-    </div>
+    <div class="absolute -top-10 -left-20 w-96 h-96 rounded-full opacity-20 bg-teal-500 blur-3xl"></div>
+    <div class="absolute -bottom-24 right-10 w-80 h-80 rounded-full opacity-20 bg-sky-500 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/3 w-72 h-72 rounded-full opacity-10 bg-rose-500 blur-2xl"></div>
   </div>
-
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-20">
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
@@ -99,14 +142,144 @@ const projects = [
       </p>
     </div>
 
-    <ul class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <ul id="portfolio-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
       {
         projects.map((project, index) => (
           <PortfolioCard project={project} index={index} />
         ))
       }
     </ul>
+
+    <div id="show-more-container" class="text-center mt-16 hidden">
+      <Button
+        id="show-more-btn"
+        variant="secondary"
+        size="lg"
+        className="min-w-[280px] h-[56px]"
+      >
+        <span class="btn-text">Mostrar Más Proyectos</span>
+        <div class="btn-loader hidden">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </Button>
+    </div>
   </div>
 
   <PortfolioModal projects={projects} />
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const portfolioGrid = document.getElementById("portfolio-grid");
+    if (!portfolioGrid) return;
+
+    const allCards = Array.from(portfolioGrid.children) as HTMLLIElement[];
+    const showMoreBtn = document.getElementById("show-more-btn");
+    const showMoreContainer = document.getElementById("show-more-container");
+
+    // Si no encuentra el botón, no continuamos.
+    if (!showMoreBtn || !showMoreContainer) return;
+
+    // Seleccionamos los elementos DENTRO del botón
+    const btnText = showMoreBtn.querySelector(".btn-text");
+    const btnLoader = showMoreBtn.querySelector(".btn-loader");
+
+    const itemsPerPage = 4;
+    let itemsShown = itemsPerPage;
+    let isLoading = false; // Variable para controlar el estado de carga
+
+    // Lógica inicial para ocultar tarjetas y mostrar botón
+    allCards.forEach((card, index) => {
+      if (index >= itemsShown) card.classList.add("hidden");
+    });
+
+    if (allCards.length > itemsShown) {
+      showMoreContainer.classList.remove("hidden");
+    }
+
+    // ✅ CAMBIO: Nueva lógica de clic con estado de carga
+    showMoreBtn.addEventListener("click", () => {
+      // Si ya está cargando, no hacemos nada
+      if (isLoading) return;
+
+      // 1. Iniciar estado de carga
+      isLoading = true;
+      showMoreBtn.setAttribute("disabled", "true");
+      showMoreBtn.classList.add("is-loading"); // Clase para estilos de carga
+
+      // 2. Simular tiempo de carga
+      setTimeout(() => {
+        const nextItems = itemsShown + itemsPerPage;
+
+        allCards.forEach((card, index) => {
+          if (index >= itemsShown && index < nextItems) {
+            card.classList.remove("hidden");
+          }
+        });
+
+        itemsShown = nextItems;
+
+        // 3. Finalizar estado de carga
+        isLoading = false;
+        showMoreBtn.removeAttribute("disabled");
+        showMoreBtn.classList.remove("is-loading");
+
+        // 4. Ocultar el botón si se mostraron todas las tarjetas
+        if (itemsShown >= allCards.length) {
+          showMoreContainer.classList.add("hidden");
+        }
+      }, 800);
+    });
+  });
+</script>
+
+<style>
+  /* ✅ CAMBIO: CSS para manejar el estado de carga del botón */
+  #show-more-btn .btn-loader {
+    display: none; /* Oculto por defecto */
+  }
+
+  #show-more-btn.is-loading .btn-loader {
+    display: flex; /* Se muestra cuando el botón está cargando */
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #show-more-btn.is-loading .btn-text {
+    display: none; /* Se oculta el texto cuando está cargando */
+  }
+
+  #show-more-btn.is-loading {
+    cursor: wait;
+  }
+
+  /* Animación de los puntos del loader */
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--brand-indigo);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  .dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+</style>
