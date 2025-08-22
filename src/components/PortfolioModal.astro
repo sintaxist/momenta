@@ -1,59 +1,104 @@
 ---
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import Button from "@/components/ui/Button.astro";
+import * as Icons from "@/components/ui/Icons.ts";
 
 interface Props {
   projects: any[];
 }
 const { projects } = Astro.props;
 const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-renderizar
-
-const iconX = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
-const iconExternalLink = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>`;
 ---
 
 <div id="project-modal" class="modal-backdrop">
-  <div 
-    class="modal-content" 
-    role="dialog" 
-    aria-modal="true" 
+  <div
+    class="modal-content"
+    role="dialog"
+    aria-modal="true"
     aria-labelledby="modal-title"
   >
-    <div class="flex flex-col-reverse md:flex-row items-end md:items-start justify-between mb-8 gap-4">
+    <div
+      class="flex flex-col-reverse md:flex-row items-end md:items-start justify-between mb-8 gap-4"
+    >
       <div class="w-full md:w-auto">
-        <h3 id="modal-title" class="font-sora font-bold text-2xl md:text-3xl text-gray-900 mb-2">{firstProject.title}</h3>
-        <span id="modal-category" class="font-sora text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200">{firstProject.category}</span>
+        <h3
+          id="modal-title"
+          class="font-sora font-bold text-2xl md:text-3xl text-gray-900 mb-2"
+        >
+          {firstProject.title}
+        </h3>
+        <span
+          id="modal-category"
+          class="font-sora text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200"
+          >{firstProject.category}</span
+        >
       </div>
-      <button id="modal-close-btn" class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0">
-        <Fragment set:html={iconX} />
+      <button
+        id="modal-close-btn"
+        class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0"
+      >
+        <span class="w-8 h-8 flex items-center justify-center">
+          <Fragment set:html={Icons.X} />
+        </span>
         <span class="text-sm font-medium">Cerrar</span>
       </button>
     </div>
     <div class="grid lg:grid-cols-2 gap-8">
-      <ImageWithFallback client:load id="modal-image" src={firstProject.image} alt={firstProject.title} className="w-full aspect-[4/3] object-cover rounded-2xl" />
+      <ImageWithFallback
+        client:load
+        id="modal-image"
+        src={firstProject.image}
+        alt={firstProject.title}
+        className="w-full aspect-[4/3] object-cover rounded-2xl"
+      />
       <div class="flex flex-col justify-between">
         <div class="space-y-6">
-          <p id="modal-description" class="font-sora font-normal text-gray-700 leading-relaxed">{firstProject.description}</p>
+          <p
+            id="modal-description"
+            class="font-sora font-normal text-gray-700 leading-relaxed"
+          >
+            {firstProject.description}
+          </p>
           <div>
             <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
               Características Principales
             </h4>
             <ul id="modal-features" class="grid grid-cols-2 gap-3">
-              {firstProject.features.map((feature: any) => (
-                <li class="flex items-center space-x-2">
-                  <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></div>
-                  <span class="text-gray-600 text-sm font-sora">{feature}</span>
-                </li>
-              ))}
+              {
+                firstProject.features.map((feature: any) => (
+                  <li class="flex items-center space-x-2">
+                    <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0" />
+                    <span class="text-gray-600 text-sm font-sora">
+                      {feature}
+                    </span>
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </div>
         <div class="space-y-3 mt-6">
-          <Button href={firstProject.demoUrl} id="modal-explore-btn" target="_blank" size="md" variant="primary" class="w-full">
-            <span class="icon-wrapper mr-2 inline-flex items-center"><Fragment set:html={iconExternalLink} /></span>
+          <Button
+            href={firstProject.demoUrl}
+            id="modal-explore-btn"
+            target="_blank"
+            size="md"
+            variant="primary"
+            class="w-full"
+            icon={Icons.ExternalLink}
+            justify="center"
+          >
             <span>Explorar Demo en Vivo</span>
           </Button>
-          <Button href="#" id="modal-whatsapp-btn" target="_blank" size="md" variant="secondary" justify="center" class="w-full">
+          <Button
+            href="#"
+            id="modal-whatsapp-btn"
+            target="_blank"
+            size="md"
+            variant="secondary"
+            justify="center"
+            class="w-full"
+          >
             Crear Algo Similar
           </Button>
         </div>
@@ -83,7 +128,7 @@ const iconExternalLink = `<svg xmlns="http://www.w3.org/2000/svg" width="16" hei
     modalImage.src = project.image;
     modalImage.alt = project.title;
     modalDescription.textContent = project.description;
-    
+
     exploreBtn.href = project.demoUrl;
     const whatsappMessage = `Quiero tener más información de esta invitación: ${project.title}`;
     const whatsappUrl = `https://wa.me/525611780488?text=${encodeURIComponent(whatsappMessage)}`;
@@ -108,7 +153,7 @@ const iconExternalLink = `<svg xmlns="http://www.w3.org/2000/svg" width="16" hei
     modal.classList.remove("is-visible");
     document.body.style.overflow = "";
   }
-  
+
   document.addEventListener("open-modal", (event) => {
     const projectId = event.detail.id;
     openModal(projectId);
@@ -127,19 +172,37 @@ const iconExternalLink = `<svg xmlns="http://www.w3.org/2000/svg" width="16" hei
 
 <style>
   .modal-backdrop {
-    position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px); z-index: 50; display: flex;
-    align-items: center; justify-content: center; padding: 1.5rem;
-    opacity: 0; pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s ease-in-out;
   }
-  .modal-backdrop.is-visible { opacity: 1; pointer-events: auto; }
-  .modal-content {
-    background-color: rgba(255, 255, 255, 0.9); border-radius: 1.5rem;
-    padding: 2rem; max-width: 56rem; width: 100%; max-height: 90vh;
-    overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    transform: scale(0.95); transition: transform 0.3s ease-in-out;
+  .modal-backdrop.is-visible {
+    opacity: 1;
+    pointer-events: auto;
   }
-  .modal-backdrop.is-visible .modal-content { transform: scale(1); }
+  .modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 56rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    transform: scale(0.95);
+    transition: transform 0.3s ease-in-out;
+  }
+  .modal-backdrop.is-visible .modal-content {
+    transform: scale(1);
+  }
 </style>

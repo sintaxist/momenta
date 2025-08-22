@@ -2,22 +2,16 @@
 import PackageCard from '@/components/PackageCard.astro';
 import SectionParticles from '@/components/SectionParticles.astro';
 import Button from '@/components/ui/Button.astro';
-
-const icons = {
-  Check: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-full h-full"><path d="M20 6 9 17l-5-5"/></svg>`,
-  Star: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-full h-full"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-  Crown: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown w-full h-full"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M12 16h.01"/></svg>`,
-  Sparkles: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-full h-full"><path d="m12 3-1.9 1.9-1 .8-2.2.4-.4 2.2-.8 1L3 12l1.9 1.9.8 1 .4 2.2 2.2.4 1 .8 1.9 1.9 1.9-1.9 1-.8 2.2-.4.4-2.2.8-1 1.9-1.9-1.9-1.9-.8-1-.4-2.2-2.2-.4-1-.8Z"/><path d="M18 6h.01"/><path d="M6 18h.01"/></svg>`,
-};
+import * as Icons from "@/components/ui/Icons.ts";
 
 const packages = [
-  { id: 1, name: "Esencial", icon: icons.Sparkles, originalPrice: "$3,125", discountedPrice: "$2,500", description: "Perfecto para eventos íntimos con funcionalidades básicas", features: ["Invitación digital personalizada", "RSVP automatizado", "Hasta 100 invitados", "Galería de fotos básica", "Soporte por email", "1 revisión de diseño"], popular: false, savings: "$625" },
-  { id: 2, name: "Premium", icon: icons.Crown, originalPrice: "$5,625", discountedPrice: "$4,500", description: "La elección perfecta para eventos que buscan la excelencia", features: ["Todo lo incluido en Esencial", "Hasta 500 invitados", "Agenda interactiva", "Tickets digitales con QR", "Analytics avanzado", "Playlist colaborativa", "Soporte prioritario 24/7", "3 revisiones de diseño", "Integración con redes sociales"], popular: true, savings: "$1,125" },
-  { id: 3, name: "Luxury", icon: icons.Star, originalPrice: "$9,375", discountedPrice: "$7,500", description: "Experiencia completa sin límites para eventos extraordinarios", features: ["Todo lo incluido en Premium", "Invitados ilimitados", "Diseño 100% personalizado", "Múltiples idiomas", "Streaming en vivo", "Concierge digital", "Dashboard administrativo", "Revisiones ilimitadas", "Consultor dedicado", "Implementación en 48h"], popular: false, savings: "$1,875" }
+  { id: 1, name: "Esencial", icon: Icons.Sparkles, originalPrice: "$3,125", discountedPrice: "$2,500", description: "Perfecto para eventos íntimos con funcionalidades básicas", features: ["Invitación digital personalizada", "RSVP automatizado", "Hasta 100 invitados", "Galería de fotos básica", "Soporte por email", "1 revisión de diseño"], popular: false, savings: "$625" },
+  { id: 2, name: "Premium", icon: Icons.Crown, originalPrice: "$5,625", discountedPrice: "$4,500", description: "La elección perfecta para eventos que buscan la excelencia", features: ["Todo lo incluido en Esencial", "Hasta 500 invitados", "Agenda interactiva", "Tickets digitales con QR", "Analytics avanzado", "Playlist colaborativa", "Soporte prioritario 24/7", "3 revisiones de diseño", "Integración con redes sociales"], popular: true, savings: "$1,125" },
+  { id: 3, name: "Luxury", icon: Icons.Star, originalPrice: "$9,375", discountedPrice: "$7,500", description: "Experiencia completa sin límites para eventos extraordinarios", features: ["Todo lo incluido en Premium", "Invitados ilimitados", "Diseño 100% personalizado", "Múltiples idiomas", "Streaming en vivo", "Concierge digital", "Dashboard administrativo", "Revisiones ilimitadas", "Consultor dedicado", "Implementación en 48h"], popular: false, savings: "$1,875" }
 ];
 ---
 
-<section id="paquetes" class="py-32 px-6 relative overflow-hidden">
+<section id="paquetes" class="py-32 px-6 relative">
   <SectionParticles />
 
   <div class="max-w-7xl mx-auto relative z-10">
@@ -30,7 +24,7 @@ const packages = [
       </div>
     </div>
 
-    <div class="text-center mb-20" style="transition-delay: 200ms;">
+    <div class="text-center mb-20">
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
         Una Inversión en la <span class="text-indigo-600">Perfección</span>
       </h2>
@@ -39,33 +33,19 @@ const packages = [
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-3 gap-8 lg:flex lg:items-end">
+    <div class="grid lg:grid-cols-3 gap-8 lg:items-stretch">
       {packages.map((pkg, index) => (
         <PackageCard pkg={pkg} index={index} />
       ))}
     </div>
 
-    <div class="text-center mt-20 animate-on-scroll" style="transition-delay: 500ms;">
+    <div class="text-center mt-20">
       <p class="font-sora text-gray-600 mb-6">
         ¿Necesitas algo personalizado? Hablemos sobre tu proyecto específico.
       </p>
-      <Button href="https://calendly.com/alejandrocanek" target="_blank" variant="floating" size="lg" icon="sparkles">
+      <Button href="https://calendly.com/alejandrocanek" target="_blank" variant="floating" size="lg" icon={Icons.Sparkles}>
         Consulta Personalizada Gratuita
       </Button>
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener('click', (e) => {
-    if (e.target.matches('.js-scroll-to-contact')) {
-      document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-</script>
-
-<style is:global>
-  .lucide-sparkles, .lucide-crown, .lucide-star, .lucide-check {
-    color: white;
-  }
-</style>

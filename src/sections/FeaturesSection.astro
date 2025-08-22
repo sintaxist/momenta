@@ -1,124 +1,143 @@
 ---
-import { ImageWithFallback } from '@/components/ImageWithFallback';
+import { ImageWithFallback } from "@/components/ImageWithFallback";
 import SectionParticles from "@/components/SectionParticles.astro";
-
-const icons = {
-  Users: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-  Ticket: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket"><path d="M2 9a3 3 0 0 1 0 6v3a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3a3 3 0 0 1 0-6V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>`,
-  Calendar: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>`,
-  BarChart3: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-3"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>`,
-  Palette: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.477-1.122-.297-.287-.703-.477-1.17-.477-.926 0-1.688-.746-1.688-1.688 0-.437.18-.835.477-1.122.297-.287.703-.477 1.17-.477.926 0 1.688-.746 1.688-1.688 0-.437.18-.835.477-1.122.297-.287.703-.477 1.17-.477.926 0 1.688-.746 1.688-1.688V2h-5.152Z"/></svg>`,
-  Shield: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>`,
-};
+import * as Icons from "@/components/ui/Icons.ts";
 
 const features = [
   {
     id: 1,
-    icon: icons.Users,
+    icon: Icons.Users,
     title: "Gestión de Invitados",
-    description: "Sistema completo de RSVP con confirmaciones automáticas, seguimiento de asistencia y comunicación personalizada con cada invitado.",
-    image: "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    description:
+      "Sistema completo de RSVP con confirmaciones automáticas, seguimiento de asistencia y comunicación personalizada con cada invitado.",
+    image:
+      "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 2,
-    icon: icons.Ticket,
+    icon: Icons.Ticket,
     title: "Boletos Digitales",
-    description: "Generación automática de tickets con códigos QR únicos, validación en tiempo real y sistema de control de acceso integrado.",
-    image: "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    description:
+      "Generación automática de tickets con códigos QR únicos, validación en tiempo real y sistema de control de acceso integrado.",
+    image:
+      "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 3,
-    icon: icons.Calendar,
+    icon: Icons.Calendar,
     title: "Agenda Interactiva",
-    description: "Cronogramas dinámicos con recordatorios automáticos, integración con calendarios personales y actualizaciones en tiempo real.",
-    image: "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080"
+    description:
+      "Cronogramas dinámicos con recordatorios automáticos, integración con calendarios personales y actualizaciones en tiempo real.",
+    image:
+      "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 4,
-    icon: icons.BarChart3,
+    icon: Icons.BarChart3,
     title: "Analytics Avanzado",
-    description: "Dashboard completo con métricas de engagement, estadísticas de asistencia y reportes detallados para optimizar futuros eventos.",
-    image: "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    description:
+      "Dashboard completo con métricas de engagement, estadísticas de asistencia y reportes detallados para optimizar futuros eventos.",
+    image:
+      "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 5,
-    icon: icons.Palette,
+    icon: Icons.Palette,
     title: "Diseño Personalizable",
-    description: "Temas completamente customizables con paletas de colores únicas, tipografías exclusivas y elementos visuales adaptados a tu marca.",
-    image: "https://images.unsplash.com/photo-1670156256975-b3dbdd416082?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBzbWFydHBob25lJTIwbW9ja3VwJTIwZGFya3xlbnwxfHx8fDE3NTU2NTQ0NDF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    description:
+      "Temas completamente customizables con paletas de colores únicas, tipografías exclusivas y elementos visuales adaptados a tu marca.",
+    image:
+      "https://images.unsplash.com/photo-1670156256975-b3dbdd416082?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBzbWFydHBob25lJTIwbW9ja3VwJTIwZGFya3xlbnwxfHx8fDE3NTU2NTQ0NDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 6,
-    icon: icons.Shield,
+    icon: Icons.Shield,
     title: "Seguridad Premium",
-    description: "Encriptación de extremo a extremo, protección de datos personales y cumplimiento con regulaciones internacionales de privacidad.",
-    image: "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080"
-  }
+    description:
+      "Encriptación de extremo a extremo, protección de datos personales y cumplimiento con regulaciones internacionales de privacidad.",
+    image:
+      "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  },
 ];
 ---
 
-<section id="features" class="py-24 px-6 relative">
+<section id="features" class="py-32 px-6 relative">
   <SectionParticles />
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-20">
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
         Capacidades Sin <span class="text-indigo-600">Compromiso</span>
       </h2>
-      <p class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Cada funcionalidad está diseñada para elevar la experiencia de tus invitados y simplificar la gestión de tu evento.
+      <p
+        class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+      >
+        Cada funcionalidad está diseñada para elevar la experiencia de tus
+        invitados y simplificar la gestión de tu evento.
       </p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
       <div class="hidden lg:block relative lg:sticky lg:top-32 h-[450px]">
-        {features.map((feature, index) => (
-          <div class={`feature-image-container ${index === 0 ? 'is-active' : ''}`} data-index={index}>
-            <div class="relative rounded-3xl overflow-hidden bg-white/40 backdrop-blur-xl border border-white/30 shadow-xl w-full h-full">
-              <ImageWithFallback client:visible src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <div class="absolute bottom-6 left-6 right-6">
-                <div class="flex items-center space-x-3 bg-white/20 backdrop-blur-xl rounded-2xl p-4 border border-white/30">
-                  <div class="p-3 rounded-full bg-indigo-500">
-                    <Fragment set:html={feature.icon} />
-                  </div>
-                  <div>
-                    <h4 class="font-sora font-semibold text-white text-lg">
-                      {feature.title}
-                    </h4>
-                    <p class="font-sora text-white/80 text-sm">
-                      Funcionalidad Activa
-                    </p>
+        {
+          features.map((feature, index) => (
+            <div
+              class={`feature-image-container ${index === 0 ? "is-active" : ""}`}
+              data-index={index}
+            >
+              <div class="relative rounded-3xl overflow-hidden bg-white/40 backdrop-blur-xl border border-white/30 shadow-xl w-full h-full">
+                <ImageWithFallback
+                  client:visible
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div class="absolute bottom-6 left-6 right-6">
+                  <div class="flex items-center space-x-3 bg-white/20 backdrop-blur-xl rounded-2xl p-4 border border-white/30">
+                    <div class="p-3 rounded-full bg-indigo-500 w-13 h-13 flex items-center justify-center">
+                      <Fragment set:html={feature.icon} />
+                    </div>
+                    <div>
+                      <h4 class="font-sora font-semibold text-white text-lg">
+                        {feature.title}
+                      </h4>
+                      <p class="font-sora text-white/80 text-sm">
+                        Funcionalidad Activa
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <dl class="space-y-8">
-        {features.map((feature, index) => (
-          <div 
-            class="feature-card p-6 rounded-2xl transition-colors duration-500 ease-out cursor-pointer bg-white/30 backdrop-blur-xl border border-white/30 hover:bg-indigo-50/50 animate-on-scroll" 
-            data-index={index}
-            style={`transition-delay: ${index * 150}ms;`}
-          >
-            <div class="flex items-start space-x-4">
-              <div class="feature-icon-wrapper p-3 rounded-xl transition-all duration-300 bg-gray-200">
-                <Fragment set:html={feature.icon} />
+        {
+          features.map((feature, index) => (
+            <div
+              class="feature-card p-6 rounded-2xl transition-colors duration-500 ease-out cursor-pointer bg-white/30 backdrop-blur-xl border border-white/30 hover:bg-indigo-50/50 animate-on-scroll"
+              data-index={index}
+              style={`transition-delay: ${index * 150}ms;`}
+            >
+              <div class="flex items-start space-x-4">
+                <div class="feature-icon-wrapper p-3 rounded-xl transition-all duration-300 bg-gray-200 w-13 h-13 flex items-center justify-center">
+                  <Fragment set:html={feature.icon} />
+                </div>
+                <div class="flex-1">
+                  <dt class="font-sora font-semibold feature-title text-xl mb-2 transition-colors duration-300 text-gray-900">
+                    {feature.title}
+                  </dt>
+                  <dd class="font-sora font-normal text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </dd>
+                </div>
               </div>
-              <div class="flex-1">
-                <dt class="font-sora font-semibold feature-title text-xl mb-2 transition-colors duration-300 text-gray-900">
-                  {feature.title}
-                </dt>
-                <dd class="font-sora font-normal text-gray-600 leading-relaxed">
-                  {feature.description}
-                </dd>
-              </div>
+              <div class="feature-bar mt-4 h-1 bg-indigo-500 rounded-full" />
             </div>
-            <div class="feature-bar mt-4 h-1 bg-indigo-500 rounded-full"></div>
-          </div>
-        ))}
+          ))
+        }
       </dl>
     </div>
   </div>
@@ -126,40 +145,49 @@ const features = [
 
 <script>
   // El script no necesita cambios
-  document.addEventListener('DOMContentLoaded', () => {
-    const featureCards = document.querySelectorAll('.feature-card');
-    const imageContainers = document.querySelectorAll('.feature-image-container');
+  document.addEventListener("DOMContentLoaded", () => {
+    const featureCards = document.querySelectorAll(".feature-card");
+    const imageContainers = document.querySelectorAll(
+      ".feature-image-container"
+    );
     let activeIndex = 0;
 
     function setActiveFeature(index: any) {
-      if (index === activeIndex && document.querySelector('.feature-card.is-active')) return;
-      
+      if (
+        index === activeIndex &&
+        document.querySelector(".feature-card.is-active")
+      )
+        return;
+
       imageContainers.forEach((container, i) => {
-        container.classList.toggle('is-active', i === index);
+        container.classList.toggle("is-active", i === index);
       });
       featureCards.forEach((card, i) => {
-        card.classList.toggle('is-active', i === index);
+        card.classList.toggle("is-active", i === index);
       });
       activeIndex = index;
     }
 
     featureCards.forEach((card, index) => {
-      card.addEventListener('click', () => setActiveFeature(index));
+      card.addEventListener("click", () => setActiveFeature(index));
     });
 
-    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const indexStr = (entry.target as HTMLElement).dataset.index;
-          if (indexStr) {
-            const index = parseInt(indexStr, 10);
-            setActiveFeature(index);
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const indexStr = (entry.target as HTMLElement).dataset.index;
+            if (indexStr) {
+              const index = parseInt(indexStr, 10);
+              setActiveFeature(index);
+            }
           }
-        }
-      });
-    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    );
 
-    featureCards.forEach(card => observer.observe(card));
+    featureCards.forEach((card) => observer.observe(card));
     setActiveFeature(0);
   });
 </script>
@@ -167,15 +195,24 @@ const features = [
 <style>
   /* Estilos locales (scoped) para la sección */
   .feature-image-container {
-    position: absolute; inset: 0; opacity: 0;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
     transform: scale(0.95);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transition:
+      opacity 0.5s ease-in-out,
+      transform 0.5s ease-in-out;
   }
-  .feature-image-container.is-active { opacity: 1; transform: scale(1); }
+  .feature-image-container.is-active {
+    opacity: 1;
+    transform: scale(1);
+  }
   .feature-card.is-active {
     background-color: rgba(255, 255, 255, 0.6);
     border-color: var(--brand-indigo);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
   .feature-card.is-active .feature-icon-wrapper {
     background-color: var(--brand-indigo);

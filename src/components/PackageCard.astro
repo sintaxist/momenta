@@ -28,7 +28,7 @@ const icons = {
     </div>
   </div>
 
-  <div class={`relative p-8 rounded-3xl backdrop-blur-xl border transition-transform duration-500 ease-out h-full flex flex-col group-hover:scale-105
+  <div class={`relative p-8 rounded-3xl backdrop-blur-xl border transition-transform duration-500 ease-out h-full flex flex-col
     ${pkg.popular ? 'bg-white/50 border-indigo-200 shadow-2xl' : 'bg-white/30 border-white/30 shadow-lg'}`
   }>
     <div class="flex-grow">
@@ -50,7 +50,7 @@ const icons = {
       </div>
 
       <ul class="space-y-4 mb-8">
-        {pkg.features.map((feature) => (
+        {pkg.features.map((feature: any) => (
           <li class="feature-item flex items-start space-x-3">
             <div class={`p-1 rounded-full mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center ${ pkg.popular ? 'bg-indigo-500' : 'bg-gray-500' }`}>
               <Fragment set:html={icons.Check} />
@@ -62,7 +62,7 @@ const icons = {
     </div>
 
     <div class="space-y-3 mt-auto">
-      <Button variant={pkg.popular ? 'primary' : 'outline'} size="md" class="w-full js-scroll-to-contact">
+      <Button variant="primary" size="md" class="w-full js-scroll-to-contact">
         Me Interesa
       </Button>
       <Button href="https://calendly.com/alejandrocanek" target="_blank" variant="secondary" size="sm" class="w-full">
