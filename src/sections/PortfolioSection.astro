@@ -1,10 +1,6 @@
 ---
 import PortfolioCard from "@/components/PortfolioCard.astro";
-import { ImageWithFallback } from "@/components/ImageWithFallback";
-import Button from "@/components/ui/Button.astro";
-
-const iconX = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
-const iconExternalLink = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>`;
+import PortfolioModal from "@/components/PortfolioModal.astro";
 
 const projects = [
   {
@@ -13,6 +9,7 @@ const projects = [
     category: "Boda Premium",
     image:
       "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Invitación digital interactiva con RSVP automatizado, galería de fotos y lista de regalos integrada. Diseño elegante con animaciones personalizadas y confirmación de asistencia en tiempo real.",
     features: [
@@ -28,6 +25,7 @@ const projects = [
     category: "Evento Corporativo",
     image:
       "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Plataforma completa para ceremonias de premiación con gestión de nominados, votación en línea y transmisión en vivo. Sistema de tickets digitales con códigos QR únicos.",
     features: [
@@ -43,6 +41,7 @@ const projects = [
     category: "Celebración Personal",
     image:
       "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080",
+    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Experiencia digital completa para quinceañeras con cronómetro interactivo, playlist colaborativa y álbum de recuerdos compartido. Diseño personalizable con temas únicos.",
     features: [
@@ -58,6 +57,7 @@ const projects = [
     category: "Evento Empresarial",
     image:
       "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    videoUrl: "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
     description:
       "Plataforma integral para conferencias corporativas con agenda interactiva, networking digital y sistema de feedback en tiempo real. Dashboard de analytics para organizadores.",
     features: [
@@ -108,176 +108,5 @@ const projects = [
     </ul>
   </div>
 
-  <div id="project-modal" class="modal-backdrop">
-    <div class="modal-content">
-      <div class="flex items-start justify-between mb-8">
-        <div>
-          <h3
-            id="modal-title"
-            class="font-sora font-bold text-3xl text-gray-900 mb-2"
-          >
-          </h3>
-          <span
-            id="modal-category"
-            class="font-sora text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200"
-          ></span>
-        </div>
-        <button
-          id="modal-close-btn"
-          class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0"
-        >
-          <Fragment set:html={iconX} />
-          <span class="text-sm font-medium">Cerrar</span>
-        </button>
-      </div>
-      <div class="grid lg:grid-cols-2 gap-8">
-        <ImageWithFallback
-          client:load
-          id="modal-image"
-          src=""
-          alt=""
-          className="w-full aspect-[4/3] object-cover rounded-2xl"
-        />
-        <div class="flex flex-col justify-between">
-          <div class="space-y-6">
-            <p
-              id="modal-description"
-              class="font-sora font-normal text-gray-700 leading-relaxed"
-            >
-            </p>
-            <div>
-              <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
-                Características Principales
-              </h4>
-              <div id="modal-features" class="grid grid-cols-2 gap-3"></div>
-            </div>
-          </div>
-          <div class="space-y-3 mt-6">
-            <Button
-              href="#"
-              size="md"
-              variant="primary"
-              class="w-full bg-indigo-600 text-white hover:bg-indigo-700 font-sora font-medium"
-            >
-              <span class="icon-wrapper mr-2 inline-flex items-center">
-                <Fragment set:html={iconExternalLink} />
-              </span>
-              <span>Explorar Demo en Vivo</span>
-            </Button>
-
-            <!-- Botón de acción -->
-            <Button
-              size="md"
-              variant="secondary"
-              justify="center"
-              class="w-full"
-              id="schedule-btn"
-            >
-              Crear Algo Similar
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <PortfolioModal projects={projects} />
 </section>
-
-<script define:vars={{ projects }}>
-  const allProjects = projects;
-  const portfolioSection = document.getElementById("demos");
-  const projectCards = document.querySelectorAll(".project-card");
-  const modal = document.getElementById("project-modal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalCategory = document.getElementById("modal-category");
-  const modalImage = document.getElementById("modal-image");
-  const modalDescription = document.getElementById("modal-description");
-  const featuresContainer = document.getElementById("modal-features");
-  const closeModalBtn = document.getElementById("modal-close-btn");
-
-  function openModal(projectId) {
-    const project = allProjects.find((p) => p.id === projectId);
-    if (!project) return;
-
-    modalTitle.textContent = project.title;
-    modalCategory.textContent = project.category;
-    modalImage.src = project.image;
-    modalImage.alt = project.title;
-    modalDescription.textContent = project.description;
-
-    featuresContainer.innerHTML = "";
-    project.features.forEach((feature) => {
-      featuresContainer.innerHTML += `
-        <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></div>
-          <span class="text-gray-600 text-sm font-sora">${feature}</span>
-        </div>
-      `;
-    });
-
-    modal.classList.add("is-visible");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeModal() {
-    modal.classList.remove("is-visible");
-    document.body.style.overflow = "";
-  }
-
-  portfolioSection.addEventListener("open-modal", (event) => {
-    const projectId = event.detail.id;
-    openModal(projectId);
-  });
-
-  closeModalBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && modal.classList.contains("is-visible")) {
-      closeModal();
-    }
-  });
-</script>
-
-<style>
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  .modal-backdrop.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .modal-content {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    max-width: 56rem;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    transform: scale(0.95);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .modal-backdrop.is-visible .modal-content {
-    transform: scale(1);
-  }
-</style>

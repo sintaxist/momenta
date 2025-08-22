@@ -2,7 +2,6 @@
 import type { projectType } from '@/types/portfolio';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
 
-// Definimos la interfaz para el prop que este componente recibirá
 export interface Props {
   project: projectType;
   index: number;
@@ -11,11 +10,11 @@ const { project, index } = Astro.props;
 ---
 
 <li 
-  class="group cursor-pointer project-card animate-on-scroll"
+  class="group cursor-pointer project-card animate-on-scroll flex"
   style={`transition-delay: ${index * 150}ms;`}
-   onclick={`this.dispatchEvent(new CustomEvent('open-modal', {detail: {id: ${project.id}}, bubbles: true}));`}
+  onclick={`this.dispatchEvent(new CustomEvent('open-modal', {detail: {id: ${project.id}}, bubbles: true}));`}
 >
-  <div class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-white/50 transition-all duration-500 shadow-lg hover:shadow-xl">
+  <article class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-white/50 transition-all duration-500 shadow-lg hover:shadow-xl w-full flex flex-col">
     <div class="aspect-[4/3] overflow-hidden relative">
       <ImageWithFallback client:visible src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
       <div class="absolute inset-0 bg-indigo-600/20 backdrop-blur-sm flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -24,13 +23,16 @@ const { project, index } = Astro.props;
         </div>
       </div>
     </div>
-    <div class="p-4">
-      <span class="font-sora text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200">
+    <div class="p-4 flex flex-col flex-grow">
+      <span class="font-sora text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200 self-start">
         {project.category}
       </span>
       <h3 class="font-sora font-semibold text-lg text-gray-900 mt-2 group-hover:text-indigo-600 transition-colors duration-300">
         {project.title}
       </h3>
+      <p class="font-sora text-sm text-gray-600 mt-2 flex-grow line-clamp-3">
+        {project.description}
+      </p>
     </div>
-  </div>
+  </article>
 </li>
