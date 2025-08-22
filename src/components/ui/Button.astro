@@ -1,17 +1,11 @@
 ---
-import { cn } from '@/components/lib/utils';
+import { cn } from '@/components/ui/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'astro/types';
 
-// Íconos inline
-const icons = {
-  calendar: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>`,
-  sparkles: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.9 1.9-1 .8-2.2.4-.4 2.2-.8 1L3 12l1.9 1.9.8 1 .4 2.2 2.2.4 1 .8 1.9 1.9 1.9-1.9 1-.8 2.2-.4.4-2.2.8-1 1.9-1.9-1.9-1.9-.8-1-.4-2.2-2.2-.4-1-.8Z"/><path d="M18 6h.01"/><path d="M6 18h.01"/></svg>`,
-};
-
 // Variantes
 const buttonVariants = cva(
-  "cursor-pointer inline-flex items-center font-sora font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "cursor-pointer inline-flex items-center font-sora font-semibold rounded-lg transition-colors transition-bg transition-border transition-transform duration-500 ease-in-out transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -40,28 +34,22 @@ const buttonVariants = cva(
   }
 );
 
-// Tipos HTML para <a> y <button>
 type AnchorProps = HTMLAttributes<'a'>;
 type ButtonProps = HTMLAttributes<'button'>;
-
 type Variants = VariantProps<typeof buttonVariants>;
 type Size = NonNullable<Variants['size']>;
 
-// Props del componente
 export interface Props extends Partial<AnchorProps & ButtonProps> {
   href?: string;
   variant?: Variants['variant'];
   size?: Variants['size'];
   justify?: Variants['justify'];
-  icon?: keyof typeof icons;
+  icon?: any; // <-- aquí recibimos el icono como componente
   className?: string;
-  onclick?: string;  
-  onClick?: string;
-  bubbles?: boolean; 
+  bubbles?: boolean;
   type?: ButtonProps['type'];
 }
 
-// Props + defaults seguros
 const {
   variant = 'primary',
   size = 'md',
@@ -70,8 +58,6 @@ const {
   icon,
   class: classAttr,
   className,
-  onclick,
-  onClick,
   bubbles = false,
   target,
   rel,
@@ -80,35 +66,17 @@ const {
   ...attrs
 } = Astro.props as Props & Record<string, any>;
 
-// Clases finales
-const finalClasses = cn(
-  buttonVariants({ variant, size, justify }),
-  classAttr,
-  className
-);
+const finalClasses = cn(buttonVariants({ variant, size, justify }), classAttr, className);
 
-// Tamaños de icono tipados
-const iconSizeClasses: Record<Exclude<Size, undefined>, string> = {
+const relFinal = rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined);
+
+const id = idAttr;
+const iconSizeClasses: Record<Size, string> = {
   sm: "w-4 h-4",
   md: "w-5 h-5",
   lg: "w-5 h-5",
   xl: "w-6 h-6",
 };
-
-// rel seguro cuando target es _blank
-const relFinal = rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined);
-
-// ID
-const id = idAttr;
-
-// Helper para renderizar contenido interno
-const IconSpan = icon
-  ? `<span class="icon-wrapper mr-4 ${iconSizeClasses[size!]}">${icons[icon]}</span>`
-  : '';
-
-const Sparkles = variant === 'floating' && icon === 'sparkles'
-  ? `<span class="animate-sparkle text-white ml-2">${icons.sparkles}</span>`
-  : '';
 ---
 
 {href ? (
@@ -121,22 +89,19 @@ const Sparkles = variant === 'floating' && icon === 'sparkles'
     data-astro-bubbles={bubbles ? 'true' : undefined}
     {...attrs}
   >
-    <Fragment set:html={IconSpan} />
+    {icon && <span class={`icon-wrapper mr-4 ${iconSizeClasses[size ?? 'md']}`}><Fragment set:html={icon} /></span>}
     <span><slot /></span>
-    <Fragment set:html={Sparkles} />
   </a>
 ) : (
   <button
     id={id}
     type={type}
     class={finalClasses}
-    onclick={onclick ?? onClick}
     data-astro-bubbles={bubbles ? 'true' : undefined}
     {...attrs}
   >
-    <Fragment set:html={IconSpan} />
+    {icon && <span class={`icon-wrapper mr-4 ${iconSizeClasses[size ?? 'md']}`}><Fragment set:html={icon} /></span>}
     <span><slot /></span>
-    <Fragment set:html={Sparkles} />
   </button>
 )}
 
@@ -160,18 +125,8 @@ const Sparkles = variant === 'floating' && icon === 'sparkles'
 )}
 
 <style>
-  .icon-wrapper svg, .animate-sparkle svg {
+  .icon-wrapper svg {
     width: 100%;
     height: 100%;
-  }
-  @keyframes sparkle-spin {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(15deg) scale(1.1); }
-    50% { transform: rotate(-10deg) scale(1); }
-    75% { transform: rotate(15deg) scale(1.1); }
-  }
-  .animate-sparkle {
-    display: inline-block;
-    animation: sparkle-spin 2.5s ease-in-out infinite;
   }
 </style>

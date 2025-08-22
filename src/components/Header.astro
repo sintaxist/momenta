@@ -1,5 +1,6 @@
 ---
 import Button from "@/components/ui/Button.astro";
+import * as Icons from '@/components/ui/Icons.ts';
 
 const menuItems = [
   { id: "demos", label: "Demos" },
@@ -8,11 +9,6 @@ const menuItems = [
   { id: "paquetes", label: "Paquetes" },
   { id: "contacto", label: "Contacto" },
 ];
-
-const icons = {
-  Menu: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`,
-  X: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`,
-};
 ---
 
 <header
@@ -50,20 +46,15 @@ const icons = {
           href="https://calendly.com/alejandrocanek"
           target="_blank"
           size="md"
-          icon="calendar"
+           icon={Icons.Calendar}
         >
           Agendar Meeting
         </Button>
       </div>
 
-      <button
-        id="mobile-menu-btn"
-        class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50"
-      >
-        <span id="menu-icon"><Fragment set:html={icons.Menu} /></span>
-        <span id="close-icon" class="hidden"
-          ><Fragment set:html={icons.X} /></span
-        >
+      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50">
+        <span id="menu-icon" class="w-5 h-5 flex items-center justify-center"><Fragment set:html={Icons.Menu} /></span>
+        <span id="close-icon" class="w-5 h-5 flex items-center justify-center hidden"><Fragment set:html={Icons.X} /></span>
       </button>
     </div>
 
@@ -88,7 +79,7 @@ const icons = {
               href="https://calendly.com/alejandrocanek"
               target="_blank"
               className="w-full"
-              icon="calendar"
+              icon={Icons.Calendar}
             >
               Agendar Meeting
             </Button>

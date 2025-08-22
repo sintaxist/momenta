@@ -1,0 +1,108 @@
+---
+import Button from '@/components/ui/Button.astro';
+
+interface Props {
+  pkg: any;
+  index: number;
+}
+const { pkg, index } = Astro.props;
+
+const icons = {
+    Check: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>`,
+    Star: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+};
+---
+
+<div id={`package-card-${pkg.id}`} class={`relative group h-full flex flex-col ${pkg.popular ? 'lg:-mt-8' : ''} animate-on-scroll`} style={`transition-delay: ${index * 150}ms`}>
+  {pkg.popular && (
+    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+      <div class="font-sora bg-indigo-600 text-white px-6 py-2 rounded-full text-sm shadow-lg flex items-center">
+        <Fragment set:html={icons.Star} />
+        <span class="ml-1">Más Popular</span>
+      </div>
+    </div>
+  )}
+  <div class="absolute -top-2 -right-2 z-20">
+    <div class="font-sora bg-emerald-500 text-white px-3 py-1 rounded-full text-xs shadow-lg">
+      Ahorra {pkg.savings}
+    </div>
+  </div>
+
+  <div class={`relative p-8 rounded-3xl backdrop-blur-xl border transition-transform duration-500 ease-out h-full flex flex-col group-hover:scale-105
+    ${pkg.popular ? 'bg-white/50 border-indigo-200 shadow-2xl' : 'bg-white/30 border-white/30 shadow-lg'}`
+  }>
+    <div class="flex-grow">
+      <div class="text-center mb-8">
+        <div class={`inline-flex p-4 rounded-2xl mb-4 transition-transform duration-300 group-hover:rotate-6 w-16 h-16 ${ pkg.popular ? 'bg-indigo-600' : 'bg-gray-500' }`}>
+          <Fragment set:html={pkg.icon} />
+        </div>
+        <h3 class={`font-sora font-bold text-2xl mb-2 ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
+          {pkg.name}
+        </h3>
+        <p class="font-sora text-gray-600 text-sm mb-4">{pkg.description}</p>
+        <div class="mb-6">
+          <div class="text-lg text-gray-400 line-through mb-1">{pkg.originalPrice}</div>
+          <span class={`font-sora font-bold text-4xl ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
+            {pkg.discountedPrice}
+          </span>
+          <span class="text-gray-600 text-sm ml-2">MXN</span>
+        </div>
+      </div>
+
+      <ul class="space-y-4 mb-8">
+        {pkg.features.map((feature) => (
+          <li class="feature-item flex items-start space-x-3">
+            <div class={`p-1 rounded-full mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center ${ pkg.popular ? 'bg-indigo-500' : 'bg-gray-500' }`}>
+              <Fragment set:html={icons.Check} />
+            </div>
+            <span class="font-sora text-gray-700 text-sm leading-relaxed">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="space-y-3 mt-auto">
+      <Button variant={pkg.popular ? 'primary' : 'outline'} size="md" class="w-full js-scroll-to-contact">
+        Me Interesa
+      </Button>
+      <Button href="https://calendly.com/alejandrocanek" target="_blank" variant="secondary" size="sm" class="w-full">
+        Consulta {pkg.name}
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ cardId: `package-card-${pkg.id}` }}>
+  const currentCard = document.getElementById(cardId);
+
+  if (currentCard) {
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const featureItems = entry.target.querySelectorAll('.feature-item');
+          featureItems.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add('is-visible');
+            }, index * 100);
+          });
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cardObserver.observe(currentCard);
+  }
+</script>
+
+<style>
+  .feature-item {
+    opacity: 0;
+    /* ✅ CAMBIO: El valor ahora es negativo para que venga de la izquierda */
+    transform: translateX(-20px);
+    transition: opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1), transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .feature-item.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
