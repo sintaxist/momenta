@@ -1,6 +1,7 @@
 ---
 import Button from "@/components/ui/Button.astro";
-import * as Icons from '@/components/ui/Icons.ts';
+import * as Icons from "@/components/ui/Icons.ts";
+import AnimatedLogo from "./AnimatedLogo.astro";
 
 const menuItems = [
   { id: "demos", label: "Demos" },
@@ -17,11 +18,9 @@ const menuItems = [
 >
   <div class="max-w-7xl mx-auto py-4 px-6">
     <div class="flex items-center justify-between">
-      <div
-        class="font-sora text-lg lg:text-xl tracking-wider text-gray-900 font-semibold"
-      >
-        <a href="#hero" id="logo-link">ALEJANDRO CANEK</a>
-      </div>
+      <a href="/" id="logo-link">
+        <AnimatedLogo/>
+      </a>
 
       <nav
         id="desktop-nav"
@@ -46,15 +45,24 @@ const menuItems = [
           href="https://calendly.com/momenta-invitaciones/nueva-reunion"
           target="_blank"
           size="md"
-           icon={Icons.Calendar}
+          icon={Icons.Calendar}
         >
           Agendar Meeting
         </Button>
       </div>
 
-      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50">
-        <span id="menu-icon" class="w-5 h-5 flex items-center justify-center"><Fragment set:html={Icons.Menu} /></span>
-        <span id="close-icon" class="w-5 h-5 flex items-center justify-center hidden"><Fragment set:html={Icons.X} /></span>
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50"
+      >
+        <span id="menu-icon" class="w-5 h-5 flex items-center justify-center"
+          ><Fragment set:html={Icons.Menu} /></span
+        >
+        <span
+          id="close-icon"
+          class="w-5 h-5 flex items-center justify-center hidden"
+          ><Fragment set:html={Icons.X} /></span
+        >
       </button>
     </div>
 
@@ -91,23 +99,41 @@ const menuItems = [
 </header>
 
 <script>
+  function smoothScroll(target, targetId) {
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + window.scrollY - 60; // offset
+    const duration = 600;
+    let startTime = null;
+
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const run = start + (end - start) * easeInOutQuad(progress);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      } else {
+        // ✅ al terminar el scroll, actualizamos la URL
+        if (targetId) {
+          history.pushState(null, "", `#${targetId}`);
+        }
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
   document.addEventListener("DOMContentLoaded", () => {
-    const header = document.getElementById("main-header") as HTMLElement | null;
-    const logoLink = document.getElementById(
-      "logo-link"
-    ) as HTMLAnchorElement | null;
-    const mobileMenuBtn = document.getElementById(
-      "mobile-menu-btn"
-    ) as HTMLButtonElement | null;
-    const mobileNavPanel = document.getElementById(
-      "mobile-nav-panel"
-    ) as HTMLDivElement | null;
-    const menuIcon = document.getElementById(
-      "menu-icon"
-    ) as HTMLSpanElement | null;
-    const closeIcon = document.getElementById(
-      "close-icon"
-    ) as HTMLSpanElement | null;
+    const header = document.getElementById("main-header");
+    const logoLink = document.getElementById("logo-link");
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileNavPanel = document.getElementById("mobile-nav-panel");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
     const allNavLinks = document.querySelectorAll("a.nav-link");
     const desktopNavLinks = document.querySelectorAll(
       "#desktop-nav a.nav-link"
@@ -115,9 +141,7 @@ const menuItems = [
     const mobileNavLinks = document.querySelectorAll(
       ".mobile-nav-panel a.nav-link"
     );
-    const navUnderline = document.getElementById(
-      "nav-underline"
-    ) as HTMLDivElement | null;
+    const navUnderline = document.getElementById("nav-underline");
     const sections = document.querySelectorAll("section[id]");
 
     if (
@@ -129,16 +153,15 @@ const menuItems = [
       !navUnderline ||
       !logoLink
     ) {
-      console.error(
-        "Error: No se encontraron algunos elementos esenciales del header."
-      );
+      console.error("Error: faltan elementos del header.");
       return;
     }
 
-    function closeMobileMenu(): void {
-      mobileNavPanel?.classList.remove("is-open");
-      menuIcon?.classList.remove("hidden");
-      closeIcon?.classList.add("hidden");
+    // Menú móvil
+    function closeMobileMenu() {
+      mobileNavPanel.classList.remove("is-open");
+      menuIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
       document.body.style.overflow = "";
     }
 
@@ -149,73 +172,88 @@ const menuItems = [
       document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
-    logoLink.addEventListener("click", (event: Event) => {
-      event.preventDefault();
-      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+    // Logo
+    logoLink.addEventListener("click", (event) => {
+      const hero = document.getElementById("hero");
+
+      if (window.location.pathname === "/" && hero) {
+        event.preventDefault();
+        const targetY = hero.offsetTop - header.offsetHeight;
+        smoothScroll(hero, "hero");
+      } else {
+        // si no estamos en home → mandamos a home con hash
+        logoLink.setAttribute("href", "/#hero");
+      }
     });
 
+    // Links
     allNavLinks.forEach((link) => {
-      link.addEventListener("click", (event: Event) => {
-        event.preventDefault();
-        const targetId = (link as HTMLAnchorElement)
-          .getAttribute("href")
-          ?.substring(1);
-        if (targetId) {
-          document
-            .getElementById(targetId)
-            ?.scrollIntoView({ behavior: "smooth" });
-        }
-        if (mobileNavPanel.classList.contains("is-open")) {
-          setTimeout(() => closeMobileMenu(), 150);
+      link.addEventListener("click", (event) => {
+        const targetId = link.getAttribute("href")?.substring(1);
+        const targetEl = document.getElementById(targetId);
+
+        // Si estamos en home
+        if (window.location.pathname === "/" && targetEl) {
+          event.preventDefault();
+          smoothScroll(targetEl, targetId);
+
+          if (mobileNavPanel.classList.contains("is-open")) {
+            setTimeout(() => closeMobileMenu(), 150);
+          }
+        } else {
+          // Si NO estamos en home, redirige a /#id
+          link.setAttribute("href", `/#${targetId}`);
         }
       });
     });
 
-    function updateUnderline(activeLink: HTMLElement | null): void {
-      if (!activeLink || !navUnderline) {
-        if (navUnderline) navUnderline.style.width = "0px";
+    // Subrayado dinámico
+    function updateUnderline(activeLink) {
+      if (!activeLink) {
+        navUnderline.style.width = "0px";
         return;
       }
       navUnderline.style.left = `${activeLink.offsetLeft}px`;
       navUnderline.style.width = `${activeLink.offsetWidth}px`;
     }
 
-    function setActiveLink(sectionId: string): void {
-      let activeDesktopLink: HTMLElement | null = null;
+    function setActiveLink(sectionId) {
+      let activeDesktopLink = null;
       desktopNavLinks.forEach((link) => {
         const isTarget = link.getAttribute("data-nav-link") === sectionId;
         link.classList.toggle("is-active", isTarget);
-        if (isTarget) activeDesktopLink = link as HTMLElement;
+        if (isTarget) activeDesktopLink = link;
       });
 
       mobileNavLinks.forEach((link) => {
-        const isTarget = link.getAttribute("data-nav-link") === sectionId;
-        link.classList.toggle("is-active", isTarget);
+        link.classList.toggle(
+          "is-active",
+          link.getAttribute("data-nav-link") === sectionId
+        );
       });
 
       updateUnderline(activeDesktopLink);
     }
 
-    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const sectionId = entry.target.getAttribute('id');
-                // ✅ SOLUCIÓN: Verificamos que sectionId no sea null antes de usarlo.
-                if (sectionId) {
-                    setActiveLink(sectionId);
-                }
-            }
+    // Observador de secciones
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.getAttribute("id");
+            if (sectionId) setActiveLink(sectionId);
+          }
         });
       },
       { rootMargin: "-40% 0px -40% 0px" }
     );
-
     sections.forEach((section) => observer.observe(section));
 
-    let resizeTimeout: number;
+    // Resize
+    let resizeTimeout;
     window.addEventListener("resize", () => {
-      window.clearTimeout(resizeTimeout);
-      resizeTimeout = window.setTimeout(() => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
         if (
           window.innerWidth >= 768 &&
           mobileNavPanel.classList.contains("is-open")
@@ -224,11 +262,12 @@ const menuItems = [
         }
         const activeLink = document.querySelector(
           "#desktop-nav a.nav-link.is-active"
-        ) as HTMLElement | null;
+        );
         updateUnderline(activeLink);
       }, 100);
     });
 
+    // Header scroll style
     const scrolledClasses = [
       "bg-white/80",
       "backdrop-blur-xl",
@@ -246,18 +285,19 @@ const menuItems = [
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
   });
+
+  window.addEventListener("load", () => {
+    if (window.location.pathname === "/" && window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        setTimeout(() => smoothScroll(targetEl, targetId), 200);
+      }
+    }
+  });
 </script>
 
 <style>
-  #main-header.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
-  }
-
   a.nav-link.is-active {
     color: var(--brand-indigo);
   }
@@ -271,6 +311,10 @@ const menuItems = [
     transition:
       left 0.3s ease-in-out,
       width 0.3s ease-in-out;
+  }
+
+  .logo-link {
+    width: 180px;
   }
 
   .mobile-nav-panel {
