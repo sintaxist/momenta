@@ -28,6 +28,20 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "sz5d7cmuna");
+    </script>
   </head>
   <body class="bg-white text-gray-900 overflow-x-hidden">
     <Header />
@@ -35,6 +49,34 @@ const { title } = Astro.props;
       <slot />
     </main>
     <Footer />
+
+    <div
+      id="cookie-banner"
+      class="fixed bottom-4 left-4 right-4 md:left-auto md:w-[400px] p-6 rounded-xl bg-white shadow-2xl border border-gray-200/50 transition-transform duration-500 ease-out z-50"
+    >
+      <p class="font-sora text-sm text-gray-700 mb-4 leading-relaxed">
+        Utilizamos cookies para mejorar tu experiencia en nuestro sitio web. Al
+        continuar, aceptas el uso de cookies. Puedes leer nuestra <a
+          href="#"
+          class="text-indigo-600 hover:underline font-semibold"
+          >Política de Cookies</a
+        >.
+      </p>
+      <div class="flex justify-end space-x-2">
+        <button
+          id="reject-cookies"
+          class="font-sora px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+        >
+          Rechazar
+        </button>
+        <button
+          id="accept-cookies"
+          class="font-sora px-4 py-2 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+        >
+          Aceptar
+        </button>
+      </div>
+    </div>
   </body>
 </html>
 <script>
@@ -57,6 +99,36 @@ const { title } = Astro.props;
 
     animatedElements.forEach((el) => {
       observer.observe(el);
+    });
+  });
+</script>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("accept-cookies");
+    const rejectBtn = document.getElementById("reject-cookies");
+
+    const hideBanner = () => banner?.classList.remove("show");
+    const showBanner = () => banner?.classList.add("show");
+
+    const consent = localStorage.getItem("cookieConsent");
+    if (consent === "true" || consent === "false") {
+      hideBanner();
+    } else {
+      showBanner();
+    }
+
+    acceptBtn?.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "true");
+      if (window.clarity) window.clarity("consent", true);
+      hideBanner();
+    });
+
+    rejectBtn?.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "false");
+      if (window.clarity) window.clarity("consent", false);
+      hideBanner();
     });
   });
 </script>

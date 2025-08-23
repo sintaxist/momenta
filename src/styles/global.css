@@ -50,8 +50,6 @@
   --brand-indigo: #4f46e5;
 }
 
-/* momentaDB403nek */
-
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -202,11 +200,17 @@ html {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  /* CAMBIO: Usamos una transición con una curva personalizada para un efecto más profesional */
   transition: opacity 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .animate-on-scroll.is-in-view {
   opacity: 1;
+  transform: translateY(0);
+}
+
+#cookie-banner {
+  transform: translateY(200%);
+}
+#cookie-banner.show {
   transform: translateY(0);
 }

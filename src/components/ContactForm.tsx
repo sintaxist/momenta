@@ -11,6 +11,13 @@ import {
 import { Label } from "@/components/ui/Label";
 import { FormSubmitButton } from "@/components/ui/FormSubmitButton";
 
+// ✅ Declaración para evitar errores de TS al usar window.clarity
+declare global {
+  interface Window {
+    clarity?: (...args: any[]) => void;
+  }
+}
+
 export function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -31,44 +38,56 @@ export function ContactForm() {
     e.preventDefault();
     if (!isFormValid) return;
     setIsSubmitting(true);
-    
+
     const formElement = e.currentTarget;
-    
-    // ✅ CAMBIO: Convertimos los datos del formulario a un objeto simple
-    const formData = new FormData(formElement);
-    const data = Object.fromEntries(formData.entries());
+
+    const formDataObj = new FormData(formElement);
+    const data = Object.fromEntries(formDataObj.entries());
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        // ✅ CAMBIO: Enviamos el objeto como JSON
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-      
+
       const result = await response.json();
-      
-      const eventType = response.ok ? 'success' : 'error';
-      const event = new CustomEvent('show-snackbar', {
+
+      const eventType = response.ok ? "success" : "error";
+      const event = new CustomEvent("show-snackbar", {
         bubbles: true,
         composed: true,
-        detail: { message: result.message, type: eventType }
+        detail: { message: result.message, type: eventType },
       });
-      
+
       formElement.dispatchEvent(event);
 
       if (response.ok) {
         formElement.reset();
-        setFormData({ name: '', email: '', phone: '', eventType: '', message: '' });
-      }
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          eventType: "",
+          message: "",
+        });
 
+        // ✅ Enviar eventos a Microsoft Clarity
+        if (window.clarity) {
+          window.clarity("set", "form_interaction", "contact_form_submitted");
+          window.clarity("event", "form_submission_success");
+        }
+      }
     } catch (error) {
-      const event = new CustomEvent('show-snackbar', {
+      const event = new CustomEvent("show-snackbar", {
         bubbles: true,
         composed: true,
-        detail: { message: 'Error de conexión. Inténtalo de nuevo.', type: 'error' }
+        detail: {
+          message: "Error de conexión. Inténtalo de nuevo.",
+          type: "error",
+        },
       });
       formElement.dispatchEvent(event);
     } finally {
@@ -122,6 +141,7 @@ export function ContactForm() {
               />
             </div>
           </div>
+
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="phone" className="font-sora text-gray-900">
@@ -152,15 +172,14 @@ export function ContactForm() {
                 <SelectContent>
                   <SelectItem value="boda">Boda</SelectItem>
                   <SelectItem value="xv">XV Años</SelectItem>
-                  <SelectItem value="corporativo">
-                    Evento Corporativo
-                  </SelectItem>
+                  <SelectItem value="corporativo">Evento Corporativo</SelectItem>
                   <SelectItem value="social">Evento Social</SelectItem>
                   <SelectItem value="otro">Otro</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
+
           <div className="space-y-2">
             <Label htmlFor="message">Mensaje</Label>
             <Textarea
@@ -181,11 +200,29 @@ export function ContactForm() {
       </div>
 
       <style>{`
-        .btn-loader { display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background-color: white; animation: pulse-dot 1.4s ease-in-out infinite; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes pulse-dot { 0%, 100% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } }
+        .btn-loader {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+        }
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: white;
+          animation: pulse-dot 1.4s ease-in-out infinite;
+        }
+        .dot:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        .dot:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+        @keyframes pulse-dot {
+          0%, 100% { transform: scale(0.8); opacity: 0.5; }
+          50% { transform: scale(1.2); opacity: 1; }
+        }
       `}</style>
     </>
   );
