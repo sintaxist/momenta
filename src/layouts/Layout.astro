@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 
@@ -23,7 +22,6 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,7 +34,7 @@ const { title } = Astro.props;
     <main>
       <slot />
     </main>
-    <Footer />
+    <!-- <Footer /> -->
   </body>
 </html>
 <script>
