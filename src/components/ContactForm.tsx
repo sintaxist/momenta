@@ -163,9 +163,7 @@ export function ContactForm() {
               value={formData.eventType}
               onValueChange={handleSelectChange}
             >
-              <SelectTrigger className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500">
-                <SelectValue placeholder="Selecciona tu evento" />
-              </SelectTrigger>
+              <SelectTrigger className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500"/>
               <SelectContent>
                 <SelectItem value="boda">Boda</SelectItem>
                 <SelectItem value="xv">XV Años</SelectItem>
