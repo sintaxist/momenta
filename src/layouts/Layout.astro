@@ -11,27 +11,38 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
-     <!-- Title & Description -->
     <title>{title}</title>
     <meta
       name="description"
       content="Portafolio de Alejandro Canek para desarrollo de plataformas interactivas para eventos."
     />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="favicon/site.webmanifest" />
 
-    <!-- Fonts -->
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,8 +50,7 @@ const { title } = Astro.props;
       rel="stylesheet"
     />
 
-    <!-- Clarity -->
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
       (function (c, l, a, r, i, t, y) {
         c[a] =
           c[a] ||
@@ -56,11 +66,13 @@ const { title } = Astro.props;
     </script>
   </head>
   <body class="bg-white text-gray-900 overflow-x-hidden">
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <div class="relative z-10">
+      <Header />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
 
     <div
       id="cookie-banner"
@@ -91,56 +103,66 @@ const { title } = Astro.props;
     </div>
   </body>
 </html>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Lógica para el sistema de animación global
     const animatedElements = document.querySelectorAll(".animate-on-scroll");
+    if (animatedElements.length > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      animatedElements.forEach((el) => observer.observe(el));
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in-view");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    animatedElements.forEach((el) => {
-      observer.observe(el);
-    });
-  });
-</script>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+    // Lógica para el banner de cookies
     const banner = document.getElementById("cookie-banner");
     const acceptBtn = document.getElementById("accept-cookies");
     const rejectBtn = document.getElementById("reject-cookies");
 
-    const hideBanner = () => banner?.classList.remove("show");
-    const showBanner = () => banner?.classList.add("show");
+    if (banner) {
+      const hideBanner = () => banner.classList.remove("show");
+      const showBanner = () => banner.classList.add("show");
 
-    const consent = localStorage.getItem("cookieConsent");
-    if (consent === "true" || consent === "false") {
-      hideBanner();
-    } else {
-      showBanner();
+      const consent = localStorage.getItem("cookieConsent");
+      if (consent === "true" || consent === "false") {
+      } else {
+        setTimeout(showBanner, 1000);
+      }
+
+      acceptBtn?.addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "true");
+        if (window.clarity) window.clarity("consent", true);
+        hideBanner();
+      });
+
+      rejectBtn?.addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "false");
+        if (window.clarity) window.clarity("consent", false);
+        hideBanner();
+      });
     }
-
-    acceptBtn?.addEventListener("click", () => {
-      localStorage.setItem("cookieConsent", "true");
-      if (window.clarity) window.clarity("consent", true);
-      hideBanner();
-    });
-
-    rejectBtn?.addEventListener("click", () => {
-      localStorage.setItem("cookieConsent", "false");
-      if (window.clarity) window.clarity("consent", false);
-      hideBanner();
-    });
   });
 </script>
+
+<style>
+  #cookie-banner {
+    transform: translateY(200%);
+    opacity: 0;
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #cookie-banner.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
