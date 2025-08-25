@@ -1,5 +1,5 @@
 ---
-
+const { id = "gradient-canvas-logo" } = Astro.props;
 ---
 
 <style>
@@ -11,7 +11,7 @@
     overflow: hidden;
   }
 
-  #gradient-canvas-logo {
+  canvas.gradient-canvas {
     width: 100%;
     height: auto;
     display: block;
@@ -34,8 +34,9 @@
 
 <div class="logo-container">
   <canvas
-    id="gradient-canvas-logo"
-    style="--gradient-color-1:#ec4899; --gradient-color-2:#8b5cf6; --gradient-color-3:#6366f1;"
+    id={id}
+    class="gradient-canvas"
+    style="--gradient-color-1:#ec4899; --gradient-color-2:#ffc800; --gradient-color-3:#6366f1;"
   ></canvas>
   <svg class="logo-hover" viewBox="0 0 150 26">
     <path
@@ -48,7 +49,9 @@
   import { Gradient } from "/lib/gradient.js";
 
   document.addEventListener("DOMContentLoaded", () => {
-    const gradient = new Gradient();
-    gradient.initGradient("#gradient-canvas-logo")
+    document.querySelectorAll("canvas.gradient-canvas").forEach((canvas) => {
+      const grad = new Gradient();
+      grad.initGradient(`#${canvas.id}`);
+    });
   });
 </script>
