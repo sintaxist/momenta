@@ -114,7 +114,7 @@ const menuItems = [
   function smoothScroll(target: HTMLElement, targetId: string) {
     const start = window.scrollY;
     const end = target.getBoundingClientRect().top + window.scrollY - 60;
-    const duration = 600;
+    const duration = 50;
     let startTime: number | null = null;
 
     function easeInOutQuad(t: number): number {
@@ -129,8 +129,6 @@ const menuItems = [
       window.scrollTo(0, run);
       if (timeElapsed < duration) {
         requestAnimationFrame(animation);
-      } else {
-        history.pushState(null, "", `#${targetId}`);
       }
     }
 
@@ -195,7 +193,7 @@ const menuItems = [
         smoothScroll(hero, "hero");
       } else {
         // si no estamos en home → mandamos a home con hash
-        logoLink.setAttribute("href", "/#hero");
+        // logoLink.setAttribute("href", "/#hero");
       }
     });
 
@@ -252,7 +250,8 @@ const menuItems = [
       updateUnderline(activeDesktopLink);
 
       // ✅ actualizar hash al hacer scroll natural
-      history.replaceState(null, "", `#${sectionId}`);
+      // history.replaceState(null, "", `#${sectionId}`);
+      history.replaceState(null, "", `/`);
     }
 
     // Observador de secciones
@@ -263,7 +262,7 @@ const menuItems = [
             const sectionId = entry.target.getAttribute("id");
             if (sectionId) {
               setActiveLink(sectionId);
-              updateUrlHash(sectionId, true); // ✅ replaceState
+              // updateUrlHash(sectionId, true);
             }
           }
         });

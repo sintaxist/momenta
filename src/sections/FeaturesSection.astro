@@ -1,7 +1,7 @@
 ---
-import { ImageWithFallback } from "@/components/ImageWithFallback";
 import SectionParticles from "@/components/SectionParticles.astro";
 import * as Icons from "@/components/ui/Icons.ts";
+import { Image } from "astro:assets";
 
 const features = [
   {
@@ -85,11 +85,13 @@ const features = [
               data-index={index}
             >
               <div class="relative rounded-3xl overflow-hidden bg-white/40 backdrop-blur-xl border border-white/30 shadow-xl w-full h-full">
-                <ImageWithFallback
-                  client:visible
+                <Image
                   src={feature.image}
                   alt={feature.title}
-                  className="w-full h-full object-cover"
+                  width={400}
+                  height={300}
+                  sizes="(max-width: 600px) 400px, 800px"
+                  class="w-full h-full object-cover"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <div class="absolute bottom-6 left-6 right-6">
