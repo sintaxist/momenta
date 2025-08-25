@@ -1,14 +1,11 @@
 ---
-import { projectData as rawProjectData} from "@/data/videos";
+import { videoData as rawVideoData} from "@/data/videos";
 import type { projectVideo } from "@/types/portfolio";
 
 const iconArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" x2="17" y1="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>`;
 
-/** Genera un poster desde una URL MP4 de Cloudinary (frame en el segundo N) */
 function derivePosterFromCloudinary(mp4Url: string, second = 2): string {
   try {
-    // Inserta so_{second} después de /video/upload/ (respetando otras transformaciones)
-    // y cambia extensión .mp4 -> .jpg
     return mp4Url
       .replace(/\/video\/upload\/(?!v\d+)/, `/video/upload/so_${second}/`)
       .replace(/\.mp4(\?.*)?$/, ".jpg$1");
@@ -17,18 +14,16 @@ function derivePosterFromCloudinary(mp4Url: string, second = 2): string {
   }
 }
 
-/** Normalizamos y enriquecemos datos (poster/description por defecto) */
-const projects: projectVideo[] = (rawProjectData as projectVideo[]).map((p) => ({
+const videos: projectVideo[] = (rawVideoData as projectVideo[]).map((p) => ({
   ...p,
   poster: p.poster && p.poster.length > 0 ? p.poster : derivePosterFromCloudinary(p.video.mp4),
   description: p.description ?? "Invitación digital interactiva.",
 }));
 
-/** JSON-LD: ItemList -> ListItem -> VideoObject */
 const videoSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  itemListElement: projects.map((project, index) => ({
+  itemListElement: videos.map((project, index) => ({
     "@type": "ListItem",
     position: index + 1,
     item: {
@@ -47,7 +42,6 @@ const videoSchema = {
 <div id="mockup-container" class="relative animate-on-scroll">
 
   <h2 class="sr-only">Ejemplos Invitaciones</h2>
-  <!-- Decoraciones -->
   <div
     class="floating-element -top-8 -left-8 bg-indigo-500/80 p-3 rounded-xl shadow-lg"
   >
@@ -59,20 +53,17 @@ const videoSchema = {
     <div class="w-6 h-6 bg-white/20 rounded-sm"></div>
   </div>
 
-  <!-- Mockup -->
   <div
     id="mockup-frame"
-    class="relative w-65 md:w-80 h-[500px] md:h-[610px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-700 transition-transform duration-500 ease-in-out"
+    class="relative w-65 md:w-80 h-[450px] md:h-[580px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-700 transition-transform duration-500 ease-in-out"
   >
     <div
       class="w-full h-full bg-black rounded-[2.2rem] overflow-hidden relative"
     >
-      <!-- Barra superior -->
       <div
         class="absolute top-0 left-0 right-0 h-10 px-8 flex items-center justify-between text-black text-xs font-semibold z-20 bg-white"
       >
         <span>9:41</span>
-        <!-- notch oscuro -->
         <div
           class="absolute left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-full"
         >
@@ -90,9 +81,8 @@ const videoSchema = {
         </div>
       </div>
 
-      <!-- Video -->
       {
-        projects.map((project, index) => (
+        videos.map((project, index) => (
           <video
             autoplay
             loop
@@ -111,24 +101,23 @@ const videoSchema = {
         ))
       }
 
-      <!-- Footer -->
       <div class="absolute bottom-0 w-full pointer-events-none pt-12">
         <div class="p-4 bg-gradient-to-t from-black/60 to-transparent">
           <div
             class="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30 flex items-center justify-between"
           >
-            <h6
+            <h4
               id="mockup-title"
-              class="font-sora text-white text-sm font-semibold"
+              class="font-sora text-white text-base font-semibold"
             >
-              {projects[0].title}
-            </h6>
+              {videos[0].title}
+            </h4>
             <a
               id="mockup-demo-link"
-              href={projects[0].demoUrl}
+              href={videos[0].demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Ver invitación de ${projects[0].title}`}
+              aria-label={`Ver invitación de ${videos[0].title}`}
               class="w-8 h-8 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white flex items-center justify-center transition-colors pointer-events-auto"
             >
               <Fragment set:html={iconArrow} />
@@ -140,13 +129,11 @@ const videoSchema = {
   </div>
 </div>
 
-<!-- JSON-LD para SEO -->
 <script type="application/ld+json">
   {JSON.stringify(videoSchema)}
 </script>
 
-
-<script define:vars={{ projectData: projects }}>
+<script>
   const mockupContainer = document.getElementById("mockup-container");
   const mockupFrame = document.getElementById("mockup-frame");
   const mockupTitle = document.getElementById("mockup-title");
@@ -154,43 +141,50 @@ const videoSchema = {
   const videoSlides = document.querySelectorAll(".video-slide");
   let currentIndex = 0;
   let videoInterval;
+  
+  // ✅ OPTIMIZACIÓN: Función para pausar el video activo
+  function pauseActiveVideo() {
+    if (videoSlides[currentIndex] && !videoSlides[currentIndex].paused) {
+      videoSlides[currentIndex].pause();
+    }
+  }
+
+  // ✅ OPTIMIZACIÓN: Función para reproducir el video activo
+  function playActiveVideo() {
+    if (videoSlides[currentIndex] && videoSlides[currentIndex].paused) {
+      videoSlides[currentIndex].play().catch(() => {});
+    }
+  }
 
   function cycleVideo() {
     videoSlides[currentIndex].classList.remove("is-active");
     currentIndex = (currentIndex + 1) % videoSlides.length;
     videoSlides[currentIndex].classList.add("is-active");
-    mockupTitle.textContent = projectData[currentIndex].title;
-    demoLink.href = projectData[currentIndex].demoUrl;
+    mockupTitle.textContent = videos[currentIndex].title;
+    demoLink.href = videos[currentIndex].demoUrl;
     mockupFrame.classList.add("is-animating");
     setTimeout(() => {
       mockupFrame.classList.remove("is-animating");
     }, 600);
   }
 
-  function playActiveVideo() {
-    const activeVideo = videoSlides[currentIndex];
-    if (activeVideo && activeVideo.paused) {
-      activeVideo.play().catch(() => {}); // Safari a veces lanza error si no puede
-    }
-  }
-
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
     if (entry.isIntersecting) {
       if (!videoInterval) {
-        videoInterval = setInterval(() => {
-          cycleVideo();
-          playActiveVideo();
-        }, 4000);
+        videoInterval = setInterval(cycleVideo, 4000);
       }
       playActiveVideo();
     } else {
       clearInterval(videoInterval);
       videoInterval = null;
+      pauseActiveVideo(); // ✅ OPTIMIZACIÓN: Pausar al salir del viewport
     }
   });
 
   observer.observe(mockupContainer);
+
+  document.addEventListener("DOMContentLoaded", playActiveVideo);
 </script>
 
 <style>
