@@ -1,6 +1,7 @@
 ---
 import type { projectType } from '@/types/portfolio';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
+import { Image } from 'astro:assets';
 
 export interface Props {
   project: projectType;
@@ -16,7 +17,13 @@ const { project, index } = Astro.props;
 >
   <article class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-white/50 transition-all duration-500 shadow-lg hover:shadow-xl w-full flex flex-col">
     <div class="aspect-[4/3] overflow-hidden relative">
-      <ImageWithFallback client:visible src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+      <Image 
+        src={project.image} 
+        alt={project.title} 
+        width={400} 
+        height={300}
+        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+      />
       <div class="absolute inset-0 bg-indigo-600/20 backdrop-blur-sm flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
         <div class="font-sora text-white text-sm bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2">
           Clic para ver detalles

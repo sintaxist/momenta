@@ -93,6 +93,7 @@ const videoSchema = {
       <!-- Video -->
       {
         videos.map((project, index) => (
+          // @ts-ignore
           <video
             autoplay
             loop
@@ -101,9 +102,13 @@ const videoSchema = {
             preload="metadata"
             poster={project.poster}
             class:list={["video-slide", { "is-active": index === 0 }]}
+            fetchpriority={index === 0 ? "high" : "auto"}
+            loading="lazy"
             data-index={index}
             aria-label={`Invitación ${project.title}`}
             title={`Video: ${project.title}`}
+            width="1080"
+            height="1920"
           >
             <source src={project.video.hls} type="application/x-mpegURL" />
             <source src={project.video.mp4} type="video/mp4" />
