@@ -11,7 +11,7 @@ import {
 import { Label } from "@/components/ui/Label";
 import { FormSubmitButton } from "@/components/ui/FormSubmitButton";
 
-// ✅ Declaración para evitar errores de TS al usar window.clarity
+// Evitar errores TS
 declare global {
   interface Window {
     clarity?: (...args: any[]) => void;
@@ -54,7 +54,6 @@ export function ContactForm() {
       });
 
       const result = await response.json();
-
       const eventType = response.ok ? "success" : "error";
       const event = new CustomEvent("show-snackbar", {
         bubbles: true,
@@ -73,14 +72,12 @@ export function ContactForm() {
           eventType: "",
           message: "",
         });
-
-        // ✅ Enviar eventos a Microsoft Clarity
         if (window.clarity) {
           window.clarity("set", "form_interaction", "contact_form_submitted");
           window.clarity("event", "form_submission_success");
         }
       }
-    } catch (error) {
+    } catch {
       const event = new CustomEvent("show-snackbar", {
         bubbles: true,
         composed: true,
@@ -108,96 +105,96 @@ export function ContactForm() {
 
   return (
     <>
-      <div className="p-8 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/30 shadow-xl flex items-center justify-center">
-        <form onSubmit={handleSubmit} className="space-y-6 w-full">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="font-sora text-gray-900">
-                Nombre Completo *
-              </Label>
-              <Input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                autoComplete="name"
-                placeholder="Tu nombre"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email" className="font-sora text-gray-900">
-                Email *
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                autoComplete="email"
-                placeholder="tu@email.com"
-              />
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="font-sora text-gray-900">
-                Teléfono
-              </Label>
-              <Input
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                autoComplete="tel"
-                placeholder="+52 (55) 1234-5678"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="eventType" className="font-sora text-gray-900">
-                Tipo de Evento *
-              </Label>
-              <Select
-                required
-                name="eventType"
-                value={formData.eventType}
-                onValueChange={handleSelectChange}
-              >
-                <SelectTrigger className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500">
-                  <SelectValue placeholder="Selecciona tu evento" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="boda">Boda</SelectItem>
-                  <SelectItem value="xv">XV Años</SelectItem>
-                  <SelectItem value="corporativo">Evento Corporativo</SelectItem>
-                  <SelectItem value="social">Evento Social</SelectItem>
-                  <SelectItem value="otro">Otro</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
+    <div className="p-8 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/30 shadow-xl flex items-center justify-center">
+      <form onSubmit={handleSubmit} className="space-y-6 w-full">
+        <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <Label htmlFor="message">Mensaje</Label>
-            <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
+            <Label htmlFor="name" className="font-sora text-gray-900">
+              Nombre Completo *
+            </Label>
+            <Input
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
-              rows={4}
-              placeholder="Cuéntanos sobre tu evento..."
+              required
+              autoComplete="name"
+              placeholder="Tu nombre"
             />
           </div>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="font-sora text-gray-900">
+              Email *
+            </Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              autoComplete="email"
+              placeholder="tu@email.com"
+            />
+          </div>
+        </div>
 
-          <FormSubmitButton
-            isSubmitting={isSubmitting}
-            disabledButton={!isFormValid}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="phone" className="font-sora text-gray-900">
+              Teléfono
+            </Label>
+            <Input
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              autoComplete="tel"
+              placeholder="+52 (55) 1234-5678"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="eventType" className="font-sora text-gray-900">
+              Tipo de Evento *
+            </Label>
+            <Select
+              required
+              name="eventType"
+              value={formData.eventType}
+              onValueChange={handleSelectChange}
+            >
+              <SelectTrigger className="font-sora bg-white/50 border-gray-300 focus:border-indigo-500">
+                <SelectValue placeholder="Selecciona tu evento" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="boda">Boda</SelectItem>
+                <SelectItem value="xv">XV Años</SelectItem>
+                <SelectItem value="corporativo">Evento Corporativo</SelectItem>
+                <SelectItem value="social">Evento Social</SelectItem>
+                <SelectItem value="otro">Otro</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="message">Mensaje</Label>
+          <Textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            rows={4}
+            placeholder="Cuéntanos sobre tu evento..."
           />
-        </form>
-      </div>
+        </div>
+
+        <FormSubmitButton
+          isSubmitting={isSubmitting}
+          disabledButton={!isFormValid}
+        />
+      </form>
+    </div>
 
       <style>{`
         .btn-loader {
