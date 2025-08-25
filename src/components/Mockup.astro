@@ -161,17 +161,15 @@ const videoSchema = {
   let currentIndex = 0;
   let videoInterval;
   
-  // ✅ OPTIMIZACIÓN: Función para pausar el video activo
   function pauseActiveVideo() {
-    if (videoSlides[currentIndex] && !videoSlides[currentIndex].paused) {
-      videoSlides[currentIndex].pause();
-    }
+    const activeVideo = videoSlides[currentIndex];
+    if (activeVideo && !activeVideo.paused) activeVideo.pause();
   }
 
-  // ✅ OPTIMIZACIÓN: Función para reproducir el video activo
   function playActiveVideo() {
-    if (videoSlides[currentIndex] && videoSlides[currentIndex].paused) {
-      videoSlides[currentIndex].play().catch(() => {});
+    const activeVideo = videoSlides[currentIndex];
+    if (activeVideo && activeVideo.paused) {
+      activeVideo.play().catch(() => {}); // Safari puede lanzar error si no se puede reproducir
     }
   }
 
@@ -179,12 +177,15 @@ const videoSchema = {
     videoSlides[currentIndex].classList.remove("is-active");
     currentIndex = (currentIndex + 1) % videoSlides.length;
     videoSlides[currentIndex].classList.add("is-active");
-    mockupTitle.textContent = videoData[currentIndex].title;
-    demoLink.href = videoData[currentIndex].demoUrl;
-    mockupFrame.classList.add("is-animating");
-    setTimeout(() => {
-      mockupFrame.classList.remove("is-animating");
-    }, 600);
+
+    requestAnimationFrame(() => {
+      if (mockupTitle) mockupTitle.textContent = videoSlides[currentIndex].getAttribute("aria-label") || "";
+      if (demoLink) demoLink.href = videoSlides[currentIndex].dataset.demoUrl || "#";
+      mockupFrame?.classList.add("is-animating");
+      setTimeout(() => mockupFrame?.classList.remove("is-animating"), 600);
+    });
+
+    playActiveVideo();
   }
 
   function playActiveVideo() {
@@ -194,25 +195,27 @@ const videoSchema = {
     }
   }
 
+  // IntersectionObserver para reproducción solo cuando el mockup está visible
   const observer = new IntersectionObserver((entries) => {
-    const entry = entries[0];
-    if (entry.isIntersecting) {
-      if (!videoInterval) {
-        videoInterval = setInterval(() => {
-          cycleVideo();
-          playActiveVideo();
-        }, 4000);
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!videoInterval) {
+          videoInterval = window.setInterval(cycleVideo, 4000);
+        }
+        playActiveVideo();
+      } else {
+        if (videoInterval) {
+          clearInterval(videoInterval);
+          videoInterval = null;
+        }
+        pauseActiveVideo();
       }
-      playActiveVideo();
-    } else {
-      clearInterval(videoInterval);
-      videoInterval = null;
-      pauseActiveVideo(); // ✅ OPTIMIZACIÓN: Pausar al salir del viewport
-    }
-  });
+    });
+  }, { threshold: 0.25 });
 
-  observer.observe(mockupContainer);
+  if (mockupContainer) observer.observe(mockupContainer);
 
+  // Reproducir el primer video al cargar
   document.addEventListener("DOMContentLoaded", playActiveVideo);
 </script>
 

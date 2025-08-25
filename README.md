@@ -10,6 +10,8 @@ npm create astro@latest -- --template minimal
 
 Inside of your Astro project, you'll see the following folders and files:
 
+Math.min(e-this.last,1e3/15) asi se manipula en gradient.js la velocidad del gradiente del logo
+
 ```text
 /
 ├── public/

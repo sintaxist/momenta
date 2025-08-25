@@ -56,12 +56,14 @@ const menuItems = [
         class="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-gray-300/50 text-gray-900 hover:bg-gray-100 transition-all duration-300 z-50"
       >
         <span id="menu-icon" class="w-5 h-5 flex items-center justify-center"
-          ><Fragment set:html={Icons.Menu} /><span class="sr-only">Menú</span></span
+          ><Fragment set:html={Icons.Menu} /><span class="sr-only">Menú</span
+          ></span
         >
         <span
           id="close-icon"
           class="w-5 h-5 flex items-center justify-center hidden"
-          ><Fragment set:html={Icons.X} /><span class="sr-only">Cerrar</span></span
+          ><Fragment set:html={Icons.X} /><span class="sr-only">Cerrar</span
+          ></span
         >
       </button>
     </div>
@@ -136,16 +138,24 @@ const menuItems = [
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-
     const header = document.getElementById("main-header") as HTMLElement | null;
-    const logoLink = document.getElementById("logo-link") as HTMLAnchorElement | null;
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn") as HTMLButtonElement | null;
+    const logoLink = document.getElementById(
+      "logo-link"
+    ) as HTMLAnchorElement | null;
+    const mobileMenuBtn = document.getElementById(
+      "mobile-menu-btn"
+    ) as HTMLButtonElement | null;
     const mobileNavPanel = getElement<HTMLElement>("mobile-nav-panel");
     const menuIcon = getElement<HTMLElement>("menu-icon");
     const closeIcon = getElement<HTMLElement>("close-icon");
-    const allNavLinks = document.querySelectorAll<HTMLAnchorElement>("a.nav-link");
-    const desktopNavLinks = document.querySelectorAll<HTMLAnchorElement>("#desktop-nav a.nav-link");
-    const mobileNavLinks = document.querySelectorAll<HTMLAnchorElement>(".mobile-nav-panel a.nav-link");
+    const allNavLinks =
+      document.querySelectorAll<HTMLAnchorElement>("a.nav-link");
+    const desktopNavLinks = document.querySelectorAll<HTMLAnchorElement>(
+      "#desktop-nav a.nav-link"
+    );
+    const mobileNavLinks = document.querySelectorAll<HTMLAnchorElement>(
+      ".mobile-nav-panel a.nav-link"
+    );
     const navUnderline = getElement<HTMLElement>("nav-underline");
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
 
@@ -225,11 +235,13 @@ const menuItems = [
     // Subrayado dinámico
     function updateUnderline(activeLink: HTMLElement | null): void {
       if (!activeLink) {
-        navUnderline.style.width = "0px";
+        navUnderline.style.width = "0";
         return;
       }
-      navUnderline.style.left = `${activeLink.offsetLeft}px`;
-      navUnderline.style.width = `${activeLink.offsetWidth}px`;
+      requestAnimationFrame(() => {
+        navUnderline.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+        navUnderline.style.width = `${activeLink.offsetWidth}px`;
+      });
     }
 
     function setActiveLink(sectionId: string): void {
