@@ -5,9 +5,9 @@ import Button from "@/components/ui/Button.astro";
 import AnimatedCounter from "@/components/AnimatedCounter.astro";
 
 const stats = [
-  { to: 5, suffix: "+", label: "Años de Experiencia" },
-  { to: 50, suffix: "+", label: "Proyectos Completados" },
-  { to: 100, suffix: "%", label: "Satisfacción del Cliente" },
+  { to: 5, suffix: "+", label: "Años de experiencia" },
+  { to: 50, suffix: "+", label: "Eventos celebrados" },
+  { to: 100, suffix: "%", label: "Clientes felices" },
 ];
 ---
 
@@ -35,25 +35,24 @@ const stats = [
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="grid lg:grid-cols-5 gap-24 items-center">
       <article
-        class="space-y-10 lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left"
+        class="flex column space-y-12 lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left"
       >
-        <div class="space-y-6">
+        <div class="space-y-8">
           <h1
             class="font-sora font-bold text-5xl lg:text-7xl text-gray-900 leading-tight animate-on-scroll"
           >
-            Experiencias Digitales. <span class="text-indigo-600"
-              >Ejecución Excepcional.</span
+            Invitaciones digitales que hacen <span class="text-indigo-600"
+              >tu evento inolvidable.</span
             >
           </h1>
           <p
-            class="font-sora font-normal text-xl text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0 animate-on-scroll"
+            class="font-sora font-normal text-xl text-gray-600 leading-relaxed mx-w-lg mx-auto lg:mx-0 animate-on-scroll"
             style="transition-delay: 200ms;"
           >
-            Diseño y desarrollo de plataformas interactivas para eventos que
-            definen el estándar de la industria.
+            En <span class="font-bold">Mömenta</span> diseñamos y programamos experiencias únicas, fáciles y memorables, para que tu celebración comience sin estrés y con estilo.
           </p>
           <div
-            class="animate-on-scroll flex flex-col sm:flex-row gap-3 sm:gap-4"
+            class="animate-on-scroll m-auto flex flex-col sm:flex-row lg:m-0 gap-3 sm:gap-4 max-w-[600px]"
             style="transition-delay: 400ms;"
           >
             <!-- Botón principal -->
@@ -63,7 +62,7 @@ const stats = [
               variant="primary"
               class="flex-1"
             >
-              Cotizar Mi Evento
+              Quiero mi invitación
             </Button>
 
             <!-- Botón secundario -->
@@ -73,18 +72,18 @@ const stats = [
               variant="secondary"
               class="flex-1"
             >
-              Ver Demos
+              Ver Ejemplos
             </Button>
           </div>
         </div>
 
         <ul
-          class="flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-8 pt-8"
+          class="flex flex-wrap justify-center lg:justify-start gap-x-12 gap-y-8"
         >
           {
             stats.map((stat, index) => (
               <li
-                class="text-center animate-on-scroll"
+                class="text-center animate-on-scroll max-w-[200px]"
                 style={`transition-delay: ${600 + index * 200}ms;`}
               >
                 <AnimatedCounter
@@ -92,7 +91,7 @@ const stats = [
                   suffix={stat.suffix}
                   className="font-sora font-bold text-3xl text-gray-900"
                 />
-                <div class="font-sora text-gray-500 text-sm">{stat.label}</div>
+                <div class="font-sora text-gray-500 text-md">{stat.label}</div>
               </li>
             ))
           }
