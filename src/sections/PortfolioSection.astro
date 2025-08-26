@@ -3,183 +3,51 @@ import PortfolioCard from "@/components/PortfolioCard.astro";
 import PortfolioModal from "@/components/PortfolioModal.astro";
 import Button from "@/components/ui/Button.astro";
 
-const projects = [
-  {
-    id: 1,
-    title: "Boda Elegante",
-    category: "Boda Premium",
-    image:
-      "https://images.unsplash.com/photo-1739909198159-a834175bd911?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwaW52aXRhdGlvbiUyMGVsZWdhbnQlMjBkZXNpZ258ZW58MXx8fHwxNzU1NjU0NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    // videoUrl:
-    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
-    description:
-      "Invitación digital interactiva con RSVP automatizado, galería de fotos y lista de regalos integrada. Diseño elegante con animaciones personalizadas y confirmación de asistencia en tiempo real.",
-    features: [
-      "RSVP Automatizado",
-      "Galería Interactiva",
-      "Lista de Regalos",
-      "Confirmación en Tiempo Real",
-    ],
-  },
-  {
-    id: 2,
-    title: "Premios Monarca",
-    category: "Evento Corporativo",
-    image:
-      "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    // videoUrl:
-    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
-    description:
-      "Plataforma completa para ceremonias de premiación con gestión de nominados, votación en línea y transmisión en vivo. Sistema de tickets digitales con códigos QR únicos.",
-    features: [
-      "Gestión de Nominados",
-      "Votación en Línea",
-      "Tickets Digitales",
-      "Transmisión en Vivo",
-    ],
-  },
-  {
-    id: 3,
-    title: "XV Años Luxury",
-    category: "Celebración Personal",
-    image:
-      "https://images.unsplash.com/photo-1736482002168-153edd469de0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxxdWluY2VhJUMzJUIxZXJhJTIwY2VsZWJyYXRpb24lMjBpbnZpdGF0aW9ufGVufDF8fHx8MTc1NTY1NDQ1MHww&ixlib=rb-4.1.0&q=80&w=1080",
-    // videoUrl:
-    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
-    description:
-      "Experiencia digital completa para quinceañeras con cronómetro interactivo, playlist colaborativa y álbum de recuerdos compartido. Diseño personalizable con temas únicos.",
-    features: [
-      "Cronómetro Interactivo",
-      "Playlist Colaborativa",
-      "Álbum de Recuerdos",
-      "Diseño Personalizable",
-    ],
-  },
-  {
-    id: 4,
-    title: "Corporate Summit",
-    category: "Evento Empresarial",
-    image:
-      "https://images.unsplash.com/photo-1672343246306-cb1467a33140?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9tZXRyaWMlMjBhYnN0cmFjdCUyMGJhY2tncm91bmQlMjBsdXh1cnl8ZW58MXx8fHwxNzU1NjU0NDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    // videoUrl:
-    //   "https://videos.pexels.com/video-files/8246470/8246470-hd_1920_1080_25fps.mp4",
-    description:
-      "Plataforma integral para conferencias corporativas con agenda interactiva, networking digital y sistema de feedback en tiempo real. Dashboard de analytics para organizadores.",
-    features: [
-      "Agenda Interactiva",
-      "Networking Digital",
-      "Feedback en Tiempo Real",
-      "Analytics Dashboard",
-    ],
-  },
-  // {
-  //   id: 5,
-  //   title: "Gala Benéfica",
-  //   category: "Evento Social",
-  //   image:
-  //     "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  //   demoUrl: "#",
-  //   description:
-  //     "Solución elegante para galas con subastas en línea y sistema de donaciones integrado.",
-  //   features: ["Subastas en Vivo", "Sistema de Donaciones", "Mapa de Mesas"],
-  // },
-  // {
-  //   id: 6,
-  //   title: "Festival de Música",
-  //   category: "Evento Masivo",
-  //   image:
-  //     "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80",
-  //   demoUrl: "#",
-  //   description:
-  //     "Plataforma para festivales con horarios de artistas, mapa interactivo y notificaciones push.",
-  //   features: ["Horarios Dinámicos", "Mapa Interactivo", "Notificaciones Push"],
-  // },
-  // {
-  //   id: 7,
-  //   title: "Bautizo Moderno",
-  //   category: "Celebración Personal",
-  //   image:
-  //     "https://images.unsplash.com/photo-1689773132576-6a3a36238cd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwZXZlbnQlMjBpbnZpdGF0aW9uJTIwZ29sZHxlbnwxfHx8fDE3NTU2NTQ0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  //   demoUrl: "#",
-  //   description:
-  //     "Invitación digital con temática moderna, confirmación de padrinos y álbum de fotos familiar.",
-  //   features: ["Confirmación de Padrinos", "Álbum Familiar", "Diseño Moderno"],
-  // },
-  // {
-  //   id: 8,
-  //   title: "Lanzamiento de Producto",
-  //   category: "Evento Corporativo",
-  //   image:
-  //     "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80",
-  //   demoUrl: "#",
-  //   description:
-  //     "Plataforma para lanzamientos de producto con registro de prensa y demos interactivas.",
-  //   features: [
-  //     "Registro de Prensa",
-  //     "Demos Interactivas",
-  //     "Kit de Medios Digital",
-  //   ],
-  // },
-];
+import { invitaciones } from "@/data/invitaciones";
 ---
 
 <section id="demos" class="py-20 lg:py-32 px-6 relative overflow-x-hidden">
   <div class="absolute inset-0">
-    <div
-      class="absolute bottom-10 left-1/4 w-96 h-96 rounded-full opacity-15 bg-teal-500 blur-3xl"
-    >
-    </div>
-    <div
-      class="absolute top-10 right-1/3 w-80 h-80 rounded-full opacity-15 bg-sky-500 blur-3xl"
-    >
-    </div>
+    <div class="absolute bottom-10 left-1/4 w-96 h-96 rounded-full opacity-10 bg-teal-500 blur-3xl"></div>
+    <div class="absolute top-10 right-1/3 w-80 h-80 rounded-full opacity-10 bg-sky-500 blur-3xl"></div>
   </div>
   <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Headline -->
     <div class="text-center mb-20">
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
-        Invitaciones que <span class="text-indigo-600">Inspiran</span>
+        Invitaciones Digitales que <span class="text-indigo-600">Inspiran</span>
       </h2>
-      <p
-        class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
-      >
-        No usamos plantillas genéricas. Cada proyecto es diseñado y programado a
-        la medida de tu celebración.
+      <p class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+        Creamos experiencias únicas para bodas, eventos corporativos y celebraciones especiales. No usamos plantillas: cada invitación es diseñada y programada a la medida.
       </p>
     </div>
 
-    <ul
-      id="portfolio-grid"
-      class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6"
-    >
-      {
-        projects.map((project, index) => (
-          <PortfolioCard project={project} index={index} />
-        ))
-      }
+    <!-- Grid de proyectos -->
+    <ul id="portfolio-grid" class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6">
+      {invitaciones.map((invitacion, index) => (
+        <PortfolioCard project={invitacion} index={index} />
+      ))}
     </ul>
 
-    {
-      projects.length > 5 && (
-        <div id="show-more-container" class="text-center mt-16 hidden">
-          <Button
-            id="show-more-btn"
-            variant="secondary"
-            size="lg"
-            className="xs:min-w-[280px] h-[56px]"
-          >
-            <span class="btn-text">Mostrar Más Proyectos</span>
-            <div class="btn-loader hidden">
-              <span class="dot" />
-              <span class="dot" />
-              <span class="dot" />
-            </div>
-          </Button>
-        </div>
-      )
-    }
+    <!-- Botón mostrar más -->
+    {invitaciones.length > 4 && (
+      <div id="show-more-container" class="text-center mt-16 hidden">
+        <Button id="show-more-btn" variant="secondary" size="lg" className="xs:min-w-[280px] h-[56px]">
+          <span class="btn-text">Mostrar Más Proyectos</span>
+          <div class="btn-loader hidden">
+            <span class="dot" /><span class="dot" /><span class="dot" />
+          </div>
+        </Button>
+      </div>
+    )}
+
+    <!-- Nota de confianza -->
+    <p class="text-center text-gray-500 text-sm mt-12 font-sora">
+      ⭐ Tu invitación personalizada también podrá aparecer en nuestro portafolio para inspirar a otros clientes.
+    </p>
   </div>
 
-  <PortfolioModal projects={projects} />
+  <PortfolioModal projects={invitaciones} />
 </section>
 
 <script>

@@ -7,7 +7,7 @@ interface Props {
   projects: any[];
 }
 const { projects } = Astro.props;
-const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-renderizar
+const firstProject = projects[0];
 ---
 
 <div id="project-modal" class="modal-backdrop">
@@ -17,6 +17,7 @@ const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-rende
     aria-modal="true"
     aria-labelledby="modal-title"
   >
+    <!-- Header -->
     <div
       class="flex flex-col-reverse md:flex-row items-end md:items-start justify-between mb-8 gap-4"
     >
@@ -30,25 +31,28 @@ const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-rende
         <span
           id="modal-category"
           class="font-sora text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200"
-          >{firstProject.category}</span
         >
+          {firstProject.event_type}
+        </span>
       </div>
       <button
         id="modal-close-btn"
         class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0"
       >
-        <span class="w-8 h-8 flex items-center justify-center">
-          <Fragment set:html={Icons.X} />
-        </span>
+        <span class="w-8 h-8 flex items-center justify-center"
+          ><Fragment set:html={Icons.X} /></span
+        >
         <span class="text-sm font-medium">Cerrar</span>
       </button>
     </div>
+
+    <!-- Contenido -->
     <div class="grid lg:grid-cols-2 gap-8">
       <ImageWithFallback
         client:load
         id="modal-image"
-        src={firstProject.image}
-        alt={firstProject.title}
+        src={firstProject.thumb}
+        alt={`Ejemplo de ${firstProject.title}`}
         className="w-full aspect-[4/3] object-cover rounded-2xl"
       />
       <div class="flex flex-col justify-between">
@@ -57,7 +61,9 @@ const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-rende
             id="modal-description"
             class="font-sora font-normal text-gray-700 leading-relaxed"
           >
-            {firstProject.description}
+            {firstProject.description} Esta invitación digital fue creada para un
+            <strong>{firstProject.event_type}</strong>, destacando innovación,
+            diseño y funcionalidad a la medida.
           </p>
           <div>
             <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
@@ -79,7 +85,7 @@ const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-rende
         </div>
         <div class="space-y-3 mt-6">
           <Button
-            href={firstProject.demoUrl}
+            href={firstProject.link_demo}
             id="modal-explore-btn"
             target="_blank"
             size="md"
@@ -104,6 +110,27 @@ const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-rende
         </div>
       </div>
     </div>
+
+    <!-- Galería extra -->
+    {
+      firstProject.gallery && (
+        <div class="mt-10">
+          <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
+            Más Vistas del Proyecto
+          </h4>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {firstProject.gallery.map((img: string) => (
+              <img
+                src={img}
+                alt={`Detalle de ${firstProject.title}`}
+                class="w-full h-40 object-cover rounded-lg shadow-md"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+      )
+    }
   </div>
 </div>
 
@@ -124,12 +151,12 @@ const firstProject = projects[0]; // Obtenemos el primer proyecto para pre-rende
     if (!project) return;
 
     modalTitle.textContent = project.title;
-    modalCategory.textContent = project.category;
-    modalImage.src = project.image;
+    modalCategory.textContent = project.event_type;
+    modalImage.src = project.thumb;
     modalImage.alt = project.title;
     modalDescription.textContent = project.description;
 
-    exploreBtn.href = project.demoUrl;
+    exploreBtn.href = project.link_demo;
     const whatsappMessage = `Quiero tener más información de esta invitación: ${project.title}`;
     const whatsappUrl = `https://wa.me/525611780488?text=${encodeURIComponent(whatsappMessage)}`;
     whatsappBtn.href = whatsappUrl;

@@ -59,7 +59,10 @@ const menuItems = [
           <Fragment set:html={Icons.Menu} />
           <span class="sr-only">Menú</span>
         </span>
-        <span id="close-icon" class="w-5 h-5 flex items-center justify-center hidden">
+        <span
+          id="close-icon"
+          class="w-5 h-5 flex items-center justify-center hidden"
+        >
           <Fragment set:html={Icons.X} />
           <span class="sr-only">Cerrar</span>
         </span>
@@ -236,9 +239,15 @@ const menuItems = [
         navUnderline.style.width = "0";
         return;
       }
+
+      const navRect = navUnderline.parentElement!.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+
+      const left = linkRect.left - navRect.left;
+
       requestAnimationFrame(() => {
-        navUnderline.style.transform = `translateX(${activeLink.offsetLeft}px)`;
-        navUnderline.style.width = `${activeLink.offsetWidth}px`;
+        navUnderline.style.left = `${left}px`;
+        navUnderline.style.width = `${linkRect.width}px`;
       });
     }
 

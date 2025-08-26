@@ -1,160 +1,156 @@
----
-import { ContactForm } from "@/components/ContactForm.tsx";
-import * as Icons from "@/components/ui/Icons.ts";
+  ---
+  import { ContactForm } from "@/components/ContactForm.tsx";
+  import * as Icons from "@/components/ui/Icons.ts";
 
-const contactInfo = [
-  {
-    icon: Icons.Mail,
-    label: "Email",
-    value: "hola@alejandrocanek.com",
-    href: "https://github.com/alejandrocanek",
-  },
-  {
-    icon: Icons.Phone,
-    label: "Teléfono",
-    value: "+52 (55) 1234-5678",
-    href: "https://github.com/alejandrocanek",
-  },
-  { icon: Icons.MapPin, label: "Ubicación", value: "Ciudad de México, México" },
-  // { icon: Icons.Calendar, label: 'Disponibilidad', value: 'Lun - Vie, 9:00 - 18:00', border: 'border-blue-200' },
-  // { icon: Icons.Github, label: 'GitHub', value: '@alejandrocanek', href: 'https://github.com/alejandrocanek', border: 'border-gray-300' },
-];
----
+  const contactInfo = [
+    {
+      icon: Icons.Mail,
+      label: "Email",
+      value: "hola@alejandrocanek.com",
+      href: "https://github.com/alejandrocanek",
+    },
+    {
+      icon: Icons.Phone,
+      label: "Teléfono",
+      value: "+52 (55) 1234-5678",
+      href: "https://github.com/alejandrocanek",
+    },
+    { icon: Icons.MapPin, label: "Ubicación", value: "Ciudad de México, México" },
+    // { icon: Icons.Calendar, label: 'Disponibilidad', value: 'Lun - Vie, 9:00 - 18:00', border: 'border-blue-200' },
+    // { icon: Icons.Github, label: 'GitHub', value: '@alejandrocanek', href: 'https://github.com/alejandrocanek', border: 'border-gray-300' },
+  ];
+  ---
 
-<div
-  id="snackbar"
-  class="snackbar fixed top-[100px] right-4 p-4 rounded-xl shadow-lg z-[999] flex items-center gap-x-3 text-white max-w-[80vw] whitespace-nowrap"
->
-  <div id="snackbar-icon" class="w-6 h-6 flex-shrink-0"></div>
-  <span id="snackbar-message" class="font-sora"></span>
-</div>
-<section id="contacto" class="py-20 lg:py-32 px-6 relative">
-  <div class="max-w-7xl mx-auto relative z-10">
-    <div class="text-center mb-20">
-      <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
-        ¿Listo para definir un <span class="text-indigo-600"
-          >nuevo estándar?</span
-        >
-      </h2>
-      <p
-        class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-      >
-        Cada gran evento comienza con una conversación. Cuéntanos tu visión y
-        transformémosla en una experiencia inolvidable.
-      </p>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-16">
-      <div class="space-y-8">
-        <div>
-          <h3
-            class="font-sora font-semibold text-2xl text-gray-900 mb-8 animate-on-scroll"
+  <div
+    id="snackbar"
+    class="snackbar fixed top-[100px] right-4 p-4 rounded-xl shadow-lg z-[999] flex items-center gap-x-3 text-white max-w-[80vw] whitespace-nowrap"
+  >
+    <div id="snackbar-icon" class="w-6 h-6 flex-shrink-0"></div>
+    <span id="snackbar-message" class="font-sora"></span>
+  </div>
+  <section id="contacto" class="py-20 lg:py-32 px-6 relative">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-20">
+        <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
+          ¿Listo para definir un <span class="text-indigo-600"
+            >nuevo estándar?</span
           >
-            Información de Contacto
-          </h3>
-
-          <address class="not-italic">
-            <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-              {
-                contactInfo.map((item, index) => (
-                  <div
-                    class="animate-on-scroll"
-                    style={`transition-delay: ${index * 100}ms`}
-                  >
-                    <dt class="sr-only">{item.label}</dt>
-                    <dd class="group flex items-center space-x-4 text-gray-700 transition-colors duration-300">
-                      <div class="container-svg p-3 rounded-xl bg-white/40 backdrop-blur-xl border">
-                        <Fragment set:html={item.icon} />
-                      </div>
-                      <div class="transition-transform duration-300 group-hover:translate-x-2">
-                        <p class="font-sora text-sm text-gray-500">
-                          {item.label}
-                        </p>
-                        {item.href ? (
-                          <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="font-sora font-medium hover:text-indigo-600 transition-colors"
-                          >
-                            {item.value}
-                          </a>
-                        ) : (
-                          <p class="font-sora font-medium">{item.value}</p>
-                        )}
-                      </div>
-                    </dd>
-                  </div>
-                ))
-              }
-            </dl>
-          </address>
-        </div>
-
-        <div
-          class="p-6 rounded-2xl bg-white/40 backdrop-blur-xl border border-indigo-200 animate-on-scroll"
-          style="transition-delay: 600ms;"
+        </h2>
+        <p
+          class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
         >
-          <h4 class="font-sora font-semibold text-lg text-indigo-600 mb-2">
-            Consulta Gratuita
-          </h4>
-          <p class="font-sora text-gray-600 text-sm leading-relaxed">
-            Agenda una llamada de 30 minutos para discutir tu proyecto sin
-            compromiso.
-          </p>
-        </div>
+          Cada gran evento comienza con una conversación. Cuéntanos tu visión y
+          transformémosla en una experiencia inolvidable.
+        </p>
       </div>
 
-      <ContactForm client:visible />
+      <div class="grid lg:grid-cols-2 gap-16">
+        <div class="space-y-8">
+          <div>
+            <h3
+              class="font-sora font-semibold text-2xl text-gray-900 mb-8"
+            >
+              Información de Contacto
+            </h3>
+
+            <address class="not-italic">
+              <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+                {
+                  contactInfo.map((item, index) => (
+                    <div>
+                      <dt class="sr-only">{item.label}</dt>
+                      <dd class="group flex items-center space-x-4 text-gray-700 transition-colors duration-300">
+                        <div class="container-svg p-3 rounded-xl bg-white/40 backdrop-blur-xl border">
+                          <Fragment set:html={item.icon} />
+                        </div>
+                        <div class="transition-transform duration-300 group-hover:translate-x-2">
+                          <p class="font-sora text-sm text-gray-500">
+                            {item.label}
+                          </p>
+                          {item.href ? (
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="font-sora font-medium hover:text-indigo-600 transition-colors"
+                            >
+                              {item.value}
+                            </a>
+                          ) : (
+                            <p class="font-sora font-medium">{item.value}</p>
+                          )}
+                        </div>
+                      </dd>
+                    </div>
+                  ))
+                }
+              </dl>
+            </address>
+          </div>
+
+          <div
+            class="p-6 rounded-2xl bg-white/40 backdrop-blur-xl border border-indigo-200"
+          >
+            <h4 class="font-sora font-semibold text-lg text-indigo-600 mb-2">
+              Consulta Gratuita
+            </h4>
+            <p class="font-sora text-gray-600 text-sm leading-relaxed">
+              Agenda una llamada de 30 minutos para discutir tu proyecto sin
+              compromiso.
+            </p>
+          </div>
+        </div>
+
+        <ContactForm client:visible />
+      </div>
     </div>
-  </div>
-</section>
-<script define:vars={{ Icons }}>
-  const snackbar = document.getElementById('snackbar');
-  const snackbarMessage = document.getElementById('snackbar-message');
-  const snackbarIcon = document.getElementById('snackbar-icon');
-  let snackbarTimeout;
+  </section>
+  <script define:vars={{ Icons }}>
+    const snackbar = document.getElementById('snackbar');
+    const snackbarMessage = document.getElementById('snackbar-message');
+    const snackbarIcon = document.getElementById('snackbar-icon');
+    let snackbarTimeout;
 
-  // Escuchamos el evento 'show-snackbar' en la sección
-  document.getElementById('contacto')?.addEventListener('show-snackbar', (event) => {
-    const { message, type } = event.detail;
+    // Escuchamos el evento 'show-snackbar' en la sección
+    document.getElementById('contacto')?.addEventListener('show-snackbar', (event) => {
+      const { message, type } = event.detail;
 
-    if (!snackbar || !snackbarMessage || !snackbarIcon) return;
+      if (!snackbar || !snackbarMessage || !snackbarIcon) return;
 
-    // Limpiamos cualquier notificación anterior
-    clearTimeout(snackbarTimeout);
-    
-    // Asignamos el contenido
-    snackbarMessage.textContent = message;
-    snackbarIcon.innerHTML = type === 'success' ? Icons.CheckCircle2 : Icons.XCircle;
-    
-    // Aplicamos los estilos
-    snackbar.classList.toggle('bg-emerald-600', type === 'success');
-    snackbar.classList.toggle('bg-destructive', type === 'error');
-    
-    // Mostramos el snackbar
-    snackbar.classList.add('is-visible');
+      // Limpiamos cualquier notificación anterior
+      clearTimeout(snackbarTimeout);
+      
+      // Asignamos el contenido
+      snackbarMessage.textContent = message;
+      snackbarIcon.innerHTML = type === 'success' ? Icons.CheckCircle2 : Icons.XCircle;
+      
+      // Aplicamos los estilos
+      snackbar.classList.toggle('bg-emerald-600', type === 'success');
+      snackbar.classList.toggle('bg-destructive', type === 'error');
+      
+      // Mostramos el snackbar
+      snackbar.classList.add('is-visible');
 
-    // Lo ocultamos después de 5 segundos
-    snackbarTimeout = setTimeout(() => {
-      snackbar.classList.remove('is-visible');
-    }, 3000);
-  });
-</script>
-<style>
-  .container-svg :global(svg) {
-    display: inline;
-    width: 20px;
-    height: 20px;
-  }
+      // Lo ocultamos después de 5 segundos
+      snackbarTimeout = setTimeout(() => {
+        snackbar.classList.remove('is-visible');
+      }, 3000);
+    });
+  </script>
+  <style>
+    .container-svg :global(svg) {
+      display: inline;
+      width: 20px;
+      height: 20px;
+    }
 
-  .snackbar {
-    opacity: 0;
-    transform: translateX(120%);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .snackbar.is-visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-</style>
+    .snackbar {
+      opacity: 0;
+      transform: translateX(120%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .snackbar.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
