@@ -1,43 +1,17 @@
-const cloudinaryConfig = {
-  f_auto: true,
-  q_auto: true,
-  dpr_auto: true,
-  thumb: { w: 500, h: 350, c: "fit" },
-  primary_image: { w: 750, h: 550, c: "fill" },
-  gallery: { w: 350, h: 310, c: "fit" },
-  format: "f_webp",
-};
-
-// Función para generar URL optimizada
-function buildCloudinaryUrl(baseUrl, options) {
-  return baseUrl.replace(
-    "/upload/",
-    `/upload/f_auto,q_auto,w_${options.w},h_${options.h},dpr_auto,c_${options.c}/${cloudinaryConfig.format}/`
-  );
-}
-
-
-// JSON invotaciones
+// JSON invitaciones
 export const invitacionesJSON = [
   {
     title: "Bocar Group – Invitación Digital Interactiva en Viñedos San Lucas",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/bocar.m3u8",
-        mp4: "https://res.cloudinary.com/demo/bocar.mp4",
-      },
-      carousel: {
-        hls: "https://res.cloudinary.com/demo/bocar.m3u8",
-        mp4: "https://res.cloudinary.com/demo/bocar.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/bocar.jpg",
-    thumb: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
-    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
+    thumb:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-2_g1qgdg.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-3_oy2yax.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233375/Bocar_Group_Mobile_rn1qp2.mp4",
     description:
       "Invitación digital corporativa para Bocar Group en Viñedos San Lucas, con registro avanzado, agenda interactiva y galería dinámica.",
     event_type: "Evento Corporativo",
@@ -61,20 +35,16 @@ export const invitacionesJSON = [
   },
   {
     title: "María y José – Invitación Digital de Boda con Animaciones",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/roma.m3u8",
-        mp4: "https://res.cloudinary.com/demo/roma.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/roma.jpg",
     thumb:
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
-    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227661/Maria-y-Jose-2_lfnaaa.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227659/Maria-y-Jose-3_rajibz.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233426/Maria_Y_Jose_Mobile_yrr9bb.mp4",
     description:
       "Invitación digital de boda con animaciones fluidas y experiencia inmersiva para los invitados.",
     event_type: "Boda",
@@ -94,24 +64,16 @@ export const invitacionesJSON = [
   },
   {
     title: "Premios Monarca 2024 – Invitación Digital Corporativa HP & HPE",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/monarca.m3u8",
-        mp4: "https://res.cloudinary.com/demo/monarca.mp4",
-      },
-      carousel: {
-        hls: "https://res.cloudinary.com/demo/monarca.m3u8",
-        mp4: "https://res.cloudinary.com/demo/monarca.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/monarca.jpg",
     thumb:
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
-    primary_image:  "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227684/Premios-Monarca-2_zn3fvn.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233437/Premios_Monarca_Mobile_cfuhta.mp4",
     description:
       "Invitación digital para los Premios Monarca HP 2024, realizados en conjunto con los Premios Quetzal de HPE en San Miguel de Allende. Incluyó registro interactivo, galería, video memoria, personalización de correos y funcionalidades avanzadas para una experiencia fluida en cualquier dispositivo.",
     event_type: "Evento Corporativo",
@@ -142,20 +104,16 @@ export const invitacionesJSON = [
 
   {
     title: "Jimena & Canek – Invitación Digital con Experiencia Completa",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/jimena.m3u8",
-        mp4: "https://res.cloudinary.com/demo/jimena.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/jimena.jpg",
     thumb:
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
-    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-2_vtdbbd.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233416/Jimena_Y_Canek_Mobile_ehuwef.mp4",
     description:
       "Invitación digital personalizada de boda, con animaciones, validación avanzada y boletos imprimibles.",
     event_type: "Boda",
@@ -167,7 +125,7 @@ export const invitacionesJSON = [
       "Galería con fotos de la pareja",
       "Mapa interactivo y código QR",
     ],
-    link_demo: "#",
+    link_demo: "https://boda-jimena-y-canek.vercel.app/",
     show_on_carousel: true,
     keywords: [
       "invitación digital de boda personalizada",
@@ -177,20 +135,16 @@ export const invitacionesJSON = [
   },
   {
     title: "Astom – Invitación Digital Empresarial",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/astom.m3u8",
-        mp4: "https://res.cloudinary.com/demo/astom.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/astom.jpg",
     thumb:
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
-    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-2_keghol.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-3_hraafp.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233393/Astom_Summit_Mobile_mcinmf.mp4",
     description:
       "Invitación digital empresarial con diseño sobrio y formulario de registro para asistentes.",
     event_type: "Evento Corporativo",
@@ -200,8 +154,8 @@ export const invitacionesJSON = [
       "Sección de agenda con horarios",
       "Confirmación por correo",
     ],
-    link_demo: "#",
-    show_on_carousel: false,
+    link_demo: "https://astom.vercel.app/",
+    show_on_carousel: true,
     keywords: [
       "invitación digital empresarial",
       "evento corporativo online",
@@ -210,20 +164,16 @@ export const invitacionesJSON = [
   },
   {
     title: "Conecton – Invitación Digital Corporativa",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/conecton.m3u8",
-        mp4: "https://res.cloudinary.com/demo/conecton.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/conecton.jpg",
     thumb:
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
-    primary_image:  "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227625/Contecon-2_zv26k5.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-3_s7jwnr.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233405/Contecon_Mobile_gcpkjb.mp4",
     description:
       "Invitación digital corporativa para Conecton, con registro, agenda y secciones interactivas.",
     event_type: "Evento Corporativo",
@@ -234,8 +184,8 @@ export const invitacionesJSON = [
       "Galería de fotos",
       "Links a calendarios externos",
     ],
-    link_demo: "#",
-    show_on_carousel: false,
+    link_demo: "https://conecton.vercel.app/",
+    show_on_carousel: true,
     keywords: [
       "invitación digital corporativa",
       "evento Conecton",
@@ -244,20 +194,16 @@ export const invitacionesJSON = [
   },
   {
     title: "Sofía – Invitación Digital para XV Años",
-    video: {
-      general: {
-        hls: "https://res.cloudinary.com/demo/sofia.m3u8",
-        mp4: "https://res.cloudinary.com/demo/sofia.mp4",
-      },
-    },
-    poster: "https://res.cloudinary.com/demo/sofia.jpg",
     thumb:
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
-    primary_image:  "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
+    primary_image:
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
     gallery: [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227701/Sofia-XV-2_phipg1.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227698/Sofia-XV-3_rpsdsa.jpg",
     ],
+    base_video:
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233449/Sofia_XV_Mobile_ivpc1a.mp4",
     description:
       "Invitación digital para XV Años, con diseño festivo, RSVP interactivo y galería de fotos.",
     event_type: "XV Años",
@@ -268,8 +214,8 @@ export const invitacionesJSON = [
       "Mapa interactivo",
       "Confirmación por correo",
     ],
-    link_demo: "#",
-    show_on_carousel: false,
+    link_demo: "https://sofia-next.vercel.app/",
+    show_on_carousel: true,
     keywords: [
       "invitación digital XV años",
       "RSVP interactivo quinceañera",
@@ -278,18 +224,88 @@ export const invitacionesJSON = [
   },
 ];
 
-// JSON final con URLs optimizadas
-export const invitaciones = invitacionesJSON.map((inv) => {
+const cloudinaryConfig = {
+  f_auto: true,
+  q_auto: true,
+  dpr_auto: true,
+  thumb: { w: 500, h: 350, c: "fit" },
+  primary_image: { w: 750, h: 550, c: "fill" },
+  gallery: { w: 350, h: 310, c: "fit" },
+  video: { w: 400, h: 800, c: "fit" },
+  format: "f_webp",
+};
+
+// Función para construir URL optimizada de imagen
+export function buildCloudinaryUrl(baseUrl, options) {
+  return baseUrl.replace(
+    "/upload/",
+    `/upload/f_auto,q_auto,w_${options.w},h_${options.h},dpr_auto,c_${options.c}/${cloudinaryConfig.format}/`
+  );
+}
+
+// Función para construir URL de video optimizado
+export function buildCloudinaryVideoUrl(baseUrl) {
+  const base = baseUrl.replace("/video/upload/", "/video/upload/");
   return {
-    ...inv,
-    thumb: inv.thumb ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb) : undefined,
-    primary_image: inv.primary_image
-      ? buildCloudinaryUrl(inv.primary_image, cloudinaryConfig.primary_image)
-      : inv.poster
-      ? buildCloudinaryUrl(inv.poster, cloudinaryConfig.primary_image)
-      : undefined,
-    gallery: inv.gallery
-      ? inv.gallery.map((img) => buildCloudinaryUrl(img, cloudinaryConfig.gallery))
-      : [],
+    mp4: `${base}?w=${cloudinaryConfig.video.w}&h=${cloudinaryConfig.video.h},c_${cloudinaryConfig.video.c}`,
+    hls:
+      base.replace(".mp4", ".m3u8") +
+      `?w=${cloudinaryConfig.video.w}&h=${cloudinaryConfig.video.h},c_${cloudinaryConfig.video.c}`,
+    poster:
+      base.replace("/upload/", "/upload/so_0/") +
+      `?w=${cloudinaryConfig.video.w}&h=${cloudinaryConfig.video.h},c_${cloudinaryConfig.video.c}`,
   };
-});
+}
+
+// Obtener exclusivamente videos con su poster y URLs optimizadas
+export function getVideosFromInvitaciones() {
+  return invitacionesJSON
+    .filter((inv) => inv.base_video)
+    .map((inv) => ({
+      title: inv.title,
+      video: buildCloudinaryVideoUrl(inv.base_video),
+      poster: buildCloudinaryVideoUrl(inv.base_video).poster,
+    }));
+}
+
+// Traer primeras 4 invitaciones con URLs optimizadas
+export function getFirstInvitaciones() {
+  return invitacionesJSON.slice(0, 4).map((inv) => ({
+    title: inv.title,
+    description: inv.description,
+    event_type: inv.event_type,
+    thumb: inv.thumb
+      ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
+      : undefined,
+  }));
+}
+
+// Traer invitaciones adicionales para cargar al hacer click en "ver más"
+export function getMoreInvitaciones(invitacionesJSON, offset = 4) {
+  return invitacionesJSON.slice(offset).map((inv) => ({
+    title: inv.title,
+    description: inv.description,
+    thumb: inv.thumb
+      ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
+      : undefined,
+  }));
+}
+
+// Obtener información completa de una invitación para el modal
+export function getInvitacionModalData(index) {
+  const inv = invitacionesJSON[index];
+  if (!inv) return null;
+  return {
+    title: inv.title,
+    description: inv.description,
+    features: inv.features,
+    gallery: inv.gallery
+      ? inv.gallery.map((img) =>
+          buildCloudinaryUrl(img, cloudinaryConfig.gallery)
+        )
+      : [],
+    link_demo: inv.link_demo,
+    event_type: inv.event_type,
+    primary_image: buildCloudinaryUrl(inv.primary_image, cloudinaryConfig.primary_image)
+  };
+}

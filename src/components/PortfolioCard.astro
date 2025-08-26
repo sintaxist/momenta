@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 
-const { project, index } = Astro.props;
+const { project, index, onClick } = Astro.props;
 ---
 
 <li
   class="group cursor-pointer project-card animate-on-scroll flex"
   style={`transition-delay: ${index * 150}ms;`}
-  onclick={`this.dispatchEvent(new CustomEvent('open-modal', {detail: {id: ${project.id}}, bubbles: true}));`}
+  data-index={index}
 >
   <article
     class="relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-indigo-200 transition-all duration-500 shadow-lg hover:shadow-xl w-full flex flex-col"
@@ -15,7 +15,7 @@ const { project, index } = Astro.props;
     <!-- Imagen con overlay -->
     <div class="aspect-[4/3] overflow-hidden relative">
       <Image
-        src={project.thumb || project.poster}
+        src={project.thumb}
         alt={`Vista previa de ${project.title}`}
         width={400}
         height={300}

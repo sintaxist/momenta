@@ -2,14 +2,21 @@
 import PortfolioCard from "@/components/PortfolioCard.astro";
 import PortfolioModal from "@/components/PortfolioModal.astro";
 import Button from "@/components/ui/Button.astro";
+import { getFirstInvitaciones, getInvitacionModalData } from "@/data/invitaciones";
 
-import { invitaciones } from "@/data/invitaciones";
+const invitaciones = getFirstInvitaciones();
 ---
 
 <section id="demos" class="py-20 lg:py-32 px-6 relative overflow-x-hidden">
   <div class="absolute inset-0">
-    <div class="absolute bottom-10 left-1/4 w-96 h-96 rounded-full opacity-10 bg-teal-500 blur-3xl"></div>
-    <div class="absolute top-10 right-1/3 w-80 h-80 rounded-full opacity-10 bg-sky-500 blur-3xl"></div>
+    <div
+      class="absolute bottom-10 left-1/4 w-96 h-96 rounded-full opacity-10 bg-teal-500 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute top-10 right-1/3 w-80 h-80 rounded-full opacity-10 bg-sky-500 blur-3xl"
+    >
+    </div>
   </div>
   <div class="max-w-7xl mx-auto relative z-10">
     <!-- Headline -->
@@ -17,20 +24,29 @@ import { invitaciones } from "@/data/invitaciones";
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
         Invitaciones Digitales que <span class="text-indigo-600">Inspiran</span>
       </h2>
-      <p class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-        Creamos experiencias únicas para bodas, eventos corporativos y celebraciones especiales. No usamos plantillas: cada invitación es diseñada y programada a la medida.
+      <p
+        class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
+      >
+        Creamos experiencias únicas para bodas, eventos corporativos y
+        celebraciones especiales. No usamos plantillas: cada invitación es
+        diseñada y programada a la medida.
       </p>
     </div>
 
     <!-- Grid de proyectos -->
-    <ul id="portfolio-grid" class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6">
-      {invitaciones.map((invitacion, index) => (
-        <PortfolioCard project={invitacion} index={index} />
-      ))}
+    <ul
+      id="portfolio-grid"
+      class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6"
+    >
+      {
+        invitaciones.map((invitacion, index) => (
+          <PortfolioCard project={invitacion} index={index} />
+        ))
+      }
     </ul>
 
     <!-- Botón mostrar más -->
-    {invitaciones.length > 4 && (
+    <!-- {invitaciones.length > 4 && (
       <div id="show-more-container" class="text-center mt-16 hidden">
         <Button id="show-more-btn" variant="secondary" size="lg" className="xs:min-w-[280px] h-[56px]">
           <span class="btn-text">Mostrar Más Proyectos</span>
@@ -39,78 +55,30 @@ import { invitaciones } from "@/data/invitaciones";
           </div>
         </Button>
       </div>
-    )}
+    )} -->
 
     <!-- Nota de confianza -->
     <p class="text-center text-gray-500 text-sm mt-12 font-sora">
-      ⭐ Tu invitación personalizada también podrá aparecer en nuestro portafolio para inspirar a otros clientes.
+      ⭐ Tu invitación personalizada también podrá aparecer en nuestro
+      portafolio para inspirar a otros clientes.
     </p>
   </div>
 
-  <PortfolioModal projects={invitaciones} />
+  <PortfolioModal />
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const portfolioGrid = document.getElementById("portfolio-grid");
-    if (!portfolioGrid) return;
+  import { getInvitacionModalData } from "@/data/invitaciones";
 
-    const allCards = Array.from(portfolioGrid.children) as HTMLLIElement[];
-    const showMoreBtn = document.getElementById("show-more-btn");
-    const showMoreContainer = document.getElementById("show-more-container");
+  const cards = document.querySelectorAll("#portfolio-grid li");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const index = parseInt(card.dataset.index, 10);
+      const data = getInvitacionModalData(index);
 
-    // Si no encuentra el botón, no continuamos.
-    if (!showMoreBtn || !showMoreContainer) return;
-
-    // Seleccionamos los elementos DENTRO del botón
-    const btnText = showMoreBtn.querySelector(".btn-text");
-    const btnLoader = showMoreBtn.querySelector(".btn-loader");
-
-    const itemsPerPage = 4;
-    let itemsShown = itemsPerPage;
-    let isLoading = false; // Variable para controlar el estado de carga
-
-    // Lógica inicial para ocultar tarjetas y mostrar botón
-    allCards.forEach((card, index) => {
-      if (index >= itemsShown) card.classList.add("hidden");
-    });
-
-    if (allCards.length > itemsShown) {
-      showMoreContainer.classList.remove("hidden");
-    }
-
-    // ✅ CAMBIO: Nueva lógica de clic con estado de carga
-    showMoreBtn.addEventListener("click", () => {
-      // Si ya está cargando, no hacemos nada
-      if (isLoading) return;
-
-      // 1. Iniciar estado de carga
-      isLoading = true;
-      showMoreBtn.setAttribute("disabled", "true");
-      showMoreBtn.classList.add("is-loading"); // Clase para estilos de carga
-
-      // 2. Simular tiempo de carga
-      setTimeout(() => {
-        const nextItems = itemsShown + itemsPerPage;
-
-        allCards.forEach((card, index) => {
-          if (index >= itemsShown && index < nextItems) {
-            card.classList.remove("hidden");
-          }
-        });
-
-        itemsShown = nextItems;
-
-        // 3. Finalizar estado de carga
-        isLoading = false;
-        showMoreBtn.removeAttribute("disabled");
-        showMoreBtn.classList.remove("is-loading");
-
-        // 4. Ocultar el botón si se mostraron todas las tarjetas
-        if (itemsShown >= allCards.length) {
-          showMoreContainer.classList.add("hidden");
-        }
-      }, 800);
+      if (data) {
+        window.dispatchEvent(new CustomEvent("openModal", { detail: data }));
+      }
     });
   });
 </script>

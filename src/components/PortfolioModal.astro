@@ -1,16 +1,11 @@
 ---
+// PortfolioModal.astro
 import Button from "@/components/ui/Button.astro";
 import * as Icons from "@/components/ui/Icons.ts";
 import { Image } from "astro:assets";
-
-interface Props {
-  projects: any[];
-}
-const { projects } = Astro.props;
-const firstProject = projects[0];
 ---
 
-<div id="project-modal" class="modal-backdrop">
+<div id="modal" class="modal-backdrop hidden">
   <div
     class="modal-content"
     role="dialog"
@@ -26,14 +21,11 @@ const firstProject = projects[0];
           id="modal-title"
           class="font-sora font-bold text-2xl md:text-3xl text-gray-900 mb-2"
         >
-          {firstProject.title}
         </h3>
         <span
           id="modal-category"
           class="font-sora text-sm px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200"
-        >
-          {firstProject.event_type}
-        </span>
+        ></span>
       </div>
       <button
         id="modal-close-btn"
@@ -50,8 +42,8 @@ const firstProject = projects[0];
     <div class="grid lg:grid-cols-2 gap-8">
       <Image
         id="modal-image"
-        src={firstProject.primary_image}
-        alt={`Ejemplo de ${firstProject.title}`}
+        src=""
+        alt="Cargando..."
         width={750}
         height={550}
         class="w-full aspect-[4/3] object-cover rounded-2xl"
@@ -62,31 +54,17 @@ const firstProject = projects[0];
             id="modal-description"
             class="font-sora font-normal text-gray-700 leading-relaxed"
           >
-            {firstProject.description} Esta invitación digital fue creada para un
-            <strong>{firstProject.event_type}</strong>, destacando innovación,
-            diseño y funcionalidad a la medida.
           </p>
           <div>
             <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
               Características Principales
             </h4>
-            <ul id="modal-features" class="grid grid-cols-2 gap-3">
-              {
-                firstProject.features.map((feature: any) => (
-                  <li class="flex items-center space-x-2">
-                    <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0" />
-                    <span class="text-gray-600 text-sm font-sora">
-                      {feature}
-                    </span>
-                  </li>
-                ))
-              }
-            </ul>
+            <ul id="features-container" class="grid grid-cols-2 gap-3"></ul>
           </div>
         </div>
         <div class="space-y-3 mt-6">
           <Button
-            href={firstProject.link_demo}
+            href=""
             id="modal-explore-btn"
             target="_blank"
             size="md"
@@ -98,7 +76,7 @@ const firstProject = projects[0];
             <span>Explorar Demo en Vivo</span>
           </Button>
           <Button
-            href="#"
+            href=""
             id="modal-whatsapp-btn"
             target="_blank"
             size="md"
@@ -112,87 +90,82 @@ const firstProject = projects[0];
       </div>
     </div>
 
-    <!-- Galería extra -->
     {
-      firstProject.gallery && (
-        <div class="mt-10">
-          <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
-            Más Vistas del Proyecto
-          </h4>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {firstProject.gallery.map((img: string) => (
-              <img
-                src={img}
-                alt={`Detalle de ${firstProject.title}`}
-                class="w-full h-40 object-cover rounded-lg shadow-md"
-                loading="lazy"
-              />
-            ))}
-          </div>
-        </div>
-      )
+      /* <!-- Galería extra -->
+          {project.gallery && (
+            <div class="mt-10">
+              <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
+                Más Vistas del Proyecto
+              </h4>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {project.gallery.map((img) => (
+                  <img
+                    src={img}
+                    alt={`Detalle de ${project.title}`}
+                    class="w-full h-40 object-cover rounded-lg shadow-md"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            </div>
+          )} */
     }
   </div>
 </div>
+<script is:inline type="module">
+  const modal = document.querySelector("#modal");
+  const closeModalBtn = modal.querySelector("#modal-close-btn");
 
-<script define:vars={{ projects }}>
-  const allProjects = projects;
-  const modal = document.getElementById("project-modal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalCategory = document.getElementById("modal-category");
-  const modalImage = document.getElementById("modal-image");
-  const modalDescription = document.getElementById("modal-description");
-  const featuresContainer = document.getElementById("modal-features");
-  const closeModalBtn = document.getElementById("modal-close-btn");
-  const exploreBtn = document.getElementById("modal-explore-btn");
-  const whatsappBtn = document.getElementById("modal-whatsapp-btn");
+  const closeModal = () => {
+    modal.classList.remove("is-visible");
+    document.body.style.overflow = "auto";
+  };
 
-  function openModal(projectId) {
-    const project = allProjects.find((p) => p.id === projectId);
-    if (!project) return;
+  window.addEventListener("openModal", (e) => {
+    const project = e.detail;
 
+    // Seleccionar elementos dentro del listener para asegurar que están disponibles
+    const modalTitle = modal.querySelector("#modal-title");
+    const modalCategory = modal.querySelector("#modal-category");
+    const modalImage = modal.querySelector("#modal-image");
+    const modalDescription = modal.querySelector("#modal-description");
+    const featuresContainer = modal.querySelector("#features-container");
+    // CORRECCIÓN: Usar los IDs correctos
+    const exploreBtn = modal.querySelector("#modal-explore-btn");
+    const whatsappBtn = modal.querySelector("#modal-whatsapp-btn");
+
+    // Llenar el contenido
     modalTitle.textContent = project.title;
     modalCategory.textContent = project.event_type;
     modalImage.src = project.primary_image;
     modalImage.alt = project.title;
     modalDescription.textContent = project.description;
 
+    console.log(project)
+
     exploreBtn.href = project.link_demo;
-    const whatsappMessage = `Quiero tener más información de esta invitación: ${project.title}`;
-    const whatsappUrl = `https://wa.me/525611780488?text=${encodeURIComponent(whatsappMessage)}`;
-    whatsappBtn.href = whatsappUrl;
+    whatsappBtn.href = `https://wa.me/525611780488?text=${encodeURIComponent(`Quiero tener más información de esta invitación: ${project.title}`)}`;
 
     featuresContainer.innerHTML = "";
-    // ✅ CAMBIO: Generamos <li> en lugar de <div>
-    project.features.forEach((feature) => {
+    project.features.forEach((f) => {
       featuresContainer.innerHTML += `
         <li class="flex items-center space-x-2">
           <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></div>
-          <span class="text-gray-600 text-sm font-sora">${feature}</span>
+          <span class="text-gray-600 text-sm font-sora">${f}</span>
         </li>
       `;
     });
 
+    // CORRECCIÓN: Usar la clase 'is-visible' para activar las transiciones CSS
     modal.classList.add("is-visible");
     document.body.style.overflow = "hidden";
-  }
-
-  function closeModal() {
-    modal.classList.remove("is-visible");
-    document.body.style.overflow = "";
-  }
-
-  document.addEventListener("open-modal", (event) => {
-    const projectId = event.detail.id;
-    openModal(projectId);
   });
 
   closeModalBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) closeModal();
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && modal.classList.contains("is-visible")) {
+
+  // Opcional: Cerrar el modal al hacer clic fuera del contenido
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
       closeModal();
     }
   });
