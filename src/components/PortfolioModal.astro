@@ -2,6 +2,7 @@
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import Button from "@/components/ui/Button.astro";
 import * as Icons from "@/components/ui/Icons.ts";
+import { Image } from "astro:assets";
 
 interface Props {
   projects: any[];
@@ -48,12 +49,13 @@ const firstProject = projects[0];
 
     <!-- Contenido -->
     <div class="grid lg:grid-cols-2 gap-8">
-      <ImageWithFallback
-        client:load
+      <Image
         id="modal-image"
-        src={firstProject.thumb}
+        src={firstProject.primary_image}
         alt={`Ejemplo de ${firstProject.title}`}
-        className="w-full aspect-[4/3] object-cover rounded-2xl"
+        width={750}
+        height={550}
+        class="w-full aspect-[4/3] object-cover rounded-2xl"
       />
       <div class="flex flex-col justify-between">
         <div class="space-y-6">
@@ -152,7 +154,7 @@ const firstProject = projects[0];
 
     modalTitle.textContent = project.title;
     modalCategory.textContent = project.event_type;
-    modalImage.src = project.thumb;
+    modalImage.src = project.primary_image;
     modalImage.alt = project.title;
     modalDescription.textContent = project.description;
 

@@ -1,4 +1,24 @@
-export const invitaciones = [
+const cloudinaryConfig = {
+  f_auto: true,
+  q_auto: true,
+  dpr_auto: true,
+  thumb: { w: 500, h: 350, c: "fit" },
+  primary_image: { w: 750, h: 550, c: "fill" },
+  gallery: { w: 350, h: 310, c: "fit" },
+  format: "f_webp",
+};
+
+// Función para generar URL optimizada
+function buildCloudinaryUrl(baseUrl, options) {
+  return baseUrl.replace(
+    "/upload/",
+    `/upload/f_auto,q_auto,w_${options.w},h_${options.h},dpr_auto,c_${options.c}/${cloudinaryConfig.format}/`
+  );
+}
+
+
+// JSON invotaciones
+export const invitacionesJSON = [
   {
     title: "Bocar Group – Invitación Digital Interactiva en Viñedos San Lucas",
     video: {
@@ -12,11 +32,11 @@ export const invitaciones = [
       },
     },
     poster: "https://res.cloudinary.com/demo/bocar.jpg",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227606/Bocar-Group-1_ukvg1i.jpg",
+    thumb: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
+    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227607/Bocar-Group-2_g1qgdg.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227607/Bocar-Group-3_oy2yax.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-2_g1qgdg.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-3_oy2yax.jpg",
     ],
     description:
       "Invitación digital corporativa para Bocar Group en Viñedos San Lucas, con registro avanzado, agenda interactiva y galería dinámica.",
@@ -49,10 +69,11 @@ export const invitaciones = [
     },
     poster: "https://res.cloudinary.com/demo/roma.jpg",
     thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
+    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227661/Maria-y-Jose-2_lfnaaa.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227659/Maria-y-Jose-3_rajibz.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227661/Maria-y-Jose-2_lfnaaa.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227659/Maria-y-Jose-3_rajibz.jpg",
     ],
     description:
       "Invitación digital de boda con animaciones fluidas y experiencia inmersiva para los invitados.",
@@ -85,10 +106,11 @@ export const invitaciones = [
     },
     poster: "https://res.cloudinary.com/demo/monarca.jpg",
     thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
+    primary_image:  "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227684/Premios-Monarca-2_zn3fvn.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227684/Premios-Monarca-2_zn3fvn.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
     ],
     description:
       "Invitación digital para los Premios Monarca HP 2024, realizados en conjunto con los Premios Quetzal de HPE en San Miguel de Allende. Incluyó registro interactivo, galería, video memoria, personalización de correos y funcionalidades avanzadas para una experiencia fluida en cualquier dispositivo.",
@@ -128,10 +150,11 @@ export const invitaciones = [
     },
     poster: "https://res.cloudinary.com/demo/jimena.jpg",
     thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
+    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227648/Jimena-y-Canek-2_vtdbbd.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-2_vtdbbd.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
     ],
     description:
       "Invitación digital personalizada de boda, con animaciones, validación avanzada y boletos imprimibles.",
@@ -162,10 +185,11 @@ export const invitaciones = [
     },
     poster: "https://res.cloudinary.com/demo/astom.jpg",
     thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227582/Astom-Summit-1_t4ta0t.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
+    primary_image: "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227582/Astom-Summit-2_keghol.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227582/Astom-Summit-3_hraafp.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-2_keghol.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-3_hraafp.jpg",
     ],
     description:
       "Invitación digital empresarial con diseño sobrio y formulario de registro para asistentes.",
@@ -194,10 +218,11 @@ export const invitaciones = [
     },
     poster: "https://res.cloudinary.com/demo/conecton.jpg",
     thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227626/Contecon-1_fggsro.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
+    primary_image:  "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227625/Contecon-2_zv26k5.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227626/Contecon-3_s7jwnr.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227625/Contecon-2_zv26k5.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-3_s7jwnr.jpg",
     ],
     description:
       "Invitación digital corporativa para Conecton, con registro, agenda y secciones interactivas.",
@@ -227,10 +252,11 @@ export const invitaciones = [
     },
     poster: "https://res.cloudinary.com/demo/sofia.jpg",
     thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227699/Sofia-XV-1_omblne.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
+    primary_image:  "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227701/Sofia-XV-2_phipg1.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/f_webp/v1756227698/Sofia-XV-3_rpsdsa.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227701/Sofia-XV-2_phipg1.jpg",
+      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227698/Sofia-XV-3_rpsdsa.jpg",
     ],
     description:
       "Invitación digital para XV Años, con diseño festivo, RSVP interactivo y galería de fotos.",
@@ -251,3 +277,19 @@ export const invitaciones = [
     ],
   },
 ];
+
+// JSON final con URLs optimizadas
+export const invitaciones = invitacionesJSON.map((inv) => {
+  return {
+    ...inv,
+    thumb: inv.thumb ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb) : undefined,
+    primary_image: inv.primary_image
+      ? buildCloudinaryUrl(inv.primary_image, cloudinaryConfig.primary_image)
+      : inv.poster
+      ? buildCloudinaryUrl(inv.poster, cloudinaryConfig.primary_image)
+      : undefined,
+    gallery: inv.gallery
+      ? inv.gallery.map((img) => buildCloudinaryUrl(img, cloudinaryConfig.gallery))
+      : [],
+  };
+});
