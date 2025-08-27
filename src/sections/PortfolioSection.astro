@@ -60,8 +60,7 @@ const invitaciones = getFirstInvitaciones();
   <PortfolioModal />
 </section>
 
-<script is:inline type="module">
-  import { getInvitacionModalData, getMoreInvitaciones } from "@/data/invitaciones";
+<script is:inline type="module" define:vars={{ getInvitacionModalData, getMoreInvitaciones }}>
 
   const grid = document.querySelector<HTMLUListElement>("#portfolio-grid");
   const showMoreBtn = document.querySelector<HTMLButtonElement>("#show-more-btn");
