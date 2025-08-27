@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
-const { project, index, onClick } = Astro.props;
+const { project, index } = Astro.props;
 ---
 
 <li
@@ -21,6 +21,7 @@ const { project, index, onClick } = Astro.props;
         height={300}
         loading="lazy"
         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        sizes="(max-width: 640px) 100vw, 179px"
       />
       <div
         class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex items-end justify-start p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500"

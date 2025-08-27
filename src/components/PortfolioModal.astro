@@ -48,6 +48,7 @@ import { Image } from "astro:assets";
         <img
           id="modal-image"
           class="w-full h-full object-cover rounded-2xl hidden"
+          sizes="(max-width: 640px) 100vw, 179px"
         />
       </div>
       <div class="flex flex-col justify-between">
@@ -113,7 +114,6 @@ import { Image } from "astro:assets";
     const galleryContainer = modal.querySelector("#modal-gallery-container");
     const galleryGrid = modal.querySelector("#modal-gallery");
 
-    // limpiar galerías previas
     galleryGrid.innerHTML = "";
 
     // Seleccionar elementos dentro del listener para asegurar que están disponibles
