@@ -8,6 +8,8 @@ import * as Icons from "@/components/ui/Icons.ts";
 const invitaciones = getFirstInvitaciones();
 const moreInvitaciones = getMoreInvitaciones();
 const showMoreButton = moreInvitaciones.length > 0;
+
+const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
 ---
 
 <!-- Preconnect para acelerar Cloudinary -->
@@ -31,7 +33,7 @@ const showMoreButton = moreInvitaciones.length > 0;
         Invitaciones Digitales que <span class="text-indigo-600">Inspiran</span>
       </h2>
       <p
-        class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
+        class="font-sora font-normal text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8"
       >
         Creamos experiencias únicas para bodas, eventos corporativos y
         celebraciones especiales. No usamos plantillas: cada invitación es
@@ -50,18 +52,6 @@ const showMoreButton = moreInvitaciones.length > 0;
         ))
       }
     </ul>
-
-    <div class="mt-16 animate-on-scroll" style="transition-delay: 300ms;">
-        <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-6 flex items-center gap-x-4 max-w-3xl mx-auto">
-            <div class="bg-indigo-600 p-3 rounded-xl flex-shrink-0">
-                <Fragment set:html={Icons.Star} />
-            </div>
-            <div>
-                <h3 class="font-sora font-semibold text-gray-900">Tu Evento Podría Ser el Próximo</h3>
-                <p class="font-sora text-sm text-gray-600 mt-1">Los proyectos de alta calidad son seleccionados para formar parte de nuestro portafolio exclusivo.</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Botón mostrar más -->
     {
@@ -85,6 +75,33 @@ const showMoreButton = moreInvitaciones.length > 0;
         </div>
       )
     }
+
+    <!-- <div class="mt-12">
+      <div
+        class="relative rounded-2xl p-6 flex items-center gap-x-4 max-w-3xl mx-auto overflow-hidden"
+      >
+        <canvas
+          id={bannerCanvasId}
+          class="gradient-canvas absolute inset-0 w-full h-full"
+          style="--gradient-color-1:#001488; --gradient-color-2:#4F39F6; --gradient-color-3:#5328ff;"
+        ></canvas>
+
+        <div class="relative z-10 flex items-start gap-x-6 text-white">
+          <div class="container-svg bg-white/20 p-3 rounded-xl flex-shrink-0">
+            <Fragment set:html={Icons.Star} />
+          </div>
+          <div>
+            <h3 class="font-sora font-bold text-lg">
+              Tu Evento Podría Ser el Próximo
+            </h3>
+            <p class="font-sora font-semibold text-md text-white/80 mt-1">
+              Los proyectos de alta calidad son seleccionados para formar parte
+              de nuestro portafolio exclusivo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 
   <PortfolioModal />
@@ -96,22 +113,25 @@ const showMoreButton = moreInvitaciones.length > 0;
     getMoreInvitaciones,
   } from "@/data/invitaciones";
 
-  const grid = document.querySelector("#portfolio-grid") as HTMLUListElement | null;
-  const showMoreBtn = document.querySelector("#show-more-btn") as HTMLButtonElement | null;
+  const grid = document.querySelector(
+    "#portfolio-grid"
+  ) as HTMLUListElement | null;
+  const showMoreBtn = document.querySelector(
+    "#show-more-btn"
+  ) as HTMLButtonElement | null;
 
   if (!grid) throw new Error("No se encontró el contenedor #portfolio-grid");
 
-
   // Función para asignar el evento de abrir modal a una card
   function attachCardModal(card: HTMLLIElement) {
-  card.addEventListener("click", () => {
-    const index = parseInt(card.dataset.index!, 10);
-    const data = getInvitacionModalData(index);
-    if (data) {
-      window.dispatchEvent(new CustomEvent("openModal", { detail: data }));
-    }
-  });
-}
+    card.addEventListener("click", () => {
+      const index = parseInt(card.dataset.index!, 10);
+      const data = getInvitacionModalData(index);
+      if (data) {
+        window.dispatchEvent(new CustomEvent("openModal", { detail: data }));
+      }
+    });
+  }
 
   // Asignar modal a las cards iniciales
   grid.querySelectorAll("li").forEach(attachCardModal);
@@ -212,6 +232,11 @@ const showMoreButton = moreInvitaciones.length > 0;
     animation-delay: 0.4s;
   }
 
+  .container-svg :global(svg) {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
   @keyframes pulse-dot {
     0%,
     100% {
