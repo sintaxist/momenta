@@ -86,20 +86,22 @@ const showMoreButton = moreInvitaciones.length > 0;
     getMoreInvitaciones,
   } from "@/data/invitaciones";
 
-  const grid = document.querySelector("#portfolio-grid");
-  const showMoreBtn = document.querySelector("#show-more-btn");
+  const grid = document.querySelector("#portfolio-grid") as HTMLUListElement | null;
+  const showMoreBtn = document.querySelector("#show-more-btn") as HTMLButtonElement | null;
+
+  if (!grid) throw new Error("No se encontró el contenedor #portfolio-grid");
+
 
   // Función para asignar el evento de abrir modal a una card
-  function attachCardModal(card) {
-    const li = card;
-    li.addEventListener("click", () => {
-      const index = parseInt(li.dataset.index!, 10);
-      const data = getInvitacionModalData(index);
-      if (data) {
-        window.dispatchEvent(new CustomEvent("openModal", { detail: data }));
-      }
-    });
-  }
+  function attachCardModal(card: HTMLLIElement) {
+  card.addEventListener("click", () => {
+    const index = parseInt(card.dataset.index!, 10);
+    const data = getInvitacionModalData(index);
+    if (data) {
+      window.dispatchEvent(new CustomEvent("openModal", { detail: data }));
+    }
+  });
+}
 
   // Asignar modal a las cards iniciales
   grid.querySelectorAll("li").forEach(attachCardModal);
@@ -118,14 +120,13 @@ const showMoreButton = moreInvitaciones.length > 0;
         return;
       }
 
-      // Tomamos el primer card como template
       const templateCard = grid.querySelector("li");
       if (!templateCard) return;
 
       newInvitaciones.forEach((inv, i) => {
         const li = templateCard.cloneNode(true) as HTMLLIElement;
 
-        // Actualizamos el contenido
+        // Actualizamos contenido
         const img = li.querySelector("img");
         if (img) {
           img.src = inv.thumb || "";
@@ -137,16 +138,21 @@ const showMoreButton = moreInvitaciones.length > 0;
 
         li.dataset.index = (offset + i).toString();
 
-        // Reset clases de animación si las tienes
-        li.classList.remove("animate-fade-in");
-        void li.offsetWidth; // trigger reflow para reiniciar animación
-        li.classList.add("animate-fade-in");
+        // Clases de animación
+        li.classList.add("animate-on-scroll");
+        li.classList.remove("is-in-view"); // asegurarnos de resetear la animación
 
-        // Agregamos al grid
         grid.appendChild(li);
 
-        // Asignamos el evento de modal
         attachCardModal(li);
+
+        // 🔹 Forzar reflow
+        void li.offsetWidth;
+
+        // Ejecutar animación con un pequeño delay para cada card
+        setTimeout(() => {
+          li.classList.add("is-in-view");
+        }, i * 100); // 100ms entre cada card
       });
 
       showMoreBtn.classList.remove("is-loading");
