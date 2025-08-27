@@ -155,7 +155,7 @@ export const invitacionesJSON = [
       "Confirmación por correo",
     ],
     link_demo: "https://astom.vercel.app/",
-    show_on_carousel: true,
+    show_on_carousel: false,
     keywords: [
       "invitación digital empresarial",
       "evento corporativo online",
@@ -185,7 +185,7 @@ export const invitacionesJSON = [
       "Links a calendarios externos",
     ],
     link_demo: "https://conecton.vercel.app/",
-    show_on_carousel: true,
+    show_on_carousel: false,
     keywords: [
       "invitación digital corporativa",
       "evento Conecton",
@@ -215,7 +215,7 @@ export const invitacionesJSON = [
       "Confirmación por correo",
     ],
     link_demo: "https://sofia-next.vercel.app/",
-    show_on_carousel: true,
+    show_on_carousel: false,
     keywords: [
       "invitación digital XV años",
       "RSVP interactivo quinceañera",
@@ -265,6 +265,7 @@ export function getVideosFromInvitaciones() {
       title: inv.title,
       video: buildCloudinaryVideoUrl(inv.base_video),
       poster: buildCloudinaryVideoUrl(inv.base_video).poster,
+      demoUrl: inv.link_demo || "#", // ✅ agregamos demoUrl para TypeScript
     }));
 }
 

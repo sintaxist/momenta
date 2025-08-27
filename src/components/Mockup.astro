@@ -1,28 +1,10 @@
 ---
-import { videoData as rawVideoData} from "@/data/videos";
+import { getVideosFromInvitaciones } from "@/data/invitaciones";
 import type { projectVideo } from "@/types/portfolio";
 
+const videos: projectVideo[] = getVideosFromInvitaciones();
+
 const iconArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" x2="17" y1="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>`;
-
-/** Genera un poster desde una URL MP4 de Cloudinary (frame en el segundo N) */
-function derivePosterFromCloudinary(mp4Url: string, second = 2): string {
-  try {
-    // Inserta so_{second} después de /video/upload/ (respetando otras transformaciones)
-    // y cambia extensión .mp4 -> .jpg
-    return mp4Url
-      .replace(/\/video\/upload\/(?!v\d+)/, `/video/upload/so_${second}/`)
-      .replace(/\.mp4(\?.*)?$/, ".jpg$1");
-  } catch {
-    return "";
-  }
-}
-
-/** Normalizamos y enriquecemos datos (poster/description por defecto) */
-const videos: projectVideo[] = (rawVideoData as projectVideo[]).map((p) => ({
-  ...p,
-  poster: p.poster && p.poster.length > 0 ? p.poster : derivePosterFromCloudinary(p.video.mp4),
-  description: p.description ?? "Invitación digital interactiva.",
-}));
 
 /** JSON-LD: ItemList -> ListItem -> VideoObject */
 const videoSchema = {
