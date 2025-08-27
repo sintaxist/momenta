@@ -1,30 +1,7 @@
 ---
 import * as Icons from "@/components/ui/Icons.ts";
+import { allFeatures } from "@/data/tablefeatures";
 const packageNames = ["Esencial", "Premium", "Luxury"];
-
-// 1. Centralizamos todas las características en un solo lugar.
-//    - `true` significa que tiene la característica (mostrará ✔).
-//    - `false` significa que no la tiene (mostrará -).
-//    - Un `string` mostrará ese texto específico.
-const allFeatures = [
-  { feature: "Invitación digital personalizada", esencial: true, premium: true, luxury: true },
-  { feature: "RSVP automatizado", esencial: true, premium: true, luxury: true },
-  { feature: "Número de invitados", esencial: "Hasta 100", premium: "Hasta 500", luxury: "Ilimitados" },
-  { feature: "Galería de fotos", esencial: "Básica", premium: true, luxury: true },
-  { feature: "Revisiones de diseño", esencial: "1", premium: "3", luxury: "Ilimitadas" },
-  { feature: "Soporte", esencial: "Email", premium: "Prioritario 24/7", luxury: "Consultor dedicado" },
-  { feature: "Agenda interactiva", esencial: false, premium: true, luxury: true },
-  { feature: "Tickets digitales con QR", esencial: false, premium: true, luxury: true },
-  { feature: "Analytics avanzado", esencial: false, premium: true, luxury: true },
-  { feature: "Playlist colaborativa", esencial: false, premium: true, luxury: true },
-  { feature: "Integración con redes sociales", esencial: false, premium: true, luxury: true },
-  { feature: "Diseño 100% personalizado", esencial: false, premium: false, luxury: true },
-  { feature: "Múltiples idiomas", esencial: false, premium: false, luxury: true },
-  { feature: "Streaming en vivo", esencial: false, premium: false, luxury: true },
-  { feature: "Concierge digital", esencial: false, premium: false, luxury: true },
-  { feature: "Dashboard administrativo", esencial: false, premium: false, luxury: true },
-  { feature: "Implementación", esencial: false, premium: false, luxury: "En 48h" },
-];
 ---
 
 <div class="w-full bg-white/50 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-lg overflow-hidden animate-on-scroll">

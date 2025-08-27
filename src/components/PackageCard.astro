@@ -52,7 +52,7 @@ const icons = {
         >
           {pkg.name}
         </h3>
-        <p class="font-sora text-gray-600 text-sm mb-4">{pkg.description}</p>
+        <p class="font-sora text-gray-600 text-sm mb-4" set:html={pkg.description}></p>
         <div class="mb-6">
           <div class="text-lg text-gray-400 line-through mb-1">
             {pkg.originalPrice}
@@ -65,6 +65,16 @@ const icons = {
           <span class="text-gray-600 text-sm ml-2">MXN</span>
         </div>
       </div>
+
+      <Button
+        href="https://calendly.com/momenta-invitaciones/nueva-reunion"
+        target="_blank"
+        variant="primary"
+        size="md"
+        class="w-full js-scroll-to-contact mb-8"
+      >
+        Lo quiero
+      </Button>
 
       <ul class="space-y-4 mb-8">
         {
@@ -82,21 +92,6 @@ const icons = {
           ))
         }
       </ul>
-    </div>
-
-    <div class="space-y-3 mt-auto">
-      <Button variant="primary" size="md" class="w-full js-scroll-to-contact">
-        Me Interesa
-      </Button>
-      <Button
-        href="https://calendly.com/momenta-invitaciones/nueva-reunion"
-        target="_blank"
-        variant="secondary"
-        size="sm"
-        class="w-full"
-      >
-        Consulta {pkg.name}
-      </Button>
     </div>
   </div>
 </div>

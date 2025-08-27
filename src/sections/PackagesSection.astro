@@ -1,15 +1,10 @@
 ---
-import PackageCard from '@/components/PackageCard.astro';
-import PackagesParticles from '@/components/PackagesParticles.astro';
-import Button from '@/components/ui/Button.astro';
-import ComparisonTable from '@/components/ComparisonTable.astro';
+import PackageCard from "@/components/PackageCard.astro";
+import PackagesParticles from "@/components/PackagesParticles.astro";
+import Button from "@/components/ui/Button.astro";
+import ComparisonTable from "@/components/ComparisonTable.astro";
 import * as Icons from "@/components/ui/Icons.ts";
-
-const packages = [
-  { id: 1, name: "Esencial", icon: Icons.Sparkles, originalPrice: "$3,125", discountedPrice: "$2,500", description: "Perfecto para eventos íntimos con funcionalidades básicas", features: ["Invitación digital personalizada", "RSVP automatizado", "Hasta 100 invitados", "Galería de fotos básica", "Soporte por email", "1 revisión de diseño"], popular: false, savings: "$625" },
-  { id: 2, name: "Premium", icon: Icons.Crown, originalPrice: "$5,625", discountedPrice: "$4,500", description: "La elección perfecta para eventos que buscan la excelencia", features: ["Todo lo incluido en Esencial", "Hasta 500 invitados", "Agenda interactiva", "Tickets digitales con QR", "Analytics avanzado", "Playlist colaborativa", "Soporte prioritario 24/7", "3 revisiones de diseño", "Integración con redes sociales"], popular: true, savings: "$1,125" },
-  { id: 3, name: "Luxury", icon: Icons.Star, originalPrice: "$9,375", discountedPrice: "$7,500", description: "Experiencia completa sin límites para eventos extraordinarios", features: ["Todo lo incluido en Premium", "Invitados ilimitados", "Diseño 100% personalizado", "Múltiples idiomas", "Streaming en vivo", "Concierge digital", "Dashboard administrativo", "Revisiones ilimitadas", "Consultor dedicado", "Implementación en 48h"], popular: false, savings: "$1,875" }
-];
+import { packages } from "@/data/paquetes";
 ---
 
 <section id="paquetes" class="py-20 lg:py-32 px-6 relative">
@@ -17,7 +12,9 @@ const packages = [
 
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-16 animate-on-scroll">
-      <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-blue-100 text-emerald-700 px-6 py-3 rounded-full border border-emerald-200 shadow-lg text-center">
+      <div
+        class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-blue-100 text-emerald-700 px-6 py-3 rounded-full border border-emerald-200 shadow-lg text-center"
+      >
         <span class="text-lg">🎉</span>
         <span class="font-sora font-semibold">
           Promoción de Lanzamiento: 20% de Descuento en tu Primer Evento
@@ -27,22 +24,25 @@ const packages = [
 
     <div class="text-center mb-32">
       <h2 class="font-sora font-bold text-4xl lg:text-6xl text-gray-900 mb-6">
-        Una Inversión en la <span class="text-indigo-600">Perfección</span>
+        Paquetes de <span class="text-indigo-600">Invitaciones Digitales</span> para
+        Cada Tipo de Evento
       </h2>
-      <p class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Cada paquete está diseñado para diferentes niveles de sofisticación, pero todos comparten el mismo compromiso con la calidad excepcional.
+      <p
+        class="font-sora font-normal text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+      >
+        Desde celebraciones íntimas hasta experiencias de gran escala, cada
+        paquete está diseñado para elevar tu evento con innovación, estilo y
+        calidad excepcional.
       </p>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:items-stretch">
-      {packages.map((pkg, index) => (
-        <PackageCard pkg={pkg} index={index} />
-      ))}
+      {packages.map((pkg, index) => <PackageCard pkg={pkg} index={index} />)}
     </div>
 
     <div class="mt-32">
       <h3 class="font-sora font-bold text-3xl lg:text-4xl text-gray-900 mb-12 text-center animate-on-scroll">
-        Comparación Detallada
+        Comparativa de Paquetes
       </h3>
       <ComparisonTable />
     </div>
@@ -51,7 +51,13 @@ const packages = [
       <p class="font-sora text-gray-600 mb-6">
         ¿Necesitas algo personalizado? Hablemos sobre tu proyecto específico.
       </p>
-      <Button href="https://calendly.com/momenta-invitaciones/nueva-reunion" target="_blank" variant="floating" size="lg" icon={Icons.Sparkles}>
+      <Button
+        href="https://calendly.com/momenta-invitaciones/nueva-reunion"
+        target="_blank"
+        variant="floating"
+        size="lg"
+        icon={Icons.Sparkles}
+      >
         Consulta Personalizada Gratuita
       </Button>
     </div>
