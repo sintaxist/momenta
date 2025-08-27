@@ -40,14 +40,16 @@ import { Image } from "astro:assets";
 
     <!-- Contenido -->
     <div class="grid lg:grid-cols-2 gap-8">
-      <Image
-        id="modal-image"
-        src=""
-        alt="Cargando..."
-        width={750}
-        height={550}
-        class="w-full aspect-[4/3] object-cover rounded-2xl"
-      />
+      <div
+        id="modal-image-container"
+        class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200 relative"
+      >
+        <div class="skeleton-loader absolute inset-0"></div>
+        <img
+          id="modal-image"
+          class="w-full h-full object-cover rounded-2xl hidden"
+        />
+      </div>
       <div class="flex flex-col justify-between">
         <div class="space-y-6">
           <p
@@ -90,84 +92,100 @@ import { Image } from "astro:assets";
       </div>
     </div>
 
-    {
-      /* <!-- Galería extra -->
-          {project.gallery && (
-            <div class="mt-10">
-              <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
-                Más Vistas del Proyecto
-              </h4>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {project.gallery.map((img) => (
-                  <img
-                    src={img}
-                    alt={`Detalle de ${project.title}`}
-                    class="w-full h-40 object-cover rounded-lg shadow-md"
-                    loading="lazy"
-                  />
-                ))}
-              </div>
-            </div>
-          )} */
-    }
+    <div id="modal-gallery-container" class="mt-10 hidden">
+      <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
+        Más Vistas del Proyecto
+      </h4>
+      <div id="modal-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      </div>
+    </div>
   </div>
 </div>
 <script is:inline type="module">
   const modal = document.querySelector("#modal");
   const closeModalBtn = modal.querySelector("#modal-close-btn");
-
-  const closeModal = () => {
-    modal.classList.remove("is-visible");
-    document.body.style.overflow = "auto";
-  };
+  const modalImage = modal.querySelector("#modal-image");
+  const skeleton = modal.querySelector(".skeleton-loader");
 
   window.addEventListener("openModal", (e) => {
     const project = e.detail;
 
+    const galleryContainer = modal.querySelector("#modal-gallery-container");
+    const galleryGrid = modal.querySelector("#modal-gallery");
+
+    // limpiar galerías previas
+    galleryGrid.innerHTML = "";
+
     // Seleccionar elementos dentro del listener para asegurar que están disponibles
-    const modalTitle = modal.querySelector("#modal-title");
-    const modalCategory = modal.querySelector("#modal-category");
-    const modalImage = modal.querySelector("#modal-image");
-    const modalDescription = modal.querySelector("#modal-description");
+    modal.querySelector("#modal-title").textContent = project.title;
+    modal.querySelector("#modal-category").textContent = project.event_type;
+    modal.querySelector("#modal-description").textContent = project.description;
+    modal.querySelector("#modal-explore-btn").href = project.link_demo;
+    modal.querySelector("#modal-whatsapp-btn").href =
+      `https://wa.me/525611780488?text=${encodeURIComponent(`Quiero más info de: ${project.title}`)}`;
+
     const featuresContainer = modal.querySelector("#features-container");
-    // CORRECCIÓN: Usar los IDs correctos
-    const exploreBtn = modal.querySelector("#modal-explore-btn");
-    const whatsappBtn = modal.querySelector("#modal-whatsapp-btn");
-
-    // Llenar el contenido
-    modalTitle.textContent = project.title;
-    modalCategory.textContent = project.event_type;
-    modalImage.src = project.primary_image;
-    modalImage.alt = project.title;
-    modalDescription.textContent = project.description;
-
-    console.log(project)
-
-    exploreBtn.href = project.link_demo;
-    whatsappBtn.href = `https://wa.me/525611780488?text=${encodeURIComponent(`Quiero tener más información de esta invitación: ${project.title}`)}`;
-
     featuresContainer.innerHTML = "";
     project.features.forEach((f) => {
-      featuresContainer.innerHTML += `
-        <li class="flex items-center space-x-2">
-          <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></div>
-          <span class="text-gray-600 text-sm font-sora">${f}</span>
-        </li>
-      `;
+      featuresContainer.innerHTML += `<li class="flex items-center space-x-2">
+      <div class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></div>
+      <span class="text-gray-600 text-sm font-sora">${f}</span>
+    </li>`;
     });
 
-    // CORRECCIÓN: Usar la clase 'is-visible' para activar las transiciones CSS
+    // mostrar modal
     modal.classList.add("is-visible");
     document.body.style.overflow = "hidden";
+
+    // mostrar placeholder y cargar imagen
+    skeleton.classList.remove("hidden");
+    modalImage.classList.add("hidden");
+    modalImage.src = project.primary_image;
+    modalImage.alt = project.title;
+
+    modalImage.onload = () => {
+      skeleton.classList.add("hidden");
+      modalImage.classList.remove("hidden");
+    };
+
+    if (project.gallery && project.gallery.length > 0) {
+      galleryContainer.classList.remove("hidden");
+
+      project.gallery.forEach((imgUrl) => {
+        // contenedor para cada imagen con placeholder
+        const imgWrapper = document.createElement("div");
+        imgWrapper.className =
+          "relative w-full h-40 rounded-lg overflow-hidden bg-gray-200";
+
+        // placeholder animado
+        const skeleton = document.createElement("div");
+        skeleton.className = "skeleton-loader absolute inset-0";
+        imgWrapper.appendChild(skeleton);
+
+        // imagen real
+        const img = document.createElement("img");
+        img.src = imgUrl;
+        img.alt = `Detalle de ${project.title}`;
+        img.className =
+          "w-full h-full object-cover rounded-lg hidden shadow-md";
+
+        // cuando la imagen carga, ocultar placeholder y mostrar imagen
+        img.onload = () => {
+          skeleton.remove();
+          img.classList.remove("hidden");
+        };
+
+        imgWrapper.appendChild(img);
+        galleryGrid.appendChild(imgWrapper);
+      });
+    } else {
+      galleryContainer.classList.add("hidden");
+    }
   });
 
-  closeModalBtn.addEventListener("click", closeModal);
-
-  // Opcional: Cerrar el modal al hacer clic fuera del contenido
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
+  closeModalBtn.addEventListener("click", () => {
+    modal.classList.remove("is-visible");
+    document.body.style.overflow = "auto";
   });
 </script>
 
@@ -205,5 +223,19 @@ import { Image } from "astro:assets";
   }
   .modal-backdrop.is-visible .modal-content {
     transform: scale(1);
+  }
+
+  .skeleton-loader {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 </style>
