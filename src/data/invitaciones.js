@@ -260,7 +260,7 @@ export function buildCloudinaryVideoUrl(baseUrl) {
 // Obtener exclusivamente videos con su poster y URLs optimizadas
 export function getVideosFromInvitaciones() {
   return invitacionesJSON
-    .filter((inv) => inv.base_video)
+    .filter((inv) => inv.base_video && inv.show_on_carousel)
     .map((inv) => ({
       title: inv.title,
       video: buildCloudinaryVideoUrl(inv.base_video),
