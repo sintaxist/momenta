@@ -282,7 +282,7 @@ export function getFirstInvitaciones() {
 }
 
 // Traer invitaciones adicionales para cargar al hacer click en "ver más"
-export function getMoreInvitaciones(invitacionesJSON, offset = 4) {
+export function getMoreInvitaciones(offset = 4) {
   return invitacionesJSON.slice(offset).map((inv) => ({
     title: inv.title,
     description: inv.description,

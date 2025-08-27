@@ -2,9 +2,11 @@
 import PortfolioCard from "@/components/PortfolioCard.astro";
 import PortfolioModal from "@/components/PortfolioModal.astro";
 import Button from "@/components/ui/Button.astro";
-import { getFirstInvitaciones, getInvitacionModalData } from "@/data/invitaciones";
+import { getFirstInvitaciones, getMoreInvitaciones } from "@/data/invitaciones";
 
 const invitaciones = getFirstInvitaciones();
+const moreInvitaciones = getMoreInvitaciones();
+const showMoreButton = moreInvitaciones.length > 0;
 ---
 
 <section id="demos" class="py-20 lg:py-32 px-6 relative overflow-x-hidden">
@@ -46,16 +48,27 @@ const invitaciones = getFirstInvitaciones();
     </ul>
 
     <!-- Botón mostrar más -->
-    <!-- {invitaciones.length > 4 && (
-      <div id="show-more-container" class="text-center mt-16 hidden">
-        <Button id="show-more-btn" variant="secondary" size="lg" className="xs:min-w-[280px] h-[56px]">
-          <span class="btn-text">Mostrar Más Proyectos</span>
-          <div class="btn-loader hidden">
-            <span class="dot" /><span class="dot" /><span class="dot" />
-          </div>
-        </Button>
-      </div>
-    )} -->
+    {
+      showMoreButton && (
+        <div id="show-more-container" class="text-center mt-16">
+          <Button
+            id="show-more-btn"
+            variant="secondary"
+            size="lg"
+            className="xs:min-w-[280px] h-[56px]"
+          >
+            <span class="btn-text">Mostrar Más Proyectos</span>
+            <div class="btn-loader hidden">
+              <>
+                <span class="dot" />
+                <span class="dot" />
+                <span class="dot" />
+              </>
+            </div>
+          </Button>
+        </div>
+      )
+    }
 
     <!-- Nota de confianza -->
     <p class="text-center text-gray-500 text-sm mt-12 font-sora">
@@ -68,18 +81,82 @@ const invitaciones = getFirstInvitaciones();
 </section>
 
 <script>
-  import { getInvitacionModalData } from "@/data/invitaciones";
+  import {
+    getInvitacionModalData,
+    getMoreInvitaciones,
+  } from "@/data/invitaciones";
 
-  const cards = document.querySelectorAll("#portfolio-grid li");
-  cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const index = parseInt(card.dataset.index, 10);
+  const grid = document.querySelector("#portfolio-grid");
+  const showMoreBtn = document.querySelector("#show-more-btn");
+
+  // Función para asignar el evento de abrir modal a una card
+  function attachCardModal(card) {
+    const li = card;
+    li.addEventListener("click", () => {
+      const index = parseInt(li.dataset.index!, 10);
       const data = getInvitacionModalData(index);
-
       if (data) {
         window.dispatchEvent(new CustomEvent("openModal", { detail: data }));
       }
     });
+  }
+
+  // Asignar modal a las cards iniciales
+  grid.querySelectorAll("li").forEach(attachCardModal);
+
+  // Manejar botón "Mostrar Más"
+  showMoreBtn?.addEventListener("click", () => {
+    showMoreBtn.classList.add("is-loading");
+
+    setTimeout(() => {
+      const offset = grid.children.length;
+      const newInvitaciones = getMoreInvitaciones(offset);
+
+      if (newInvitaciones.length === 0) {
+        showMoreBtn.parentElement?.classList.add("hidden");
+        showMoreBtn.classList.remove("is-loading");
+        return;
+      }
+
+      // Tomamos el primer card como template
+      const templateCard = grid.querySelector("li");
+      if (!templateCard) return;
+
+      newInvitaciones.forEach((inv, i) => {
+        const li = templateCard.cloneNode(true) as HTMLLIElement;
+
+        // Actualizamos el contenido
+        const img = li.querySelector("img");
+        if (img) {
+          img.src = inv.thumb || "";
+          img.alt = inv.title;
+        }
+
+        const titleEl = li.querySelector("h3");
+        if (titleEl) titleEl.textContent = inv.title;
+
+        li.dataset.index = (offset + i).toString();
+
+        // Reset clases de animación si las tienes
+        li.classList.remove("animate-fade-in");
+        void li.offsetWidth; // trigger reflow para reiniciar animación
+        li.classList.add("animate-fade-in");
+
+        // Agregamos al grid
+        grid.appendChild(li);
+
+        // Asignamos el evento de modal
+        attachCardModal(li);
+      });
+
+      showMoreBtn.classList.remove("is-loading");
+
+      // Ocultar botón si no quedan más invitaciones
+      const remaining = getMoreInvitaciones(grid.children.length);
+      if (remaining.length === 0) {
+        showMoreBtn.parentElement?.classList.add("hidden");
+      }
+    }, 300);
   });
 </script>
 
