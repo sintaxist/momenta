@@ -192,7 +192,6 @@ const videoSchema = {
       if (entry.isIntersecting) {
         loadVideo(video);
         playActiveVideo();
-        console.log(video)
         if (!videoInterval) {
           videoInterval = setInterval(cycleVideo, 4000);
         }
