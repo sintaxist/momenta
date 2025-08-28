@@ -231,7 +231,7 @@ const cloudinaryConfig = {
   thumb: { w: 200, h: 250, c: "fit" },
   primary_image: { w: 750, h: 550, c: "fill" },
   gallery: { w: 350, h: 310, c: "fit" },
-  video: { w: 400, h: 800, c: "fit" },
+  video: { w: 300, h: 600, c: "fit" },
   format: "f_webp",
 };
 
