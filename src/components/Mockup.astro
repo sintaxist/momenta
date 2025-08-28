@@ -85,15 +85,17 @@ const videoSchema = {
             poster={project.poster}
             class:list={["video-slide", { "is-active": index === 0 }]}
             fetchpriority={index === 0 ? "high" : "auto"}
-            loading="lazy"
             data-index={index}
-            aria-label={`${project.title}`}
-            title={`Video: ${project.title}`}
+            data-src={JSON.stringify([
+              { src: project.video.hls, type: "application/x-mpegURL" },
+              { src: project.video.mp4, type: "video/mp4" }
+            ])}
+            loading="lazy"
             width="1080"
             height="1920"
+            aria-label={`${project.title}`}
+            title={`Video: ${project.title}`}
           >
-            <source src={project.video.hls} type="application/x-mpegURL" />
-            <source src={project.video.mp4} type="video/mp4" />
           </video>
         ))
       }
@@ -134,7 +136,7 @@ const videoSchema = {
 </script>
 
 
-<script define:vars={{ videoData: videos }}>
+<script is:inline>
   const mockupContainer = document.getElementById("mockup-container");
   const mockupFrame = document.getElementById("mockup-frame");
   const mockupTitle = document.getElementById("mockup-title");
@@ -142,17 +144,32 @@ const videoSchema = {
   const videoSlides = document.querySelectorAll(".video-slide");
   let currentIndex = 0;
   let videoInterval;
-  
-  function pauseActiveVideo() {
-    const activeVideo = videoSlides[currentIndex];
-    if (activeVideo && !activeVideo.paused) activeVideo.pause();
+
+  // Función para cargar video desde data-src
+  function loadVideo(video) {
+    if (video.dataset.src) {
+      const sources = JSON.parse(video.dataset.src);
+      sources.forEach(s => {
+        const source = document.createElement("source");
+        source.src = s.src;
+        source.type = s.type;
+        video.appendChild(source);
+      });
+      video.removeAttribute("data-src");
+      video.load();
+    }
   }
 
   function playActiveVideo() {
     const activeVideo = videoSlides[currentIndex];
     if (activeVideo && activeVideo.paused) {
-      activeVideo.play().catch(() => {}); // Safari puede lanzar error si no se puede reproducir
+      activeVideo.play().catch(() => {});
     }
+  }
+
+  function pauseActiveVideo() {
+    const activeVideo = videoSlides[currentIndex];
+    if (activeVideo && !activeVideo.paused) activeVideo.pause();
   }
 
   function cycleVideo() {
@@ -160,45 +177,42 @@ const videoSchema = {
     currentIndex = (currentIndex + 1) % videoSlides.length;
     videoSlides[currentIndex].classList.add("is-active");
 
-    requestAnimationFrame(() => {
-      if (mockupTitle) mockupTitle.textContent = videoSlides[currentIndex].getAttribute("aria-label") || "";
-      if (demoLink) demoLink.href = videoSlides[currentIndex].dataset.demoUrl || "#";
-      mockupFrame?.classList.add("is-animating");
-      setTimeout(() => mockupFrame?.classList.remove("is-animating"), 600);
-    });
+    if (mockupTitle) mockupTitle.textContent = videoSlides[currentIndex].getAttribute("aria-label") || "";
+    if (demoLink) demoLink.href = videoSlides[currentIndex].dataset.demoUrl || "#";
+
+    mockupFrame?.classList.add("is-animating");
+    setTimeout(() => mockupFrame?.classList.remove("is-animating"), 600);
 
     playActiveVideo();
   }
 
-  function playActiveVideo() {
-    const activeVideo = videoSlides[currentIndex];
-    if (activeVideo && activeVideo.paused) {
-      activeVideo.play().catch(() => {}); // Safari a veces lanza error si no puede
-    }
-  }
-
-  // IntersectionObserver para reproducción solo cuando el mockup está visible
-  const observer = new IntersectionObserver((entries) => {
+  // IntersectionObserver para lazy load y play/pause
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
+      const video = entry.target;
       if (entry.isIntersecting) {
-        if (!videoInterval) {
-          videoInterval = window.setInterval(cycleVideo, 4000);
-        }
+        loadVideo(video);
         playActiveVideo();
+        if (!videoInterval) {
+          videoInterval = setInterval(cycleVideo, 4000);
+        }
       } else {
+        pauseActiveVideo();
         if (videoInterval) {
           clearInterval(videoInterval);
           videoInterval = null;
         }
-        pauseActiveVideo();
       }
     });
   }, { threshold: 0.25 });
 
-  if (mockupContainer) observer.observe(mockupContainer);
+  videoSlides.forEach(video => observer.observe(video));
 
-  // Reproducir el primer video al cargar
-  document.addEventListener("DOMContentLoaded", playActiveVideo);
+  // Reproducir primer video al cargar
+  document.addEventListener("DOMContentLoaded", () => {
+    loadVideo(videoSlides[0]);
+    playActiveVideo();
+  });
 </script>
 
 <style>

@@ -226,9 +226,9 @@ export const invitacionesJSON = [
 
 const cloudinaryConfig = {
   f_auto: true,
-  q_auto: true,
+  q_auto: "eco",
   dpr_auto: true,
-  thumb: { w: 300, h: 250, c: "fill" },
+  thumb: { w: 200, h: 250, c: "fit" },
   primary_image: { w: 750, h: 550, c: "fill" },
   gallery: { w: 350, h: 310, c: "fit" },
   video: { w: 400, h: 800, c: "fit" },
