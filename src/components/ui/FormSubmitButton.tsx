@@ -1,5 +1,4 @@
-import React from 'react';
-import { Send } from 'lucide-react';
+import { Send } from "@/components/ui/Icons.ts";
 
 // Definimos las props que el botón aceptará
 interface FormSubmitButtonProps {
@@ -28,7 +27,10 @@ export function FormSubmitButton({ isSubmitting, disabledButton }: FormSubmitBut
     >
       {isSubmitting ? loader : (
         <div className="flex items-center justify-center space-x-2">
-          <Send size={16} />
+          <span
+            className="w-5 h-5 [&>svg]:w-full [&>svg]:h-full [&>svg]:stroke-current"
+            dangerouslySetInnerHTML={{ __html: Send }}
+          />
           <span>Enviar Mensaje</span>
         </div>
       )}

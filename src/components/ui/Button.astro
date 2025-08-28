@@ -1,55 +1,25 @@
 ---
-import { cn } from '@/components/ui/utils';
-import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'astro/types';
-
-// Variantes
-const buttonVariants = cva(
-  "cursor-pointer inline-flex items-center font-sora font-semibold rounded-lg transition-colors transition-bg transition-border transition-transform duration-500 ease-in-out transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        primary: "bg-indigo-600 text-white border border-transparent hover:bg-indigo-700 shadow-lg",
-        secondary: "bg-white/20 backdrop-blur-xl border border-indigo-200 text-indigo-600 hover:bg-indigo-50",
-        floating: "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 shadow-2xl",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        ghost: "hover:bg-accent hover:text-accent-foreground shadow-none",
-      },
-      size: {
-        sm: "px-5 py-2.5 text-sm",
-        md: "px-7 py-3 text-base",
-        lg: "px-8 py-4 text-lg",
-        xl: "px-10 py-5 text-xl"
-      },
-      justify: {
-        center: "justify-center",
-        start: "justify-start",
-      }
-    },
-    defaultVariants: {
-      variant: "primary",
-      size: "md",
-      justify: "center",
-    },
-  }
-);
 
 type AnchorProps = HTMLAttributes<'a'>;
 type ButtonProps = HTMLAttributes<'button'>;
-type Variants = VariantProps<typeof buttonVariants>;
-type Size = NonNullable<Variants['size']>;
+
+type Variant = 'primary' | 'secondary' | 'floating' | 'outline' | 'ghost';
+type Size = 'sm' | 'md' | 'lg' | 'xl';
+type Justify = 'center' | 'start';
 
 export interface Props extends Partial<AnchorProps & ButtonProps> {
   href?: string;
-  variant?: Variants['variant'];
-  size?: Variants['size'];
-  justify?: Variants['justify'];
-  icon?: any; // <-- aquí recibimos el icono como componente
+  variant?: Variant;
+  size?: Size;
+  justify?: Justify;
+  icon?: any; // componente o SVG
   className?: string;
   bubbles?: boolean;
   type?: ButtonProps['type'];
 }
 
+// Props con defaults
 const {
   variant = 'primary',
   size = 'md',
@@ -66,17 +36,52 @@ const {
   ...attrs
 } = Astro.props as Props & Record<string, any>;
 
-const finalClasses = cn(buttonVariants({ variant, size, justify }), classAttr, className);
+// Base styles
+const baseClasses = "cursor-pointer inline-flex items-center font-sora font-semibold rounded-lg transition-colors transition-bg transition-border transition-transform duration-500 ease-in-out transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
-const relFinal = rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined);
+// Variantes de estilo
+const variantClasses: Record<Variant, string> = {
+  primary: "bg-indigo-600 text-white border border-transparent hover:bg-indigo-700 shadow-lg",
+  secondary: "bg-white/20 backdrop-blur-xl border border-indigo-200 text-indigo-600 hover:bg-indigo-50",
+  floating: "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 shadow-2xl",
+  outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+  ghost: "hover:bg-accent hover:text-accent-foreground shadow-none",
+};
 
-const id = idAttr;
+// Tamaños
+const sizeClasses: Record<Size, string> = {
+  sm: "px-5 py-2.5 text-sm",
+  md: "px-7 py-3 text-base",
+  lg: "px-8 py-4 text-lg",
+  xl: "px-10 py-5 text-xl"
+};
+
+// Justify
+const justifyClasses: Record<Justify, string> = {
+  center: "justify-center",
+  start: "justify-start",
+};
+
+// Icon sizes
 const iconSizeClasses: Record<Size, string> = {
   sm: "w-4 h-4",
   md: "w-5 h-5",
   lg: "w-5 h-5",
   xl: "w-6 h-6",
 };
+
+// Clase final combinada
+const finalClasses = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  justifyClasses[justify],
+  classAttr,
+  className,
+].filter(Boolean).join(" ");
+
+const relFinal = rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined);
+const id = idAttr;
 ---
 
 {href ? (
@@ -89,7 +94,7 @@ const iconSizeClasses: Record<Size, string> = {
     data-astro-bubbles={bubbles ? 'true' : undefined}
     {...attrs}
   >
-    {icon && <span class={`icon-wrapper mr-4 ${iconSizeClasses[size ?? 'md']}`}><Fragment set:html={icon} /></span>}
+    {icon && <span class={`icon-wrapper mr-4 ${iconSizeClasses[size]}`}><Fragment set:html={icon} /></span>}
     <span><slot /></span>
   </a>
 ) : (
@@ -100,7 +105,7 @@ const iconSizeClasses: Record<Size, string> = {
     data-astro-bubbles={bubbles ? 'true' : undefined}
     {...attrs}
   >
-    {icon && <span class={`icon-wrapper mr-4 ${iconSizeClasses[size ?? 'md']}`}><Fragment set:html={icon} /></span>}
+    {icon && <span class={`icon-wrapper mr-4 ${iconSizeClasses[size]}`}><Fragment set:html={icon} /></span>}
     <span><slot /></span>
   </button>
 )}
