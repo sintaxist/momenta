@@ -122,7 +122,7 @@ import { Image } from "astro:assets";
     modal.querySelector("#modal-description").textContent = project.description;
     modal.querySelector("#modal-explore-btn").href = project.link_demo;
     modal.querySelector("#modal-whatsapp-btn").href =
-      `https://wa.me/525611780488?text=${encodeURIComponent(`Quiero más info de: ${project.title}`)}`;
+      `https://wa.me/525533256703?text=${encodeURIComponent(`Quiero más info de: ${project.title}`)}`;
 
     const featuresContainer = modal.querySelector("#features-container");
     featuresContainer.innerHTML = "";
@@ -229,6 +229,11 @@ import { Image } from "astro:assets";
     background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
+  }
+
+  .modal-close-btn :global(svg){
+    width: 25px;
+    height: 25px;
   }
   @keyframes shimmer {
     0% {

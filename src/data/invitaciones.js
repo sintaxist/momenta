@@ -228,7 +228,7 @@ const cloudinaryConfig = {
   f_auto: true,
   q_auto: true,
   dpr_auto: true,
-  thumb: { w: 500, h: 350, c: "fit" },
+  thumb: { w: 300, h: 250, c: "fill" },
   primary_image: { w: 750, h: 550, c: "fill" },
   gallery: { w: 350, h: 310, c: "fit" },
   video: { w: 400, h: 800, c: "fit" },
