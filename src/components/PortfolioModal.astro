@@ -30,7 +30,7 @@ import * as Icons from "@/components/ui/Icons.ts";
         id="modal-close-btn"
         class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0"
       >
-        <span class="w-8 h-8 flex items-center justify-center"
+        <span class="container-svg w-8 h-8 flex items-center justify-center"
           ><Fragment set:html={Icons.X} /></span
         >
         <span class="text-sm font-medium">Cerrar</span>
@@ -230,9 +230,14 @@ import * as Icons from "@/components/ui/Icons.ts";
     animation: shimmer 1.2s infinite;
   }
 
-  .modal-close-btn :global(svg){
+  .container-svg :global(svg){
     width: 25px;
     height: 25px;
+    color: #4a5565;
+  }
+
+  #modal-close-btn:hover .container-svg :global(svg){
+    color: #4f46e5;
   }
   @keyframes shimmer {
     0% {

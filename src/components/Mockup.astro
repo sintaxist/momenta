@@ -77,26 +77,25 @@ const videoSchema = {
         videos.map((project, index) => (
           // @ts-ignore
           <video
-            autoplay
-            loop
-            muted
-            playsinline
-            preload="metadata"
-            poster={project.poster}
-            class:list={["video-slide", { "is-active": index === 0 }]}
-            fetchpriority={index === 0 ? "high" : "auto"}
-            data-index={index}
-            data-src={JSON.stringify([
-              { src: project.video.hls, type: "application/x-mpegURL" },
-              { src: project.video.mp4, type: "video/mp4" }
-            ])}
-            loading="lazy"
-            width="1080"
-            height="1920"
-            aria-label={`${project.title}`}
-            title={`Video: ${project.title}`}
-          >
-          </video>
+          autoplay
+          loop
+          muted
+          playsinline
+          poster={project.poster}
+          class:list={["video-slide", { "is-active": index === 0 }]}
+          fetchpriority={index === 0 ? "high" : "auto"}
+          data-index={index}
+          data-src={JSON.stringify([
+            { src: project.video.hls, type: "application/x-mpegURL" },
+            { src: project.video.mp4, type: "video/mp4" }
+          ])}
+          loading="lazy"
+          width="1080"
+          height="1920"
+          aria-label={`${project.title}`}
+          title={`Video: ${project.title}`}
+        >
+        </video>
         ))
       }
 
@@ -143,12 +142,13 @@ const videoSchema = {
   const videoSlides = document.querySelectorAll(".video-slide");
   let currentIndex = 0;
   let videoInterval;
+  let observer;
 
   // Función para cargar video desde data-src
   function loadVideo(video) {
     if (video.dataset.src) {
       const sources = JSON.parse(video.dataset.src);
-      sources.forEach(s => {
+      sources.forEach((s) => {
         const source = document.createElement("source");
         source.src = s.src;
         source.type = s.type;
@@ -176,8 +176,11 @@ const videoSchema = {
     currentIndex = (currentIndex + 1) % videoSlides.length;
     videoSlides[currentIndex].classList.add("is-active");
 
-    if (mockupTitle) mockupTitle.textContent = videoSlides[currentIndex].getAttribute("aria-label") || "";
-    if (demoLink) demoLink.href = videoSlides[currentIndex].dataset.demoUrl || "#";
+    if (mockupTitle)
+      mockupTitle.textContent =
+        videoSlides[currentIndex].getAttribute("aria-label") || "";
+    if (demoLink)
+      demoLink.href = videoSlides[currentIndex].dataset.demoUrl || "#";
 
     mockupFrame?.classList.add("is-animating");
     setTimeout(() => mockupFrame?.classList.remove("is-animating"), 600);
@@ -186,33 +189,53 @@ const videoSchema = {
   }
 
   // IntersectionObserver para lazy load y play/pause
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const video = entry.target;
-      if (entry.isIntersecting) {
-        loadVideo(video);
-        playActiveVideo();
-        if (!videoInterval) {
-          videoInterval = setInterval(cycleVideo, 4000);
-        }
-      } else {
-        pauseActiveVideo();
-        if (videoInterval) {
-          clearInterval(videoInterval);
-          videoInterval = null;
-        }
-      }
-    });
-  }, { threshold: 0.25 });
+  function initObserver() {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            loadVideo(video);
+            playActiveVideo();
+            if (!videoInterval) {
+              videoInterval = setInterval(cycleVideo, 4000);
+            }
+          } else {
+            pauseActiveVideo();
+            if (videoInterval) {
+              clearInterval(videoInterval);
+              videoInterval = null;
+            }
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
 
-  videoSlides.forEach(video => observer.observe(video));
+    videoSlides.forEach((video, index) => {
+      if (index !== 0) observer.observe(video); // 👈 solo observa los demás
+    });
+  }
 
   // Reproducir primer video al cargar
   document.addEventListener("DOMContentLoaded", () => {
-    loadVideo(videoSlides[0]);
-    playActiveVideo();
+    const firstVideo = videoSlides[0];
+    loadVideo(firstVideo);
+
+    // Esperar a que el primer video esté listo antes de seguir
+    firstVideo.addEventListener(
+      "canplaythrough",
+      () => {
+        playActiveVideo();
+        // Ahora sí inicializamos observer y ciclo
+        initObserver();
+        videoInterval = setInterval(cycleVideo, 4000);
+      },
+      { once: true }
+    );
   });
 </script>
+
 
 <style>
   .video-slide {

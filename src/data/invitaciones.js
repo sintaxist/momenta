@@ -11,7 +11,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-3_oy2yax.jpg",
     ],
     base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233375/Bocar_Group_Mobile_rn1qp2.mp4",
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490451/Bocar_Group_Mobile_dyk5ya.mp4",
     description:
       "Invitación digital corporativa para Bocar Group en Viñedos San Lucas, con registro avanzado, agenda interactiva y galería dinámica.",
     event_type: "Evento Corporativo",
@@ -73,7 +73,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
     ],
     base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233437/Premios_Monarca_Mobile_cfuhta.mp4",
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490461/Premios_Monarca_Mobile_vsuybz.mp4",
     description:
       "Invitación digital para los Premios Monarca HP 2024, realizados en conjunto con los Premios Quetzal de HPE en San Miguel de Allende. Incluyó registro interactivo, galería, video memoria, personalización de correos y funcionalidades avanzadas para una experiencia fluida en cualquier dispositivo.",
     event_type: "Evento Corporativo",
@@ -113,7 +113,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
     ],
     base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233416/Jimena_Y_Canek_Mobile_ehuwef.mp4",
+      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490429/Jimena_Y_Canek_Mobile_mjruvk.mp4",
     description:
       "Invitación digital personalizada de boda, con animaciones, validación avanzada y boletos imprimibles.",
     event_type: "Boda",
