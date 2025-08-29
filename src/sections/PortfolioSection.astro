@@ -44,7 +44,7 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
     <!-- Grid de proyectos -->
     <ul
       id="portfolio-grid"
-      class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6"
+      class="hidden md:grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6"
     >
       {
         invitaciones.map((invitacion, index) => (
@@ -56,7 +56,10 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
     <!-- Botón mostrar más -->
     {
       showMoreButton && (
-        <div id="show-more-container" class="text-center mt-16">
+        <div
+          id="show-more-container"
+          class="hidden md:block text-center m-auto mt-16"
+        >
           <Button
             id="show-more-btn"
             variant="secondary"
@@ -75,6 +78,43 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
         </div>
       )
     }
+
+    <div class="block md:hidden">
+      <div class="swiper mySwiper pb-12">
+        <div id="swiper-cards" class="swiper-wrapper">
+          {
+            invitaciones.map((invitacion, index) => (
+              <div class="swiper-slide flex">
+                <div class="w-full min-h-[420px] flex">
+                  <PortfolioCard project={invitacion} index={index} />
+                </div>
+              </div>
+            ))
+          }
+
+          {
+            showMoreButton && (
+              <div id="showMoreBtnMobile-container" class="swiper-slide relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-indigo-200 transition-all duration-500 shadow-lg hover:shadow-xl w-full flex flex-col">
+                <div class="w-full min-h-[420px] flex items-center justify-center border rounded-2xl shadow-lg">
+                  <button
+                    id="showMoreBtnMobile"
+                    class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0"
+                  >
+                    <span class="container-svg w-8 h-8 flex items-center justify-center">
+                      <Fragment set:html={Icons.X} />
+                    </span>
+                    <span class="text-sm font-medium">Cerrar</span>
+                  </button>
+                </div>
+              </div>
+            )
+          }
+        </div>
+
+        <!-- Barra de progreso -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
 
     <!-- <div class="mt-12">
       <div
@@ -112,6 +152,10 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
     getInvitacionModalData,
     getMoreInvitaciones,
   } from "@/data/invitaciones";
+import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icons.js";
+
+  import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
 
   const grid = document.querySelector(
     "#portfolio-grid"
@@ -119,6 +163,10 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
   const showMoreBtn = document.querySelector(
     "#show-more-btn"
   ) as HTMLButtonElement | null;
+
+
+  const showMoreBtnMobile = document.getElementById("showMoreBtnMobile");
+  const swiperContainer = document.getElementById("swiper-cards");
 
   if (!grid) throw new Error("No se encontró el contenedor #portfolio-grid");
 
@@ -194,6 +242,108 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
       }
     }, 300);
   });
+
+  const swiper = new Swiper(".mySwiper", {
+    modules: [Pagination],
+    slidesPerView: 1.2,
+    spaceBetween: 16,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "progressbar",
+    },
+    breakpoints: {
+      300: { slidesPerView: 1 },
+      480: { slidesPerView: 1.5 },
+      640: { slidesPerView: 2 },
+    },
+  });
+
+
+  if (showMoreBtnMobile && swiperContainer) {
+  showMoreBtnMobile.addEventListener("click", () => {
+    showMoreBtnMobile.classList.add("is-loading");
+
+    setTimeout(() => {
+      const offset = swiperContainer.querySelectorAll(".swiper-slide").length;
+      const newInvitaciones = getMoreInvitaciones(offset - 1);
+      console.log(newInvitaciones)
+
+      if (newInvitaciones.length === 0) {
+        const containerButton = document.getElementById("showMoreBtnMobile-container");
+        containerButton?.classList.add("hidden");
+        showMoreBtnMobile.classList.remove("is-loading");
+        return;
+      }
+
+      const templateCard = swiperContainer.querySelector("li");
+      if (!templateCard) return;
+
+      const newSlides: HTMLElement[] = [];
+
+      newInvitaciones.forEach((inv, i) => {
+        // Clonamos el <li> que ya tiene PortfolioCard
+        const li = templateCard.cloneNode(true) as HTMLLIElement;
+
+        // Actualizamos contenido
+        const img = li.querySelector("img");
+        if (img) {
+          img.src = inv.thumb || "";
+          img.alt = inv.title;
+        }
+
+        const titleEl = li.querySelector("h3");
+        if (titleEl) titleEl.textContent = inv.title;
+
+        li.dataset.index = ((offset - 1 ) + i).toString();
+        li.classList.add("animate-on-scroll");
+        li.classList.remove("is-in-view"); // reset animación
+
+        // Creamos slide
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide flex";
+        const inner = document.createElement("div");
+        inner.className = "w-full min-h-[420px] flex";
+        inner.appendChild(li);
+        slide.appendChild(inner);
+
+        newSlides.push(slide);
+      });
+
+      // Insertamos slides antes del slide del botón
+      const buttonSlide = document.getElementById("showMoreBtnMobile-container")?.closest(".swiper-slide");
+      newSlides.forEach((slide) => {
+        if (buttonSlide) {
+          swiperContainer.insertBefore(slide, buttonSlide);
+        } else {
+          swiperContainer.appendChild(slide);
+        }
+      });
+
+      // Si no quedan más invitaciones, eliminamos slide del botón
+      const remaining = getMoreInvitaciones(swiperContainer.querySelectorAll(".swiper-slide").length);
+      if (remaining.length === 0 && buttonSlide) {
+        buttonSlide.remove();
+      }
+
+      // Refrescamos Swiper
+      swiper.update();
+
+      // Reasignamos eventos de modal
+      swiperContainer.querySelectorAll("li").forEach(attachCardModal);
+
+      // Forzar animación
+      newSlides.forEach((slide, i) => {
+        const li = slide.querySelector("li");
+        if (li) {
+          setTimeout(() => li.classList.add("is-in-view"), i * 100);
+        }
+      });
+
+      showMoreBtnMobile.classList.remove("is-loading");
+    }, 300);
+  });
+}
+
 </script>
 
 <style>

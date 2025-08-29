@@ -215,3 +215,31 @@ html {
 #cookie-banner.show {
   transform: translateY(0);
 }
+
+.swiper {
+  padding-bottom: 3rem; /* 🔹 espacio para sombras */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* 🔹 mismas alturas */
+}
+
+.swiper-pagination {
+  position: absolute;
+  bottom: 0; /* 🔹 siempre abajo */
+  left: 50% !important;
+  top: unset !important;
+  transform: translateX(-50%);
+  width: 80% !important;
+  height: 6px; /* 🔹 más delgada */
+  background-color: #e5e7eb; /* gris claro */
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.swiper-pagination-progressbar-fill {
+  background: #4f46e5 !important; /* 🔹 color de tu marca */
+  border-radius: 30px;
+}

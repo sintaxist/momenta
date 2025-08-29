@@ -126,7 +126,7 @@ export const invitacionesJSON = [
       "Mapa interactivo y código QR",
     ],
     link_demo: "https://boda-jimena-y-canek.vercel.app/",
-    show_on_carousel: false,
+    show_on_carousel: true,
     keywords: [
       "invitación digital de boda personalizada",
       "boletos digitales boda",
@@ -286,6 +286,7 @@ export function getMoreInvitaciones(offset = 4) {
   return invitacionesJSON.slice(offset).map((inv) => ({
     title: inv.title,
     description: inv.description,
+    event_type: inv.event_type,
     thumb: inv.thumb
       ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
       : undefined,
