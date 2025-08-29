@@ -1,8 +1,6 @@
 ---
-// PortfolioModal.astro
 import Button from "@/components/ui/Button.astro";
 import * as Icons from "@/components/ui/Icons.ts";
-import { Image } from "astro:assets";
 ---
 
 <div id="modal" class="modal-backdrop hidden">
@@ -11,6 +9,7 @@ import { Image } from "astro:assets";
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
+    aria-label="Detalles del proyecto"
   >
     <!-- Header -->
     <div
