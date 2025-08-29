@@ -126,7 +126,7 @@ export const invitacionesJSON = [
       "Mapa interactivo y código QR",
     ],
     link_demo: "https://boda-jimena-y-canek.vercel.app/",
-    show_on_carousel: true,
+    show_on_carousel: false,
     keywords: [
       "invitación digital de boda personalizada",
       "boletos digitales boda",
