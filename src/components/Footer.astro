@@ -99,17 +99,17 @@ const menuItems = [
 </style>
 <script>
   // Reusar smoothScroll del header
-  function smoothScroll(target, targetId) {
+  function smoothScroll(target: any, targetId: any) {
     const start = window.scrollY;
     const end = target.getBoundingClientRect().top + window.scrollY - 60;
     const duration = 50; // más suave para footer
-    let startTime = null;
+    let startTime: any = null;
 
-    function easeInOutQuad(t) {
+    function easeInOutQuad(t: any) {
       return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
     }
 
-    function animation(currentTime) {
+    function animation(currentTime: any) {
       if (startTime === null) startTime = currentTime;
       const timeElapsed = currentTime - startTime;
       const progress = Math.min(timeElapsed / duration, 1);
