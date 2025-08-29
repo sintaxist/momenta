@@ -14,9 +14,15 @@
     "@tailwindcss/vite": "^4.1.12",
     "@types/react": "^19.1.10",
     "astro": "^5.13.2",
+    "google-auth-library": "^10.3.0",
+    "googleapis": "^159.0.0",
+    "nodemailer": "^7.0.5",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^7.0.1"
   }
 }

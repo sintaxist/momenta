@@ -4,63 +4,149 @@ import AnimatedLogo from "./AnimatedLogo.astro";
 const currentYear = new Date().getFullYear();
 
 const icons = {
-    Heart: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+  Heart: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
 };
 
 // ✅ CAMBIO: Usamos los items del menú principal en lugar de 'Servicios'
 const menuItems = [
-    { id: "demos", label: "Demos" },
-    { id: "features", label: "Features" },
-    { id: "sobre-mi", label: "Sobre Mí" },
-    { id: "paquetes", label: "Paquetes" },
-    { id: "contacto", label: "Contacto" },
+  { id: "demos", label: "Demos" },
+  { id: "features", label: "Features" },
+  { id: "sobre-mi", label: "Sobre Mí" },
+  { id: "paquetes", label: "Paquetes" },
+  { id: "contacto", label: "Contacto" },
 ];
 ---
 
-<footer class="py-16 pb-8 px-6 border-t border-gray-200 relative bg-white/30 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-8 mb-12">
-            <div>
-                <AnimatedLogo id="logo-footer"/>
-                <p class="mt-4 font-sora text-gray-600 leading-relaxed max-w-sm">
-                    Transformando momentos especiales en experiencias digitales extraordinarias.
-                </p>
-            </div>
+<footer
+  class="py-16 pb-8 px-6 border-t border-gray-200 relative bg-white/30 backdrop-blur-xl"
+>
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div>
+        <AnimatedLogo id="logo-footer" />
+        <p class="mt-4 font-sora text-gray-600 leading-relaxed max-w-sm">
+          Experiencias digitales que convierten cada evento en un recuerdo
+          inolvidable.
+        </p>
+      </div>
 
-            <div>
-                <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">Navegación</h4>
-                <ul class="space-y-2">
-                    {menuItems.map(item => (
-                        <li>
-                           <a href={`#${item.id}`} class="font-sora text-gray-500 hover:text-gray-700 transition-colors cursor-pointer">
-                             {item.label}
-                           </a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+      <div>
+        <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
+          Navegación
+        </h4>
+        <ul class="space-y-2">
+          {
+            menuItems.map((item) => (
+              <li>
+                <a
+                  href={`#${item.id}`}
+                  class="link-style font-sora text-gray-500 transition-colors cursor-pointer"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
-            <div>
-                <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">Conecta Conmigo</h4>
-                <div class="space-y-2 text-sm font-sora">
-                    <p class="text-gray-500">hola@alejandrocanek.com</p>
-                    <p class="text-gray-500">+52 (55) 1234-5678</p>
-                    <p class="text-gray-500">Ciudad de México, México</p>
-                </div>
-            </div>
+      <div>
+        <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
+          Conecta con Mömenta
+        </h4>
+        <div class="space-y-2 text-sm font-sora">
+          <p class="text-gray-500">contacto@momentainvitaciones.com.mx</p>
+          <p class="text-gray-500">+52 (55) 3325 6703</p>
+          <p class="text-gray-500">Ciudad de México, México</p>
         </div>
-
-        <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p class="font-sora text-gray-500 text-sm flex items-center">
-                © {currentYear} Alejandro Canek. Hecho con 
-                <span class="mx-1.5 text-red-500">
-                    <Fragment set:html={icons.Heart} />
-                </span>
-                 para eventos extraordinarios.
-            </p>
-             <div class="flex space-x-6 text-sm font-sora">
-                <a href="#" class="text-gray-500 hover:text-gray-700 transition-colors">Cookies</a>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div
+      class="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0"
+    >
+      <p class="font-sora text-gray-500 text-sm text-center">
+        © {currentYear} Mömenta. Hecho con corazón para eventos extraordinarios.
+      </p>
+      <div class="flex space-x-6 text-sm font-sora">
+        <a
+          href="/politica-de-cookies"
+          class="link-style text-gray-500 hover:text-gray-700 transition-colors"
+          >Politica de cookies</a
+        >
+      </div>
+    </div>
+  </div>
 </footer>
+<style>
+  .link-style {
+    position: relative;
+  }
+
+  .link-style:before {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: #4f39f6;
+    position: absolute;
+    bottom: -3px;
+    border-radius: 100px;
+    transition: width 0.3s;
+  }
+
+  .link-style:hover {
+    color: #4f39f6;
+  }
+
+  .link-style:hover:before {
+    width: 100%;
+  }
+</style>
+<script>
+  // Reusar smoothScroll del header
+  function smoothScroll(target, targetId) {
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + window.scrollY - 60;
+    const duration = 50; // más suave para footer
+    let startTime = null;
+
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const run = start + (end - start) * easeInOutQuad(progress);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const footerLinks = document.querySelectorAll("footer a[href^='#']");
+
+    footerLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        const targetId = href ? href.substring(1) : null;
+        if (!targetId) return;
+
+        const targetEl = document.getElementById(targetId);
+
+        if (window.location.pathname === "/" && targetEl) {
+          e.preventDefault();
+          smoothScroll(targetEl, targetId);
+        } else {
+          // Si no estamos en home, manda a home con hash
+          link.setAttribute("href", `/#${targetId}`);
+        }
+      });
+    });
+  });
+</script>

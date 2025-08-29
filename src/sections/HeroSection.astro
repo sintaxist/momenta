@@ -39,21 +39,20 @@ const stats = [
       >
         <div class="space-y-8">
           <h1
-            class="font-sora font-bold text-5xl lg:text-7xl text-gray-900 leading-tight animate-on-scroll"
+            class="font-sora font-bold text-5xl lg:text-7xl text-gray-900 leading-tight"
           >
             Invitaciones digitales que hacen <span class="text-indigo-600"
               >tu evento inolvidable.</span
             >
           </h1>
           <p
-            class="font-sora font-normal text-xl text-gray-600 leading-relaxed mx-w-lg mx-auto lg:mx-0 animate-on-scroll"
+            class="font-sora font-normal text-xl text-gray-600 leading-relaxed mx-w-lg mx-auto lg:mx-0"
             style="transition-delay: 200ms;"
           >
             En <span class="font-bold">Mömenta</span> diseñamos y programamos experiencias únicas, fáciles y memorables, para que tu celebración comience sin estrés y con estilo.
           </p>
           <div
-            class="animate-on-scroll m-auto flex flex-col sm:flex-row lg:m-0 gap-3 sm:gap-4 max-w-[600px]"
-            style="transition-delay: 400ms;"
+            class="m-auto flex flex-col sm:flex-row lg:m-0 gap-3 sm:gap-4 max-w-[600px]"
           >
             <!-- Botón principal -->
             <Button
@@ -84,7 +83,7 @@ const stats = [
             stats.map((stat, index) => (
               <li
                 class="text-center animate-on-scroll max-w-[200px]"
-                style={`transition-delay: ${600 + index * 200}ms;`}
+                style={`transition-delay: ${index * 200}ms;`}
               >
                 <AnimatedCounter
                   to={stat.to}

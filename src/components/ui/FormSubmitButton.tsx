@@ -9,12 +9,12 @@ interface FormSubmitButtonProps {
 export function FormSubmitButton({ isSubmitting, disabledButton }: FormSubmitButtonProps) {
   const loader = (
     <div className="flex items-center justify-center gap-x-2">
+      <span>Enviando</span>
       <div className="btn-loader">
         <span className="dot"></span>
         <span className="dot"></span>
         <span className="dot"></span>
       </div>
-      <span>Enviando...</span>
     </div>
   );
 
