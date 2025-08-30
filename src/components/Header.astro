@@ -97,7 +97,6 @@ const menuItems = [
         </nav>
       </div>
     </div>
-  <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40"></div>
 
 <script>
   function updateUrlHash(sectionId: string, replace: boolean = false) {
@@ -157,7 +156,6 @@ const menuItems = [
     );
     const navUnderline = getElement<HTMLElement>("nav-underline");
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
-    const overlay = getElement<HTMLElement>("mobile-overlay");
 
     if (
       !header ||
@@ -204,7 +202,6 @@ const menuItems = [
       menuIcon.classList.remove("hidden");
       closeIcon.classList.add("hidden");
       document.body.style.overflow = "";
-      overlay.classList.remove("show");
     }
 
     mobileMenuBtn.addEventListener("click", () => {
@@ -213,15 +210,12 @@ const menuItems = [
       closeIcon.classList.toggle("hidden", !isOpen);
       closeIcon.classList.add("flex");
       document.body.style.overflow = isOpen ? "hidden" : "";
-      overlay.classList.toggle("show", isOpen);
       if(isOpen) {
         header.classList.remove(...scrolledClasses);
       } else {
         header.classList.add(...scrolledClasses);
       }
     });
-
-    overlay.addEventListener("click", closeMobileMenu);
 
     // Logo
     logoLink.addEventListener("click", (event) => {
@@ -373,16 +367,6 @@ const menuItems = [
 
   .mobile-nav-panel.is-open {
     transform: translateX(0);
-  }
-
-  #mobile-overlay.show {
-    display: block;
-    animation: fadeIn 0.3s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 
   .mobile-nav-link:hover,
