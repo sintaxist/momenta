@@ -9,8 +9,6 @@ interface Props {
 }
 
 const { title, description = "Invitaciones Digitales para Eventos Inolvidables." } = Astro.props;
-const siteUrl = "https://www.momentainvitaciones.com.mx"; // ✅ CAMBIO: Pon tu URL aquí
-const imageUrl = new URL("/open-graph.png", Astro.site || siteUrl).href;
 ---
 
 <!doctype html>
@@ -68,17 +66,18 @@ const imageUrl = new URL("/open-graph.png", Astro.site || siteUrl).href;
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-    <meta property="og:title" content={title} />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mömenta - Invitaciones Digitales" />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site || siteUrl).href} />
+    <meta property="og:image" content="https://www.momentainvitaciones.com.mx/opengraph.png" />
+    <meta property="og:url" content="https://www.momentainvitaciones.com.mx" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Momenta Invitaciones" />
 
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content="Mömenta - Invitaciones Digitales" />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image" content="https://www.momentainvitaciones.com.mx/opengraph.png" />
 
     <!-- Microsoft Clarity (normal) -->
     <!-- <script type="text/javascript" defer>
