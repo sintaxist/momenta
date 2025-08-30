@@ -85,27 +85,18 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
           {
             invitaciones.map((invitacion, index) => (
               <div class="swiper-slide flex">
-                <div class="w-full min-h-[420px] flex">
                   <PortfolioCard project={invitacion} index={index} />
-                </div>
               </div>
             ))
           }
 
           {
             showMoreButton && (
-              <div id="showMoreBtnMobile-container" class="swiper-slide relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-indigo-200 transition-all duration-500 shadow-lg hover:shadow-xl w-full flex flex-col">
-                <div class="w-full min-h-[420px] flex items-center justify-center border rounded-2xl shadow-lg">
-                  <button
-                    id="showMoreBtnMobile"
-                    class="inline-flex items-center gap-x-2 text-gray-600 cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 px-3 py-1.5 rounded-full transition-colors duration-300 flex-shrink-0"
-                  >
-                    <span class="container-svg w-8 h-8 flex items-center justify-center">
-                      <Fragment set:html={Icons.X} />
-                    </span>
-                    <span class="text-sm font-medium">Cerrar</span>
-                  </button>
-                </div>
+              <div id="showMoreBtnMobile" class="swiper-slide relative rounded-2xl bg-white/40 backdrop-blur-xl border border-white/30 hover:border-indigo-200 hover:bg-indigo-100 transition-all duration-300 shadow-lg hover:shadow-xl w-full flex flex-col cursor-pointer">
+                <span class="container-svg flex items-center justify-center">
+                  <Fragment set:html={Icons.moreProjects} />
+                </span>
+                <span class="text-xl font-bold max-w-[60%] text-center">Mostrar más proyectos</span>
               </div>
             )
           }
@@ -152,7 +143,6 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
     getInvitacionModalData,
     getMoreInvitaciones,
   } from "@/data/invitaciones";
-import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icons.js";
 
   import Swiper from "swiper";
   import { Pagination } from "swiper/modules";
@@ -214,6 +204,12 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
         const titleEl = li.querySelector("h3");
         if (titleEl) titleEl.textContent = inv.title;
 
+        const event_typeEl = li.querySelector(".event_type");
+        if (event_typeEl) event_typeEl.textContent = inv.event_type;
+
+        const descEl = li.querySelector(".description_card");
+        if (descEl) descEl.textContent = inv.description || "";
+
         li.dataset.index = (offset + i).toString();
 
         // Clases de animación
@@ -243,21 +239,49 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
     }, 300);
   });
 
+  function normalizeSlideHeights() {
+    const slides = document.querySelectorAll(".mySwiper .swiper-slide");
+    let maxHeight = 0;
+
+    slides.forEach((slide) => {
+      (slide as HTMLElement).style.height = "auto"; // reset
+      maxHeight = Math.max(maxHeight, (slide as HTMLElement).offsetHeight);
+    });
+
+    slides.forEach((slide) => {
+      (slide as HTMLElement).style.height = `${maxHeight}px`;
+    });
+  }
+
   const swiper = new Swiper(".mySwiper", {
     modules: [Pagination],
-    slidesPerView: 1.2,
+    slidesPerView: 1,
     spaceBetween: 16,
+    freeMode: true,
+    grabCursor: true,
+    mousewheel: true,
+    keyboard: {
+      enabled: true,
+    },
     pagination: {
       el: ".swiper-pagination",
       type: "progressbar",
     },
     breakpoints: {
-      300: { slidesPerView: 1 },
+      300: { slidesPerView: 1.3 },
       480: { slidesPerView: 1.5 },
       640: { slidesPerView: 2 },
     },
+    on: {
+      init: normalizeSlideHeights,
+      resize: normalizeSlideHeights,
+      update: normalizeSlideHeights,
+    },
   });
 
+  if(swiperContainer){
+    swiperContainer.querySelectorAll("li").forEach(attachCardModal);
+  }
 
   if (showMoreBtnMobile && swiperContainer) {
   showMoreBtnMobile.addEventListener("click", () => {
@@ -266,12 +290,9 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
     setTimeout(() => {
       const offset = swiperContainer.querySelectorAll(".swiper-slide").length;
       const newInvitaciones = getMoreInvitaciones(offset - 1);
-      console.log(newInvitaciones)
 
       if (newInvitaciones.length === 0) {
-        const containerButton = document.getElementById("showMoreBtnMobile-container");
-        containerButton?.classList.add("hidden");
-        showMoreBtnMobile.classList.remove("is-loading");
+        showMoreBtnMobile?.classList.add("hidden");
         return;
       }
 
@@ -294,6 +315,12 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
         const titleEl = li.querySelector("h3");
         if (titleEl) titleEl.textContent = inv.title;
 
+        const event_typeEl = li.querySelector(".event_type");
+        if (event_typeEl) event_typeEl.textContent = inv.event_type;
+
+        const descEl = li.querySelector(".description_card");
+        if (descEl) descEl.textContent = inv.description || "";
+
         li.dataset.index = ((offset - 1 ) + i).toString();
         li.classList.add("animate-on-scroll");
         li.classList.remove("is-in-view"); // reset animación
@@ -310,10 +337,10 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
       });
 
       // Insertamos slides antes del slide del botón
-      const buttonSlide = document.getElementById("showMoreBtnMobile-container")?.closest(".swiper-slide");
+      showMoreBtnMobile?.closest(".swiper-slide");
       newSlides.forEach((slide) => {
-        if (buttonSlide) {
-          swiperContainer.insertBefore(slide, buttonSlide);
+        if (showMoreBtnMobile) {
+          swiperContainer.insertBefore(slide, showMoreBtnMobile);
         } else {
           swiperContainer.appendChild(slide);
         }
@@ -321,8 +348,8 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
 
       // Si no quedan más invitaciones, eliminamos slide del botón
       const remaining = getMoreInvitaciones(swiperContainer.querySelectorAll(".swiper-slide").length);
-      if (remaining.length === 0 && buttonSlide) {
-        buttonSlide.remove();
+      if (remaining.length === 0 && showMoreBtnMobile) {
+        showMoreBtnMobile.remove();
       }
 
       // Refrescamos Swiper
@@ -338,6 +365,8 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
           setTimeout(() => li.classList.add("is-in-view"), i * 100);
         }
       });
+
+      normalizeSlideHeights();
 
       showMoreBtnMobile.classList.remove("is-loading");
     }, 300);
@@ -367,6 +396,22 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
     cursor: wait;
   }
 
+  #showMoreBtnMobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-indigo);
+    font-size: 18px;
+    gap: 1rem;
+    transition: all .3s !important;
+  }
+
+  .container-svg :global(svg) {
+    width: 45px;
+    height: 45px;
+    color: var(--brand-indigo);
+  }
+
   /* Animación de los puntos del loader */
   .dot {
     width: 8px;
@@ -382,11 +427,6 @@ import { getIconElement } from "astro/runtime/client/dev-toolbar/ui-library/icon
     animation-delay: 0.4s;
   }
 
-  .container-svg :global(svg) {
-    width: 24px;
-    height: 24px;
-    color: white;
-  }
   @keyframes pulse-dot {
     0%,
     100% {

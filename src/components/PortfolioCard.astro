@@ -5,7 +5,7 @@ const { project, index } = Astro.props;
 ---
 
 <li
-  class="group cursor-pointer project-card animate-on-scroll flex"
+  class="group cursor-pointer project-card animate-on-scroll flex h-full"
   style={`transition-delay: ${index * 150}ms;`}
   data-index={index}
 >
@@ -36,7 +36,7 @@ const { project, index } = Astro.props;
     <!-- Texto -->
     <div class="p-4 flex flex-col flex-grow">
       <span
-        class="font-sora text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200 self-start"
+        class="event_type font-sora text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200 self-start"
       >
         {project.event_type}
       </span>
@@ -45,7 +45,7 @@ const { project, index } = Astro.props;
       >
         {project.title}
       </h3>
-      <p class="font-sora text-sm text-gray-600 mt-2 flex-grow line-clamp-3">
+      <p class="description_card font-sora text-sm text-gray-600 mt-2 flex-grow line-clamp-3">
         {project.description}
       </p>
 

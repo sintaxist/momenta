@@ -14,7 +14,7 @@ const menuItems = [
 
 <header
   id="main-header"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+  class="fixed top-0 left-0 right-0 z-51 transition-all duration-500"
 >
   <div class="max-w-7xl mx-auto py-4 px-6">
     <div class="flex items-center justify-between">
@@ -61,24 +61,23 @@ const menuItems = [
         </span>
         <span
           id="close-icon"
-          class="w-5 h-5 flex items-center justify-center hidden"
+          class="w-5 h-5 items-center justify-center hidden"
         >
           <Fragment set:html={Icons.X} />
           <span class="sr-only">Cerrar</span>
         </span>
       </button>
     </div>
-
-    <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden relative z-50">
-      <div
-        class="bg-white/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 shadow-xl p-6"
-      >
-        <nav class="space-y-2">
+  </div>
+</header>
+<div id="mobile-nav-panel" class="mobile-nav-panel md:hidden fixed pt-[80px] right-0 w-full h-full bg-white/95 backdrop-blur-xl border-l border-gray-200/50 shadow-2xl z-50">
+      <div class="p-6 h-full flex flex-col" >
+        <nav class="flex flex-col gap-4 space-y-2 flex-1">
           {
             menuItems.map((item) => (
               <a
                 href={`#${item.id}`}
-                class="nav-link mobile-nav-link"
+                class="nav-link mobile-nav-link text-center w-full rounded-lg p-4 font-bold transition duration-300 text-lg"
                 data-nav-link={item.id}
               >
                 {item.label}
@@ -98,8 +97,7 @@ const menuItems = [
         </nav>
       </div>
     </div>
-  </div>
-</header>
+  <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40"></div>
 
 <script>
   function updateUrlHash(sectionId: string, replace: boolean = false) {
@@ -159,6 +157,7 @@ const menuItems = [
     );
     const navUnderline = getElement<HTMLElement>("nav-underline");
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    const overlay = getElement<HTMLElement>("mobile-overlay");
 
     if (
       !header ||
@@ -179,20 +178,50 @@ const menuItems = [
       return el as T;
     }
 
+    // Header scroll style
+    const scrolledClasses = [
+      "bg-white/80",
+      "backdrop-blur-xl",
+      "border-b",
+      "border-gray-200/50",
+      "shadow-lg",
+    ];
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        header.classList.add(...scrolledClasses);
+      } else {
+        header.classList.remove(...scrolledClasses);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    handleScroll();
+
     // Menú móvil
     function closeMobileMenu(): void {
       mobileNavPanel.classList.remove("is-open");
       menuIcon.classList.remove("hidden");
       closeIcon.classList.add("hidden");
       document.body.style.overflow = "";
+      overlay.classList.remove("show");
     }
 
     mobileMenuBtn.addEventListener("click", () => {
       const isOpen = mobileNavPanel.classList.toggle("is-open");
       menuIcon.classList.toggle("hidden", isOpen);
       closeIcon.classList.toggle("hidden", !isOpen);
+      closeIcon.classList.add("flex");
       document.body.style.overflow = isOpen ? "hidden" : "";
+      overlay.classList.toggle("show", isOpen);
+      if(isOpen) {
+        header.classList.remove(...scrolledClasses);
+      } else {
+        header.classList.add(...scrolledClasses);
+      }
     });
+
+    overlay.addEventListener("click", closeMobileMenu);
 
     // Logo
     logoLink.addEventListener("click", (event) => {
@@ -308,25 +337,6 @@ const menuItems = [
         updateUnderline(activeLink);
       }, 100);
     });
-
-    // Header scroll style
-    const scrolledClasses = [
-      "bg-white/80",
-      "backdrop-blur-xl",
-      "border-b",
-      "border-gray-200/50",
-      "shadow-lg",
-    ];
-
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        header.classList.add(...scrolledClasses);
-      } else {
-        header.classList.remove(...scrolledClasses);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
   });
 
   window.addEventListener("load", () => {
@@ -356,56 +366,29 @@ const menuItems = [
       width 0.3s ease-in-out;
   }
 
-  .logo-link {
-    width: 180px;
-  }
-
   .mobile-nav-panel {
-    visibility: hidden;
-    margin-top: 0;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-1rem);
-    transition:
-      max-height 0.4s ease,
-      opacity 0.3s ease,
-      transform 0.3s ease,
-      visibility 0.4s,
-      margin-top 0.4s ease;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
   }
 
   .mobile-nav-panel.is-open {
-    visibility: visible;
-    margin-top: 1rem;
-    max-height: 500px;
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-      max-height 0.4s ease,
-      opacity 0.3s ease,
-      transform 0.3s ease,
-      visibility 0s,
-      margin-top 0.4s ease;
+    transform: translateX(0);
   }
 
-  .mobile-nav-link {
+  #mobile-overlay.show {
     display: block;
-    width: 100%;
-    text-align: left;
-    color: var(--muted-foreground);
-    padding: 0.5rem 1rem;
-    font-family: "Sora", sans-serif;
-    font-weight: 500;
-    border-radius: var(--radius-lg, 0.625rem);
-    transition:
-      color 0.3s,
-      background-color 0.3s;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .mobile-nav-link:hover,
   .mobile-nav-link.is-active {
     color: var(--brand-indigo);
-    background-color: rgba(239, 246, 255, 1);
+    background-color: rgb(222, 237, 255);
   }
 
   .mobile-schedule-button button {

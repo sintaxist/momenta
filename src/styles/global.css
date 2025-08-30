@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@tailwind components;
 @tailwind utilities;
 
 @custom-variant dark (&:is(.dark *));
@@ -224,6 +223,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: stretch; /* 🔹 mismas alturas */
+}
+
+.swiper-slide > div {
+  flex: 1 !important;
 }
 
 .swiper-pagination {
