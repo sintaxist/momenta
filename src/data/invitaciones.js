@@ -265,7 +265,7 @@ export function getVideosFromInvitaciones() {
       title: inv.title,
       video: buildCloudinaryVideoUrl(inv.base_video),
       poster: buildCloudinaryVideoUrl(inv.base_video).poster,
-      demoUrl: inv.link_demo || "#", // ✅ agregamos demoUrl para TypeScript
+      demoUrl: inv.link_demo, // ✅ agregamos demoUrl para TypeScript
     }));
 }
 

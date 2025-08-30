@@ -85,6 +85,8 @@ const videoSchema = {
           class:list={["video-slide", { "is-active": index === 0 }]}
           fetchpriority={index === 0 ? "high" : "auto"}
           data-index={index}
+          data-demo-url={project.demoUrl}
+          data-title={project.title}
           data-src={JSON.stringify([
             { src: project.video.hls, type: "application/x-mpegURL" },
             { src: project.video.mp4, type: "video/mp4" }
