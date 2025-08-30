@@ -17,7 +17,7 @@ export const features = [
     icon: Icons.Sparkles,
     title: "Diseño Personalizado",
     description:
-      "Cada invitación refleja el estilo y esencia de tu celebración con colores, tipografía y detalles únicos.",
+      "Cada invitación refleja el <strong>estilo</strong> y la <strong>esencia</strong> de tu celebración con colores, tipografía y detalles únicos.",
     image: optimizeCloudinaryUrl("https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg"),
   },
   {
@@ -25,7 +25,7 @@ export const features = [
     icon: Icons.Mail,
     title: "RSVP Inteligente",
     description:
-      "Confirmaciones en línea con control de invitados, validación por familia y notificaciones automáticas.",
+      "Confirmaciones en línea con <strong>control de invitados</strong>, validación por familia y <strong>notificaciones automáticas</strong>.",
     image: optimizeCloudinaryUrl("https://res.cloudinary.com/dxdysqkbg/image/upload/v1756573850/Captura_de_pantalla_2025-08-30_a_la_s_11.10.37_a.m._hlb7ct.png"),
   },
   {
@@ -33,7 +33,7 @@ export const features = [
     icon: Icons.Calendar,
     title: "Experiencia Completa",
     description:
-      "Itinerario, ubicación en mapas, código de vestimenta y opción de agregar al calendario en un solo clic.",
+      "Incluye <strong>itinerario</strong>, ubicación en mapas, <strong>código de vestimenta</strong> y la opción de agregar al calendario en un solo clic.",
     image: optimizeCloudinaryUrl("https://res.cloudinary.com/dxdysqkbg/image/upload/v1756573725/Captura_de_pantalla_2025-08-30_a_la_s_11.06.22_a.m._apulhv.png"),
   },
   {
@@ -41,7 +41,7 @@ export const features = [
     icon: Icons.Gallery,
     title: "Galería Interactiva",
     description:
-      "Fotos y videos con animaciones modernas, opción de subida en tiempo real y recuerdos compartidos.",
+      "<strong>Fotos y videos</strong> con animaciones modernas, opción de <strong>subida en tiempo real</strong> y recuerdos compartidos.",
     image: optimizeCloudinaryUrl("https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-3_s7jwnr.jpg"),
   },
   {
@@ -49,7 +49,7 @@ export const features = [
     icon: Icons.Gift,
     title: "Mesa de Regalos & Extras",
     description:
-      "Playlist colaborativa, mesa de regalos, hospedajes recomendados y secciones exclusivas para tus invitados.",
+"<strong>Playlist colaborativa</strong>, mesa de regalos, hospedajes recomendados y secciones exclusivas para tus invitados.",
     image: optimizeCloudinaryUrl("https://res.cloudinary.com/dxdysqkbg/image/upload/v1756573731/Captura_de_pantalla_2025-08-30_a_la_s_11.07.12_a.m._g7klwh.png"),
   },
   {
@@ -57,7 +57,7 @@ export const features = [
     icon: Icons.Support,
     title: "Soporte Dedicado",
     description:
-      "Acompañamiento continuo antes y durante el evento, asegurando que todo fluya sin estrés.",
+      "Acompañamiento <strong>continuo</strong> antes y durante el evento, asegurando que todo fluya <strong>sin estrés</strong>.",
     image: optimizeCloudinaryUrl("https://res.cloudinary.com/dxdysqkbg/image/upload/v1756527566/Open_graph_vyig32.png"),
   }
 ];

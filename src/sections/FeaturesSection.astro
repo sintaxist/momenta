@@ -73,9 +73,7 @@ import { Image } from "astro:assets";
                   <h3 class="font-sora font-semibold feature-title text-lg md:text-xl mb-2 transition-colors duration-300 text-gray-900 text-center md:text-left">
                     {feature.title}
                   </h3>
-                  <p class="font-sora text-sm sm:text-base text-gray-600 leading-relaxed text-center md:text-left">
-                    {feature.description}
-                  </p>
+                  <p class="font-sora text-sm sm:text-base text-gray-600 leading-relaxed text-center md:text-left" set:html={feature.description}></p>
                 </div>
               </article>
               <div class="feature-bar mt-4 h-1 bg-indigo-500 rounded-full hidden lg:flex" />
