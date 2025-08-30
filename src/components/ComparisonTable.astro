@@ -1,45 +1,146 @@
 ---
 import * as Icons from "@/components/ui/Icons.ts";
 import { allFeatures } from "@/data/tablefeatures";
+
 const packageNames = ["Esencial", "Premium", "Luxury"];
+const initialVisibleRows = 10;
+const remainingRows =
+  allFeatures.length > initialVisibleRows
+    ? allFeatures.length - initialVisibleRows
+    : 0;
 ---
 
-<div class="w-full bg-white/50 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-lg overflow-hidden animate-on-scroll">
+<div
+  class="w-full bg-white/50 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-lg overflow-hidden animate-on-scroll"
+>
   <div class="overflow-x-auto">
     <table class="w-full text-sm text-left">
       <thead class="bg-[var(--brand-indigo)] text-white font-bold">
         <tr>
           <th class="p-4 lg:p-6 w-1/3 text-base">Características</th>
-          {packageNames.map(name => (
-            <th class="p-4 lg:p-6 text-center text-base">{name}</th>
-          ))}
+          {
+            packageNames.map((name) => (
+              <th class="p-4 lg:p-6 text-center text-base">{name}</th>
+            ))
+          }
         </tr>
       </thead>
-      <tbody>
-        {allFeatures.map((row, index) => (
-          <tr class:list={["border-t border-gray-200/80", { 'bg-indigo-50/30': index % 2 !== 0 }]}>
-            <td class="font-sora font-medium text-gray-700 p-4 lg:p-6">{row.feature}</td>
-            
-            <td class="p-4 lg:p-6 text-center">
-              {row.esencial === true && <div class="w-6 h-6 mx-auto text-emerald-500"><Fragment set:html={Icons.Check} /></div>}
-              {row.esencial === false && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Dash} /></div>}
-              {typeof row.esencial === 'string' && <span class="font-sora font-semibold text-gray-800">{row.esencial}</span>}
-            </td>
-
-            <td class="p-4 lg:p-6 text-center">
-              {row.premium === true && <div class="w-6 h-6 mx-auto text-emerald-500"><Fragment set:html={Icons.Check} /></div>}
-              {row.premium === false && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Dash} /></div>}
-              {typeof row.premium === 'string' && <span class="font-sora font-semibold text-gray-800">{row.premium}</span>}
-            </td>
-
-            <td class="p-4 lg:p-6 text-center">
-              {row.luxury === true && <div class="w-6 h-6 mx-auto text-emerald-500"><Fragment set:html={Icons.Check} /></div>}
-              {row.luxury === false && <div class="w-6 h-6 mx-auto"><Fragment set:html={Icons.Dash} /></div>}
-              {typeof row.luxury === 'string' && <span class="font-sora font-semibold text-gray-800">{row.luxury}</span>}
-            </td>
-          </tr>
-        ))}
+      <tbody id="comparison-tbody">
+        {
+          allFeatures.map((row, index) => (
+            <tr
+              class:list={[
+                "feature-row border-t border-gray-200/80",
+                { "bg-indigo-50/30": index % 2 !== 0 },
+                { "initially-hidden": index >= initialVisibleRows },
+              ]}
+            >
+              <td class="font-sora font-medium text-gray-700 p-4 lg:p-6">
+                {row.feature}
+              </td>
+              <td class="p-4 lg:p-6 text-center">
+                {row.esencial === true && (
+                  <div class="w-6 h-6 mx-auto text-emerald-500">
+                    <Fragment set:html={Icons.Check} />
+                  </div>
+                )}
+                {row.esencial === false && (
+                  <div class="w-6 h-6 mx-auto text-gray-300">
+                    <Fragment set:html={Icons.Dash} />
+                  </div>
+                )}
+                {typeof row.esencial === "string" && (
+                  <span class="font-sora font-semibold text-gray-800">
+                    {row.esencial}
+                  </span>
+                )}
+              </td>
+              <td class="p-4 lg:p-6 text-center">
+                {row.premium === true && (
+                  <div class="w-6 h-6 mx-auto text-emerald-500">
+                    <Fragment set:html={Icons.Check} />
+                  </div>
+                )}
+                {row.premium === false && (
+                  <div class="w-6 h-6 mx-auto text-gray-300">
+                    <Fragment set:html={Icons.Dash} />
+                  </div>
+                )}
+                {typeof row.premium === "string" && (
+                  <span class="font-sora font-semibold text-gray-800">
+                    {row.premium}
+                  </span>
+                )}
+              </td>
+              <td class="p-4 lg:p-6 text-center">
+                {row.luxury === true && (
+                  <div class="w-6 h-6 mx-auto text-emerald-500">
+                    <Fragment set:html={Icons.Check} />
+                  </div>
+                )}
+                {row.luxury === false && (
+                  <div class="w-6 h-6 mx-auto text-gray-300">
+                    <Fragment set:html={Icons.Dash} />
+                  </div>
+                )}
+                {typeof row.luxury === "string" && (
+                  <span class="font-sora font-semibold text-gray-800">
+                    {row.luxury}
+                  </span>
+                )}
+              </td>
+            </tr>
+          ))
+        }
       </tbody>
     </table>
   </div>
+  {
+    remainingRows > 0 && (
+      <div class="border-t border-gray-200/80 p-4 text-center">
+        <button
+          id="table-toggle-btn"
+          class="font-sora text-sm font-semibold text-indigo-500 hover:text-indigo-800 transition-colors cursor-pointer"
+        >
+          <span class="view-more-text">
+            Mostrar las {remainingRows} características restantes
+          </span>
+          <span class="view-less-text hidden">Mostrar menos</span>
+        </button>
+      </div>
+    )
+  }
 </div>
+
+<script define:vars={{ initialVisibleRows }}>
+  const tableContainer = document
+    .querySelector("#comparison-tbody")
+    ?.closest(".animate-on-scroll");
+  if (tableContainer) {
+    const toggleBtn = tableContainer.querySelector("#table-toggle-btn");
+    const hiddenRows = tableContainer.querySelectorAll(".initially-hidden");
+    const viewMoreText = tableContainer.querySelector(".view-more-text");
+    const viewLessText = tableContainer.querySelector(".view-less-text");
+
+    // Ocultamos las filas con JS para evitar saltos de layout (CLS)
+    hiddenRows.forEach((row) => row.classList.add("hidden"));
+
+    toggleBtn?.addEventListener("click", () => {
+      const isExpanding = viewLessText?.classList.contains("hidden");
+
+      viewMoreText?.classList.toggle("hidden", isExpanding);
+      viewLessText?.classList.toggle("hidden", !isExpanding);
+
+      hiddenRows.forEach((row) => {
+        row.classList.toggle("hidden", !isExpanding);
+      });
+    });
+  }
+</script>
+
+<style>
+  /* Puedes añadir una transición suave si lo deseas */
+  .feature-row {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>

@@ -9,18 +9,18 @@ export const packages = [
     discountedPrice: "$5,520",
     savings: "$1,380",
     description:
-      "Ideal para quien busca una invitación digital elegante y funcional.",
+      "Ideal para quien busca una <strong>invitación digital elegante</strong> y funcional.",
     features: [
-      "Invitación digital personalizada (colores y tipografía)",
+      "<strong>Invitación digital personalizada</strong> (colores y tipografía)",
       "RSVP sencillo con base de datos",
       "Confirmación automática por correo",
       "Itinerario, ubicación en mapas y código de vestimenta",
       "Agregar al calendario (Google, Apple, Outlook)",
       "Galería con modal",
       "Música personalizada",
-      "OpenGraph y Favicon personalizados"
+      "OpenGraph y Favicon personalizados",
     ],
-    popular: false
+    popular: false,
   },
   {
     id: 2,
@@ -30,22 +30,23 @@ export const packages = [
     discountedPrice: "$10,000",
     savings: "$2,500",
     description:
-      "El equilibrio perfecto entre estilo y tecnología.",
+      "El equilibrio perfecto entre <strong>estilo</strong> y <strong>tecnología</strong>.",
     features: [
-      "Todo lo del Esencial",
-      "Invitación 100% animada y conteo regresivo",
-      "RSVP avanzado con validación y control por familia",
-      "Boletos PDF personalizados con QR",
+      "Todo lo del <strong>Esencial</strong>",
+      "Hosting y dominio personalizado <strong>tuevento.com</strong>",
+      "Invitación <strong>100% animada</strong> y conteo regresivo",
+      "RSVP avanzado con <strong>validación y control por familia</strong>",
+      "Boletos PDF personalizados con <strong>QR</strong>",
       "Lista de espera de invitados",
-      "Mesa de regalos y playlist colaborativa de Spotify",
+      "Mesa de regalos y <strong>playlist colaborativa</strong> de Spotify",
       "Galería avanzada y subida de fotos en tiempo real",
       "Nuestra historia y mensajes de familiares",
       "Lista de hospedajes recomendados",
       "Mails personalizados en formularios",
       "Botones de contacto y links a redes sociales",
-      "Soporte continuo hasta el evento"
+      "<strong>Soporte continuo hasta el evento</strong>",
     ],
-    popular: true
+    popular: true,
   },
   {
     id: 3,
@@ -55,21 +56,21 @@ export const packages = [
     discountedPrice: "$20,000",
     savings: "$5,000",
     description:
-      "Experiencia a medida con diseño 100% personalizado.",
+      "Experiencia a medida con <strong>diseño 100% personalizado</strong>.",
     features: [
-      "Todo lo del Premium",
-      "Diseño invitación 100% a medida",
+      "Todo lo del <strong>Premium</strong>",
+      "<strong>Diseño invitación 100% a medida</strong>",
       "Fondos y tipografía personalizados",
-      "Login con correo (acceso restringido)",
+      "Login con correo (<strong>acceso restringido</strong>)",
       "Dashboard: confirmaciones, mensajes y pendientes",
-      "Descarga de lista de invitados en Excel",
+      "Descarga de <strong>lista de invitados en Excel</strong>",
       "Boletos Apple Wallet y Google Wallet",
       "Hashtag del evento y sección social",
-      "Internacionalización (1+ idiomas)",
+      "Internacionalización (<strong>1+ idiomas</strong>)",
       "Animaciones y efectos especiales (partículas, transiciones)",
       "Recomendaciones turísticas personalizadas",
-      "Consultor dedicado y soporte hasta el evento"
+      "<strong>Consultor dedicado</strong> y soporte hasta el evento",
     ],
-    popular: false
-  }
+    popular: false,
+  },
 ];

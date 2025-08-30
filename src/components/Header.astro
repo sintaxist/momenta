@@ -221,6 +221,8 @@ const menuItems = [
     logoLink.addEventListener("click", (event) => {
       const hero = document.getElementById("hero");
 
+      closeMobileMenu()
+
       if (window.location.pathname === "/" && hero) {
         event.preventDefault();
         const targetY = hero.offsetTop - header.offsetHeight;

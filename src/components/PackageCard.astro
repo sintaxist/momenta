@@ -1,65 +1,50 @@
 ---
-import Button from "@/components/ui/Button.astro";
+import Button from '@/components/ui/Button.astro';
+import * as Icons from '@/components/ui/Icons.ts';
 
 interface Props {
   pkg: any;
   index: number;
 }
 const { pkg, index } = Astro.props;
+const cardId = `package-card-${pkg.id}`;
 
-const icons = {
-  Check: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>`,
-  Star: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-};
+// Límite de características visibles inicialmente
+const initialVisibleFeatures = 8;
+const featuresCount = pkg.features.length;
+const remainingFeatures = featuresCount - initialVisibleFeatures;
 ---
 
-<div
-  id={`package-card-${pkg.id}`}
-  class={`relative group h-full flex flex-col ${pkg.popular ? "lg:-mt-8" : ""} animate-on-scroll`}
-  style={`transition-delay: ${index * 150}ms`}
->
-  {
-    pkg.popular && (
-      <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div class="font-sora bg-indigo-600 text-white px-6 py-2 rounded-full text-sm shadow-lg flex items-center">
-          <Fragment set:html={icons.Star} />
-          <span class="ml-1">Más Popular</span>
-        </div>
+<div id={cardId} class={`package-card relative group flex flex-col ${pkg.popular ? 'lg:-mt-10' : ''} animate-on-scroll`} style={`transition-delay: ${index * 150}ms`}>
+  {pkg.popular && (
+    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+      <div class="container-svg font-sora bg-indigo-600 text-white px-6 py-2 rounded-full text-sm shadow-lg flex items-center">
+          <Fragment set:html={Icons.Star} />
+        <span class="ml-1">Más Popular</span>
       </div>
-    )
-  }
+    </div>
+  )}
   <div class="absolute -top-2 -right-2 z-20">
-    <div
-      class="font-sora bg-emerald-500 text-white px-3 py-1 rounded-full text-xs shadow-lg"
-    >
+    <div class="font-sora bg-emerald-500 text-white px-3 py-1 rounded-full text-xs shadow-lg">
       Ahorra {pkg.savings}
     </div>
   </div>
 
-  <div
-    class={`relative p-8 rounded-3xl backdrop-blur-xl border transition-transform duration-500 ease-out h-full flex flex-col
-    ${pkg.popular ? "bg-white/50 border-indigo-200 shadow-2xl" : "bg-white/30 border-white/30 shadow-lg"}`}
-  >
+  <div class={`relative p-8 rounded-3xl backdrop-blur-xl border transition-transform duration-500 ease-out h-full flex flex-col
+    ${pkg.popular ? 'bg-white/50 border-indigo-200 shadow-2xl' : 'bg-white/30 border-white/30 shadow-lg'}`
+  }>
     <div class="flex-grow">
       <div class="text-center mb-8">
-        <div
-          class={`text-white inline-flex p-4 rounded-2xl mb-4 transition-transform duration-300 group-hover:rotate-6 w-16 h-16 ${pkg.popular ? "bg-indigo-600" : "bg-gray-500"}`}
-        >
+        <div class={`text-white inline-flex p-4 rounded-2xl mb-4 transition-transform duration-300 group-hover:rotate-6 w-16 h-16 ${ pkg.popular ? 'bg-indigo-600' : 'bg-gray-500' }`}>
           <Fragment set:html={pkg.icon} />
         </div>
-        <h3
-          class={`font-sora font-bold text-2xl mb-2 ${pkg.popular ? "text-indigo-600" : "text-gray-900"}`}
-        >
+        <h3 class={`font-sora font-bold text-2xl mb-2 ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
           {pkg.name}
         </h3>
         <p class="font-sora text-gray-600 text-sm mb-4" set:html={pkg.description}></p>
         <div class="mb-6">
-          <div class="text-lg text-gray-400 line-through mb-1">
-            {pkg.originalPrice}
-          </div>
-          <span
-            class={`font-sora font-bold text-4xl ${pkg.popular ? "text-indigo-600" : "text-gray-900"}`}
-          >
+          <div class="text-lg text-gray-400 line-through mb-1">{pkg.originalPrice}</div>
+          <span class={`font-sora font-bold text-4xl ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
             {pkg.discountedPrice}
           </span>
           <span class="text-gray-600 text-sm ml-2">MXN</span>
@@ -76,62 +61,108 @@ const icons = {
         Lo quiero
       </Button>
 
-      <ul class="space-y-4 mb-8">
-        {
-          pkg.features.map((feature: any) => (
-            <li class="feature-item flex items-start space-x-3">
-              <div
-                class={`text-white p-1 rounded-full mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center ${pkg.popular ? "bg-indigo-500" : "bg-gray-500"}`}
-              >
-                <Fragment set:html={icons.Check} />
-              </div>
-              <span class="font-sora text-gray-700 text-sm leading-relaxed">
-                {feature}
-              </span>
-            </li>
-          ))
-        }
+      <ul class="feature-list space-y-4 mb-8">
+        {pkg.features.map((feature: string, idx: number) => (
+          <li class:list={["text-white feature-item flex items-start space-x-3", { 'initially-hidden': idx >= initialVisibleFeatures }]}>
+            <div class={`p-1 rounded-full mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center ${ pkg.popular ? 'bg-indigo-500' : 'bg-gray-500' }`}>
+              <Fragment set:html={Icons.Check} />
+            </div>
+            <span class="font-sora text-gray-700 text-sm leading-relaxed" set:html={feature}></span>
+          </li>
+        ))}
       </ul>
+
+      {featuresCount > initialVisibleFeatures && (
+        <div class=" border-t border-gray-200/50 pt-8">
+          <button class="accordion-toggle font-sora text-sm font-semibold text-gray-700 hover:text-indigo-500 transition-colors w-full text-center cursor-pointer">
+            <span class="view-more-text">
+              Ver más (+{remainingFeatures} restantes)
+            </span>
+            <span class="view-less-text hidden">
+              Ver menos
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   </div>
 </div>
 
-<script define:vars={{ cardId: `package-card-${pkg.id}` }}>
+<script define:vars={{ cardId, initialVisibleFeatures }}>
   const currentCard = document.getElementById(cardId);
 
   if (currentCard) {
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const featureItems = entry.target.querySelectorAll(".feature-item");
-            featureItems.forEach((item, index) => {
-              setTimeout(() => {
-                item.classList.add("is-visible");
-              }, index * 100);
-            });
-            cardObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
+    const featureItems = currentCard.querySelectorAll('.feature-item');
+    
+    // Lógica de animación para la entrada de los items
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animamos solo los items visibles inicialmente
+          featureItems.forEach((item, index) => {
+            if (index < initialVisibleFeatures) {
+                setTimeout(() => {
+                    item.classList.add('is-visible');
+                }, index * 100);
+            }
+          });
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
     cardObserver.observe(currentCard);
+
+    // ✅ CAMBIO: Nueva lógica para el acordeón de "Ver Más"
+    const toggleBtn = currentCard.querySelector('.accordion-toggle');
+    const hiddenItems = currentCard.querySelectorAll('.initially-hidden');
+    const viewMoreText = currentCard.querySelector('.view-more-text');
+    const viewLessText = currentCard.querySelector('.view-less-text');
+    
+    if (toggleBtn) {
+      // Ocultamos los items extra con JS para evitar problemas de layout
+      hiddenItems.forEach(item => item.classList.add('hidden'));
+
+      toggleBtn.addEventListener('click', () => {
+        const isExpanding = !viewMoreText?.classList.contains('hidden');
+        
+        viewMoreText?.classList.toggle('hidden', isExpanding);
+        viewLessText?.classList.toggle('hidden', !isExpanding);
+        
+        // Mostramos u ocultamos los items
+        hiddenItems.forEach((item, index) => {
+            if(isExpanding) {
+                // Si estamos expandiendo, mostramos y animamos
+                item.classList.remove('hidden');
+                setTimeout(() => {
+                    item.classList.add('is-visible');
+                }, index * 50); // Un delay más corto para la expansión
+            } else {
+                // Si estamos colapsando, quitamos la animación y ocultamos
+                item.classList.remove('is-visible');
+                item.classList.add('hidden');
+            }
+        });
+      });
+    }
   }
 </script>
 
 <style>
+  .package-card {
+    height: fit-content;
+  }
   .feature-item {
     opacity: 0;
-    /* ✅ CAMBIO: El valor ahora es negativo para que venga de la izquierda */
     transform: translateX(-20px);
-    transition:
-      opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1),
-      transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: opacity 0.6s cubic-bezier(0.65, 0, 0.35, 1), transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
   }
   .feature-item.is-visible {
     opacity: 1;
     transform: translateX(0);
+  }
+
+  .container-svg :global(svg){
+    width: 15px;
+    height: 15px;
   }
 </style>
