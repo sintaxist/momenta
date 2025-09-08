@@ -2,13 +2,11 @@
 export const invitacionesJSON = [
   {
     title: "Bocar Group – Invitación Digital Interactiva en Viñedos San Lucas",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
+      "https://i.imgur.com/YVb6MOul.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-2_g1qgdg.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-3_oy2yax.jpg",
+      "https://i.imgur.com/oMfJlXzm.jpeg",
+      "https://i.imgur.com/JC9NV1pm.jpeg",
     ],
     base_video: "bocar_group_mobile",
     description:
@@ -34,13 +32,11 @@ export const invitacionesJSON = [
   },
   {
     title: "María y José – Invitación Digital de Boda con Animaciones",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
+      "https://i.imgur.com/org4Oldl.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227661/Maria-y-Jose-2_lfnaaa.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227659/Maria-y-Jose-3_rajibz.jpg",
+      "https://i.imgur.com/sGQ2KaXm.jpeg",
+      "https://i.imgur.com/eL84pG3m.jpeg",
     ],
     base_video: "maria_y_jose_mobile",
     description:
@@ -62,13 +58,11 @@ export const invitacionesJSON = [
   },
   {
     title: "Premios Monarca 2024 – Invitación Digital Corporativa HP & HPE",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
+      "https://i.imgur.com/dVlkjxcl.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227684/Premios-Monarca-2_zn3fvn.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
+      "https://i.imgur.com/tppSiiZm.jpeg",
+      "https://i.imgur.com/4BxaQh2m.jpeg",
     ],
     base_video: "premios_monarca_mobile",
     description:
@@ -101,13 +95,11 @@ export const invitacionesJSON = [
 
   {
     title: "Jimena & Canek – Invitación Digital con Experiencia Completa",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
+      "https://i.imgur.com/PTpA48jl.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-2_vtdbbd.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
+      "https://i.imgur.com/4yr0plPm.jpeg",
+      "https://i.imgur.com/1ZoBPfWm.jpeg",
     ],
     base_video: "jimena_y_canek_mobile",
     description:
@@ -131,13 +123,11 @@ export const invitacionesJSON = [
   },
   {
     title: "Astom – Invitación Digital Empresarial",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
+      "https://i.imgur.com/wMAIZVvl.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-2_keghol.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-3_hraafp.jpg",
+      "https://i.imgur.com/zbs5Wsam.jpeg",
+      "https://i.imgur.com/JM84Wjqm.jpeg",
     ],
     base_video: "astom_summit_mobile",
     description:
@@ -159,13 +149,11 @@ export const invitacionesJSON = [
   },
   {
     title: "Conecton – Invitación Digital Corporativa",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
+      "https://i.imgur.com/hYEn75Gl.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227625/Contecon-2_zv26k5.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-3_s7jwnr.jpg",
+      "https://i.imgur.com/jb4XxwTm.jpeg",
+      "https://i.imgur.com/aJorjCim.jpeg",
     ],
     base_video: "contecon_mobile",
     description:
@@ -188,13 +176,11 @@ export const invitacionesJSON = [
   },
   {
     title: "Sofía – Invitación Digital para XV Años",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
     primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
+      "https://i.imgur.com/PDXG4vHl.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227701/Sofia-XV-2_phipg1.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227698/Sofia-XV-3_rpsdsa.jpg",
+      "https://i.imgur.com/uwz6zCsm.jpeg",
+      "https://i.imgur.com/xtyDqcem.jpeg",
     ],
     base_video: "sofia_xv_mobile",
     description:
@@ -223,11 +209,10 @@ const cloudinaryConfig = {
   f_auto: true,
   q_auto: "eco",
   dpr_auto: true,
-  thumb: { w: 400, h: 350, c: "fit" },
   primary_image: { w: 750, h: 550, c: "fill" },
   gallery: { w: 350, h: 310, c: "fit" },
-  video: { w: 300, h: 600, c: "fit" },
-  format: "f_webp",
+  vimeo: { w: 300, h: 600, c: "fit" },
+  fommat: "f_webp",
 };
 
 // Función para construir URL optimizada de imagen
@@ -280,9 +265,7 @@ export function getFirstInvitaciones() {
     title: inv.title,
     description: inv.description,
     event_type: inv.event_type,
-    thumb: inv.thumb
-      ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
-      : undefined,
+    thumb: inv.primary_image
   }));
 }
 
@@ -292,9 +275,7 @@ export function getMoreInvitaciones(offset = 4) {
     title: inv.title,
     description: inv.description,
     event_type: inv.event_type,
-    thumb: inv.thumb
-      ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
-      : undefined,
+    thumb: inv.primary_image
   }));
 }
 
@@ -306,13 +287,9 @@ export function getInvitacionModalData(index) {
     title: inv.title,
     description: inv.description,
     features: inv.features,
-    gallery: inv.gallery
-      ? inv.gallery.map((img) =>
-          buildCloudinaryUrl(img, cloudinaryConfig.gallery)
-        )
-      : [],
-    link_demo: inv.link_demo,
-    event_type: inv.event_type,
-    primary_image: buildCloudinaryUrl(inv.primary_image, cloudinaryConfig.primary_image)
+    gallery: inv.gallery,
+    limk_demo: inv.linkmdemo,
+    evmnt_type: inv.eventmtype,
+    primary_image: inv.primary_image
   };
 }
