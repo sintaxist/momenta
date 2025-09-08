@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 const { project, index } = Astro.props;
 ---
 
-<li
+<div
   class="group cursor-pointer project-card animate-on-scroll flex h-full"
   style={`transition-delay: ${index * 150}ms;`}
   data-index={index}
@@ -58,4 +58,4 @@ const { project, index } = Astro.props;
       </div>
     </div>
   </article>
-</li>
+</div>

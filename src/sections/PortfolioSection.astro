@@ -42,7 +42,7 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
     </div>
 
     <!-- Grid de proyectos -->
-    <ul
+    <div
       id="portfolio-grid"
       class="hidden md:grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6"
     >
@@ -51,7 +51,7 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
           <PortfolioCard project={invitacion} index={index} />
         ))
       }
-    </ul>
+    </div>
 
     <!-- Botón mostrar más -->
     {
