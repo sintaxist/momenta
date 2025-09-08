@@ -12,6 +12,5 @@ export type projectVideo = {
   video: { hls: string; mp4: string };
   poster?: string;
   demoUrl: string;
-  uploadDate?: string;
   description?: string;
 };

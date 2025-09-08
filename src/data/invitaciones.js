@@ -270,6 +270,7 @@ export function getVideosFromInvitaciones() {
       video: buildLocalVideoUrl(inv.base_video),
       poster: buildLocalVideoUrl(inv.base_video).poster,
       demoUrl: inv.link_demo,
+      description: inv.description,
     }));
 }
 
