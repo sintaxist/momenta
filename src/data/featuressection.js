@@ -18,7 +18,7 @@ export const features = [
     title: "Diseño Personalizado",
     description:
       "Cada invitación refleja el <strong>estilo</strong> y la <strong>esencia</strong> de tu celebración con colores, tipografía y detalles únicos.",
-    image: "https://i.imgur.com/wMAIZVvh.jpeg",
+    image: "https://i.imgur.com/wMAIZVvl.jpeg",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ export const features = [
     title: "RSVP Inteligente",
     description:
       "Confirmaciones en línea con <strong>control de invitados</strong>, validación por familia y <strong>notificaciones automáticas</strong>.",
-    image: "https://i.imgur.com/4sVBo5sh.png",
+    image: "https://i.imgur.com/4sVBo5sl.png",
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ export const features = [
     title: "Experiencia Completa",
     description:
       "Incluye <strong>itinerario</strong>, ubicación en mapas, <strong>código de vestimenta</strong> y la opción de agregar al calendario en un solo clic.",
-    image: "https://i.imgur.com/O4wKnWoh.png",
+    image: "https://i.imgur.com/O4wKnWol.png",
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ export const features = [
     title: "Galería Interactiva",
     description:
       "<strong>Fotos y videos</strong> con animaciones modernas, opción de <strong>subida en tiempo real</strong> y recuerdos compartidos.",
-    image: "https://i.imgur.com/aJorjCih.jpeg",
+    image: "https://i.imgur.com/aJorjCil.jpeg",
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ export const features = [
     title: "Mesa de Regalos & Extras",
     description:
 "<strong>Playlist colaborativa</strong>, mesa de regalos, hospedajes recomendados y secciones exclusivas para tus invitados.",
-    image: "https://i.imgur.com/854JpqJh.png",
+    image: "https://i.imgur.com/854JpqJl.png",
   },
   {
     id: 6,
@@ -58,6 +58,6 @@ export const features = [
     title: "Soporte Dedicado",
     description:
       "Acompañamiento <strong>continuo</strong> antes y durante el evento, asegurando que todo fluya <strong>sin estrés</strong>.",
-    image: "https://i.imgur.com/3utGyV1h.png",
+    image: "https://i.imgur.com/3utGyV1l.png",
   }
 ];
