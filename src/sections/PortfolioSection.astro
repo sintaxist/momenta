@@ -84,9 +84,9 @@ const bannerCanvasId = `banner-canvas-${crypto.randomUUID()}`;
         <div id="swiper-cards" class="swiper-wrapper">
           {
             invitaciones.map((invitacion, index) => (
-              <div class="swiper-slide flex">
+              <ul class="swiper-slide flex">
                   <PortfolioCard project={invitacion} index={index} />
-              </div>
+              </ul>
             ))
           }
 
