@@ -10,8 +10,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-2_g1qgdg.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-3_oy2yax.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490451/Bocar_Group_Mobile_dyk5ya.mp4",
+    base_video: "bocar_group_mobile",
     description:
       "Invitación digital corporativa para Bocar Group en Viñedos San Lucas, con registro avanzado, agenda interactiva y galería dinámica.",
     event_type: "Evento Corporativo",
@@ -43,8 +42,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227661/Maria-y-Jose-2_lfnaaa.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227659/Maria-y-Jose-3_rajibz.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233426/Maria_Y_Jose_Mobile_yrr9bb.mp4",
+    base_video: "maria_y_jose_mobile",
     description:
       "Invitación digital de boda con animaciones fluidas y experiencia inmersiva para los invitados.",
     event_type: "Boda",
@@ -72,8 +70,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227684/Premios-Monarca-2_zn3fvn.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490461/Premios_Monarca_Mobile_vsuybz.mp4",
+    base_video: "premios_monarca_mobile",
     description:
       "Invitación digital para los Premios Monarca HP 2024, realizados en conjunto con los Premios Quetzal de HPE en San Miguel de Allende. Incluyó registro interactivo, galería, video memoria, personalización de correos y funcionalidades avanzadas para una experiencia fluida en cualquier dispositivo.",
     event_type: "Evento Corporativo",
@@ -112,8 +109,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-2_vtdbbd.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490429/Jimena_Y_Canek_Mobile_mjruvk.mp4",
+    base_video: "jimena_y_canek_mobile",
     description:
       "Invitación digital personalizada de boda, con animaciones, validación avanzada y boletos imprimibles.",
     event_type: "Boda",
@@ -143,8 +139,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-2_keghol.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-3_hraafp.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233393/Astom_Summit_Mobile_mcinmf.mp4",
+    base_video: "astom_summit_mobile",
     description:
       "Invitación digital empresarial con diseño sobrio y formulario de registro para asistentes.",
     event_type: "Evento Corporativo",
@@ -172,8 +167,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227625/Contecon-2_zv26k5.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-3_s7jwnr.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233405/Contecon_Mobile_gcpkjb.mp4",
+    base_video: "contecon_mobile",
     description:
       "Invitación digital corporativa para Conecton, con registro, agenda y secciones interactivas.",
     event_type: "Evento Corporativo",
@@ -202,8 +196,7 @@ export const invitacionesJSON = [
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227701/Sofia-XV-2_phipg1.jpg",
       "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227698/Sofia-XV-3_rpsdsa.jpg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233449/Sofia_XV_Mobile_ivpc1a.mp4",
+    base_video: "sofia_xv_mobile",
     description:
       "Invitación digital para XV Años, con diseño festivo, RSVP interactivo y galería de fotos.",
     event_type: "XV Años",
@@ -223,6 +216,8 @@ export const invitacionesJSON = [
     ],
   },
 ];
+
+const hostVideos = "https://sintaxist.github.io/videos-invitaciones-momenta/"
 
 const cloudinaryConfig = {
   f_auto: true,
@@ -257,15 +252,24 @@ export function buildCloudinaryVideoUrl(baseUrl) {
   };
 }
 
+// Función para construir URLs de video locales (MP4 + WebM + Poster JPG/WEBP)
+export function buildLocalVideoUrl(basePath) {
+  return {
+    mp4: `${hostVideos + basePath}.mp4`,
+    webm: `${hostVideos + basePath}.webm`,
+    // poster: `${hostVideos + basePath}.jpg`,
+  };
+}
+
 // Obtener exclusivamente videos con su poster y URLs optimizadas
 export function getVideosFromInvitaciones() {
   return invitacionesJSON
     .filter((inv) => inv.base_video && inv.show_on_carousel)
     .map((inv) => ({
       title: inv.title,
-      video: buildCloudinaryVideoUrl(inv.base_video),
-      poster: buildCloudinaryVideoUrl(inv.base_video).poster,
-      demoUrl: inv.link_demo, // ✅ agregamos demoUrl para TypeScript
+      video: buildLocalVideoUrl(inv.base_video),
+      poster: buildLocalVideoUrl(inv.base_video).poster,
+      demoUrl: inv.link_demo,
     }));
 }
 

@@ -22,7 +22,7 @@ const createConfirmationEmailHtml = (name: string) => `
             <!-- Logo -->
             <tr>
               <td align="center" bgcolor="#FBFBFB" style="padding:20px;">
-                <img src="https://res.cloudinary.com/dxdysqkbg/image/upload/w_300,f_auto,q_auto/momenta-logo_dvnvyz.gif" alt="Mömenta Invitaciones" width="250" border="0" style="display:block;">
+                <img src="https://i.imgur.com/Y63Cy9i.gif" alt="Mömenta Invitaciones" width="250" border="0" style="display:block;">
               </td>
             </tr>
 
