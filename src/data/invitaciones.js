@@ -2,8 +2,8 @@
 export const invitacionesJSON = [
   {
     title: "Bocar Group – Invitación Digital Interactiva en Viñedos San Lucas",
-    primary_image:
-      "https://i.imgur.com/YVb6MOul.jpeg",
+    primary_image: "https://i.imgur.com/YVb6MOul.jpeg",
+    thumb: "https://i.imgur.com/YVb6MOum.jpeg",
     gallery: [
       "https://i.imgur.com/oMfJlXzm.jpeg",
       "https://i.imgur.com/JC9NV1pm.jpeg",
@@ -32,8 +32,8 @@ export const invitacionesJSON = [
   },
   {
     title: "María y José – Invitación Digital de Boda con Animaciones",
-    primary_image:
-      "https://i.imgur.com/org4Oldl.jpeg",
+    primary_image: "https://i.imgur.com/org4Oldl.jpeg",
+    thumb: "https://i.imgur.com/org4Oldm.jpeg",
     gallery: [
       "https://i.imgur.com/sGQ2KaXm.jpeg",
       "https://i.imgur.com/eL84pG3m.jpeg",
@@ -58,8 +58,8 @@ export const invitacionesJSON = [
   },
   {
     title: "Premios Monarca 2024 – Invitación Digital Corporativa HP & HPE",
-    primary_image:
-      "https://i.imgur.com/dVlkjxcl.jpeg",
+    primary_image: "https://i.imgur.com/dVlkjxcl.jpeg",
+    thumb: "https://i.imgur.com/dVlkjxcm.jpeg",
     gallery: [
       "https://i.imgur.com/tppSiiZm.jpeg",
       "https://i.imgur.com/4BxaQh2m.jpeg",
@@ -95,8 +95,8 @@ export const invitacionesJSON = [
 
   {
     title: "Jimena & Canek – Invitación Digital con Experiencia Completa",
-    primary_image:
-      "https://i.imgur.com/PTpA48jl.jpeg",
+    primary_image: "https://i.imgur.com/PTpA48jl.jpeg",
+    thumb: "https://i.imgur.com/PTpA48jm.jpeg",
     gallery: [
       "https://i.imgur.com/4yr0plPm.jpeg",
       "https://i.imgur.com/1ZoBPfWm.jpeg",
@@ -123,8 +123,8 @@ export const invitacionesJSON = [
   },
   {
     title: "Astom – Invitación Digital Empresarial",
-    primary_image:
-      "https://i.imgur.com/wMAIZVvl.jpeg",
+    primary_image: "https://i.imgur.com/wMAIZVvl.jpeg",
+    thumb: "https://i.imgur.com/wMAIZVvm.jpeg",
     gallery: [
       "https://i.imgur.com/zbs5Wsam.jpeg",
       "https://i.imgur.com/JM84Wjqm.jpeg",
@@ -149,8 +149,8 @@ export const invitacionesJSON = [
   },
   {
     title: "Conecton – Invitación Digital Corporativa",
-    primary_image:
-      "https://i.imgur.com/hYEn75Gl.jpeg",
+    primary_image: "https://i.imgur.com/hYEn75Gl.jpeg",
+    primary_image: "https://i.imgur.com/hYEn75Gm.jpeg",
     gallery: [
       "https://i.imgur.com/jb4XxwTm.jpeg",
       "https://i.imgur.com/aJorjCim.jpeg",
@@ -176,8 +176,8 @@ export const invitacionesJSON = [
   },
   {
     title: "Sofía – Invitación Digital para XV Años",
-    primary_image:
-      "https://i.imgur.com/PDXG4vHl.jpeg",
+    primary_image: "https://i.imgur.com/PDXG4vHl.jpeg",
+    primary_image: "https://i.imgur.com/PDXG4vHm.jpeg",
     gallery: [
       "https://i.imgur.com/uwz6zCsm.jpeg",
       "https://i.imgur.com/xtyDqcem.jpeg",
@@ -265,7 +265,7 @@ export function getFirstInvitaciones() {
     title: inv.title,
     description: inv.description,
     event_type: inv.event_type,
-    thumb: inv.primary_image
+    thumb: inv.thumb
   }));
 }
 
