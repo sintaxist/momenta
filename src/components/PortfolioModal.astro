@@ -86,7 +86,7 @@ import * as Icons from "@/components/ui/Icons.ts";
             justify="center"
             class="w-full"
           >
-            Crear Algo Similar
+            Quiero algo similar 
           </Button>
         </div>
       </div>
@@ -104,8 +104,14 @@ import * as Icons from "@/components/ui/Icons.ts";
 <script is:inline type="module">
   const modal = document.querySelector("#modal");
   const closeModalBtn = modal.querySelector("#modal-close-btn");
+  const modalContent = modal.querySelector(".modal-content");
   const modalImage = modal.querySelector("#modal-image");
   const skeleton = modal.querySelector(".skeleton-loader");
+
+  const closeModal = () => {
+    modal.classList.remove("is-visible");
+    document.body.style.overflow = "auto";
+  };
 
   window.addEventListener("openModal", (e) => {
     const project = e.detail;
@@ -121,7 +127,7 @@ import * as Icons from "@/components/ui/Icons.ts";
     modal.querySelector("#modal-description").textContent = project.description;
     modal.querySelector("#modal-explore-btn").href = project.link_demo;
     modal.querySelector("#modal-whatsapp-btn").href =
-      `https://wa.me/525533256703?text=${encodeURIComponent(`Quiero más info de: ${project.title}`)}`;
+      `https://wa.me/525533256703?text=${encodeURIComponent(`Quisiera más información de: ${project.title} porque quisiera algo parecido`)}`;
 
     const featuresContainer = modal.querySelector("#features-container");
     featuresContainer.innerHTML = "";
@@ -182,9 +188,21 @@ import * as Icons from "@/components/ui/Icons.ts";
     }
   });
 
-  closeModalBtn.addEventListener("click", () => {
-    modal.classList.remove("is-visible");
-    document.body.style.overflow = "auto";
+  // Botón cerrar
+  closeModalBtn.addEventListener("click", closeModal);
+
+  // Click fuera del modal
+  modal.addEventListener("click", (e) => {
+    if (!modalContent.contains(e.target)) {
+      closeModal();
+    }
+  });
+
+  // Tecla ESC
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-visible")) {
+      closeModal();
+    }
   });
 </script>
 

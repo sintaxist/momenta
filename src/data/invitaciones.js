@@ -288,8 +288,8 @@ export function getInvitacionModalData(index) {
     description: inv.description,
     features: inv.features,
     gallery: inv.gallery,
-    limk_demo: inv.linkmdemo,
-    evmnt_type: inv.eventmtype,
+    link_demo: inv.link_demo,
+    event_type: inv.event_type,
     primary_image: inv.primary_image
   };
 }
