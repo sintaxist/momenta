@@ -2,16 +2,13 @@
 export const invitacionesJSON = [
   {
     title: "Bocar Group – Invitación Digital Interactiva en Viñedos San Lucas",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227606/Bocar-Group-1_ukvg1i.jpg",
+    primary_image: "https://i.imgur.com/YVb6MOul.jpeg",
+    thumb: "https://i.imgur.com/YVb6MOum.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-2_g1qgdg.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227607/Bocar-Group-3_oy2yax.jpg",
+      "https://i.imgur.com/oMfJlXzm.jpeg",
+      "https://i.imgur.com/JC9NV1pm.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490451/Bocar_Group_Mobile_dyk5ya.mp4",
+    base_video: "bocar_group_mobile",
     description:
       "Invitación digital corporativa para Bocar Group en Viñedos San Lucas, con registro avanzado, agenda interactiva y galería dinámica.",
     event_type: "Evento Corporativo",
@@ -35,16 +32,13 @@ export const invitacionesJSON = [
   },
   {
     title: "María y José – Invitación Digital de Boda con Animaciones",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227660/Maria-y-Jose-1_bekbgk.jpg",
+    primary_image: "https://i.imgur.com/org4Oldl.jpeg",
+    thumb: "https://i.imgur.com/org4Oldm.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227661/Maria-y-Jose-2_lfnaaa.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227659/Maria-y-Jose-3_rajibz.jpg",
+      "https://i.imgur.com/sGQ2KaXm.jpeg",
+      "https://i.imgur.com/eL84pG3m.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233426/Maria_Y_Jose_Mobile_yrr9bb.mp4",
+    base_video: "maria_y_jose_mobile",
     description:
       "Invitación digital de boda con animaciones fluidas y experiencia inmersiva para los invitados.",
     event_type: "Boda",
@@ -64,16 +58,13 @@ export const invitacionesJSON = [
   },
   {
     title: "Premios Monarca 2024 – Invitación Digital Corporativa HP & HPE",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227682/Premios-Monarca-1_lsl1ah.jpg",
+    primary_image: "https://i.imgur.com/dVlkjxcl.jpeg",
+    thumb: "https://i.imgur.com/dVlkjxcm.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227684/Premios-Monarca-2_zn3fvn.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227683/Premios-Monarca-3_r6xrvz.jpg",
+      "https://i.imgur.com/tppSiiZm.jpeg",
+      "https://i.imgur.com/4BxaQh2m.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490461/Premios_Monarca_Mobile_vsuybz.mp4",
+    base_video: "premios_monarca_mobile",
     description:
       "Invitación digital para los Premios Monarca HP 2024, realizados en conjunto con los Premios Quetzal de HPE en San Miguel de Allende. Incluyó registro interactivo, galería, video memoria, personalización de correos y funcionalidades avanzadas para una experiencia fluida en cualquier dispositivo.",
     event_type: "Evento Corporativo",
@@ -104,16 +95,13 @@ export const invitacionesJSON = [
 
   {
     title: "Jimena & Canek – Invitación Digital con Experiencia Completa",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-1_obylsy.jpg",
+    primary_image: "https://i.imgur.com/PTpA48jl.jpeg",
+    thumb: "https://i.imgur.com/PTpA48jm.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227648/Jimena-y-Canek-2_vtdbbd.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227647/Jimena-y-Canek-3_itldgr.jpg",
+      "https://i.imgur.com/4yr0plPm.jpeg",
+      "https://i.imgur.com/1ZoBPfWm.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756490429/Jimena_Y_Canek_Mobile_mjruvk.mp4",
+    base_video: "jimena_y_canek_mobile",
     description:
       "Invitación digital personalizada de boda, con animaciones, validación avanzada y boletos imprimibles.",
     event_type: "Boda",
@@ -135,16 +123,13 @@ export const invitacionesJSON = [
   },
   {
     title: "Astom – Invitación Digital Empresarial",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-1_t4ta0t.jpg",
+    primary_image: "https://i.imgur.com/wMAIZVvl.jpeg",
+    thumb: "https://i.imgur.com/wMAIZVvm.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-2_keghol.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227582/Astom-Summit-3_hraafp.jpg",
+      "https://i.imgur.com/zbs5Wsam.jpeg",
+      "https://i.imgur.com/JM84Wjqm.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233393/Astom_Summit_Mobile_mcinmf.mp4",
+    base_video: "astom_summit_mobile",
     description:
       "Invitación digital empresarial con diseño sobrio y formulario de registro para asistentes.",
     event_type: "Evento Corporativo",
@@ -164,16 +149,13 @@ export const invitacionesJSON = [
   },
   {
     title: "Conecton – Invitación Digital Corporativa",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-1_fggsro.jpg",
+    primary_image: "https://i.imgur.com/hYEn75Gl.jpeg",
+    primary_image: "https://i.imgur.com/hYEn75Gm.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227625/Contecon-2_zv26k5.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227626/Contecon-3_s7jwnr.jpg",
+      "https://i.imgur.com/jb4XxwTm.jpeg",
+      "https://i.imgur.com/aJorjCim.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233405/Contecon_Mobile_gcpkjb.mp4",
+    base_video: "contecon_mobile",
     description:
       "Invitación digital corporativa para Conecton, con registro, agenda y secciones interactivas.",
     event_type: "Evento Corporativo",
@@ -194,16 +176,13 @@ export const invitacionesJSON = [
   },
   {
     title: "Sofía – Invitación Digital para XV Años",
-    thumb:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
-    primary_image:
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227699/Sofia-XV-1_omblne.jpg",
+    primary_image: "https://i.imgur.com/PDXG4vHl.jpeg",
+    primary_image: "https://i.imgur.com/PDXG4vHm.jpeg",
     gallery: [
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227701/Sofia-XV-2_phipg1.jpg",
-      "https://res.cloudinary.com/dxdysqkbg/image/upload/v1756227698/Sofia-XV-3_rpsdsa.jpg",
+      "https://i.imgur.com/uwz6zCsm.jpeg",
+      "https://i.imgur.com/xtyDqcem.jpeg",
     ],
-    base_video:
-      "https://res.cloudinary.com/dxdysqkbg/video/upload/v1756233449/Sofia_XV_Mobile_ivpc1a.mp4",
+    base_video: "sofia_xv_mobile",
     description:
       "Invitación digital para XV Años, con diseño festivo, RSVP interactivo y galería de fotos.",
     event_type: "XV Años",
@@ -224,15 +203,16 @@ export const invitacionesJSON = [
   },
 ];
 
+const hostVideos = "https://sintaxist.github.io/videos-invitaciones-momenta/"
+
 const cloudinaryConfig = {
   f_auto: true,
   q_auto: "eco",
   dpr_auto: true,
-  thumb: { w: 400, h: 350, c: "fit" },
   primary_image: { w: 750, h: 550, c: "fill" },
   gallery: { w: 350, h: 310, c: "fit" },
-  video: { w: 300, h: 600, c: "fit" },
-  format: "f_webp",
+  vimeo: { w: 300, h: 600, c: "fit" },
+  fommat: "f_webp",
 };
 
 // Función para construir URL optimizada de imagen
@@ -257,15 +237,25 @@ export function buildCloudinaryVideoUrl(baseUrl) {
   };
 }
 
+// Función para construir URLs de video locales (MP4 + WebM + Poster JPG/WEBP)
+export function buildLocalVideoUrl(basePath) {
+  return {
+    mp4: `${hostVideos + basePath}.mp4`,
+    webm: `${hostVideos + basePath}.webm`,
+    // poster: `${hostVideos + basePath}.jpg`,
+  };
+}
+
 // Obtener exclusivamente videos con su poster y URLs optimizadas
 export function getVideosFromInvitaciones() {
   return invitacionesJSON
     .filter((inv) => inv.base_video && inv.show_on_carousel)
     .map((inv) => ({
       title: inv.title,
-      video: buildCloudinaryVideoUrl(inv.base_video),
-      poster: buildCloudinaryVideoUrl(inv.base_video).poster,
-      demoUrl: inv.link_demo, // ✅ agregamos demoUrl para TypeScript
+      video: buildLocalVideoUrl(inv.base_video),
+      poster: buildLocalVideoUrl(inv.base_video).poster,
+      demoUrl: inv.link_demo,
+      description: inv.description,
     }));
 }
 
@@ -276,8 +266,6 @@ export function getFirstInvitaciones() {
     description: inv.description,
     event_type: inv.event_type,
     thumb: inv.thumb
-      ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
-      : undefined,
   }));
 }
 
@@ -287,9 +275,7 @@ export function getMoreInvitaciones(offset = 4) {
     title: inv.title,
     description: inv.description,
     event_type: inv.event_type,
-    thumb: inv.thumb
-      ? buildCloudinaryUrl(inv.thumb, cloudinaryConfig.thumb)
-      : undefined,
+    thumb: inv.primary_image
   }));
 }
 
@@ -301,13 +287,9 @@ export function getInvitacionModalData(index) {
     title: inv.title,
     description: inv.description,
     features: inv.features,
-    gallery: inv.gallery
-      ? inv.gallery.map((img) =>
-          buildCloudinaryUrl(img, cloudinaryConfig.gallery)
-        )
-      : [],
+    gallery: inv.gallery,
     link_demo: inv.link_demo,
     event_type: inv.event_type,
-    primary_image: buildCloudinaryUrl(inv.primary_image, cloudinaryConfig.primary_image)
+    primary_image: inv.primary_image
   };
 }

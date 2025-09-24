@@ -64,7 +64,7 @@ const remainingFeatures = featuresCount - initialVisibleFeatures;
       <ul class="feature-list space-y-4 mb-8">
         {pkg.features.map((feature: string, idx: number) => (
           <li class:list={["text-white feature-item flex items-start space-x-3", { 'initially-hidden': idx >= initialVisibleFeatures }]}>
-            <div class={`p-1 rounded-full mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center ${ pkg.popular ? 'bg-indigo-500' : 'bg-gray-500' }`}>
+            <div class={`icon-container p-1 rounded-full mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center ${ pkg.popular ? 'bg-indigo-500' : 'bg-gray-500' }`}>
               <Fragment set:html={Icons.Check} />
             </div>
             <span class="font-sora text-gray-700 text-sm leading-relaxed" set:html={feature}></span>
@@ -164,5 +164,11 @@ const remainingFeatures = featuresCount - initialVisibleFeatures;
   .container-svg :global(svg){
     width: 15px;
     height: 15px;
+  }
+
+  .icon-container :global(svg) {
+    width: 11px;
+    height: 11px;
+    color: white;
   }
 </style>

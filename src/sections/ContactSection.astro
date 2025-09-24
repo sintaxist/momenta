@@ -52,11 +52,11 @@ const contactInfo = [
           </h3>
 
           <address class="not-italic">
-            <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
               {
                 contactInfo.map((item, index) => (
-                  <div>
-                    <dt class="sr-only">{item.label}</dt>
+                  <li>
+                    <p class="sr-only">{item.label}</p>
 
                     {item.href ? (
                       // 🔹 Card clickeable completa
@@ -92,10 +92,10 @@ const contactInfo = [
                         </div>
                       </div>
                     )}
-                  </div>
+                  </li>
                 ))
               }
-            </dl>
+            </ul>
           </address>
         </div>
 

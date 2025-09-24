@@ -109,7 +109,7 @@ export function ContactForm() {
   };
 
   const inputStyles =
-    "flex h-11 w-full rounded-md border border-gray-300 bg-white/60 px-3 py-2 text-md font-sora ring-offset-background placeholder:text-gray-400 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+    "flex h-12 w-full rounded-md border border-gray-300 bg-white/60 px-3 py-2 pb-3 text-[16px] font-sora ring-offset-background placeholder:text-gray-400 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-[4px]";
 
   return (
     <>
@@ -122,7 +122,7 @@ export function ContactForm() {
           <div className="space-y-1">
             <label
               htmlFor="name"
-              className="font-sora text-sm font-medium text-gray-900"
+              className="font-sora text-md font-medium text-gray-900"
             >
               Nombre Completo *
             </label>
@@ -142,7 +142,7 @@ export function ContactForm() {
           <div className="space-y-1">
             <label
               htmlFor="email"
-              className="font-sora text-sm font-medium text-gray-900"
+              className="font-sora text-md font-medium text-gray-900"
             >
               Email *
             </label>
@@ -168,7 +168,7 @@ export function ContactForm() {
           <div className="space-y-1">
             <label
               htmlFor="phone"
-              className="font-sora text-sm font-medium text-gray-900"
+              className="font-sora text-md font-medium text-gray-900"
             >
               Teléfono
             </label>
@@ -193,7 +193,7 @@ export function ContactForm() {
           <div className="space-y-1">
             <label
               htmlFor="eventType"
-              className="font-sora text-sm font-medium text-gray-900"
+              className="font-sora text-md font-medium text-gray-900"
             >
               Tipo de Evento *
             </label>
@@ -218,7 +218,7 @@ export function ContactForm() {
 
           {/* Mensaje */}
           <div className="space-y-1">
-            <label htmlFor="message" className="font-sora text-sm font-medium">
+            <label htmlFor="message" className="font-sora text-md font-medium">
               Mensaje
             </label>
             <textarea

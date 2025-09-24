@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear();
 const menuItems = [
   { id: "demos", label: "Demos" },
   { id: "features", label: "Features" },
-  { id: "sobre-mi", label: "Sobre Mí" },
+  { id: "sobre-mi", label: "Nosotros" },
   { id: "paquetes", label: "Paquetes" },
   { id: "contacto", label: "Contacto" },
 ];
@@ -50,11 +50,25 @@ const menuItems = [
         <h4 class="font-sora font-semibold text-lg text-gray-900 mb-4">
           Conecta con Mömenta
         </h4>
-        <div class="space-y-2 text-sm font-sora">
-          <p class="text-gray-500 overflow-hidden text-ellipsis">contacto@momentainvitaciones.com.mx</p>
-          <p class="text-gray-500">+52 (55) 3325 6703</p>
+        <ul class="space-y-2 text-sm font-sora">
+          <li>
+            <a
+              href="mailto:contacto@momentainvitaciones.com.mx"
+              class="link-style text-gray-500 transition-colors cursor-pointer overflow-hidden text-ellipsis"
+            >
+              contacto@momentainvitaciones.com.mx
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://wa.me/525533256703?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20evento"
+              class="link-style text-gray-500 transition-colors cursor-pointer"
+            >
+              +52 (55) 3325 6703
+            </a>
+          </li>
           <p class="text-gray-500">Ciudad de México, México</p>
-        </div>
+        </ul>
       </div>
 
     </div>
