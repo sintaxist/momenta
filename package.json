@@ -9,22 +9,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.3.0",
-    "@astrojs/vercel": "^8.0.4",
-    "@tailwindcss/vite": "^4.1.12",
-    "@types/react": "^19.1.10",
-    "astro": "^5.13.2",
-    "google-auth-library": "^10.3.0",
-    "googleapis": "^159.0.0",
-    "lucide-react": "^0.544.0",
-    "nodemailer": "^7.0.5",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "swiper": "^11.2.10",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.12"
+    "@astrojs/react": "4.3.0",
+    "@astrojs/vercel": "8.0.4",
+    "@tailwindcss/vite": "4.1.12",
+    "@types/react": "19.1.10",
+    "astro": "5.13.2",
+    "google-auth-library": "10.3.0",
+    "googleapis": "159.0.0",
+    "lucide-react": "0.544.0",
+    "nodemailer": "7.0.5",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "swiper": "11.2.10",
+    "tailwind-merge": "3.3.1",
+    "tailwindcss": "4.1.12"
   },
   "devDependencies": {
-    "@types/nodemailer": "^7.0.1"
+    "@types/nodemailer": "7.0.1"
   }
 }
