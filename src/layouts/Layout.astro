@@ -6,9 +6,10 @@ import Header from "@/components/Header.astro";
 interface Props {
   title: string;
   description: string;
+  noNavgation: boolean;
 }
 
-const { title, description = "Invitaciones Digitales para Eventos Inolvidables." } = Astro.props;
+const { title, description, noNavgation } = Astro.props;
 ---
 
 <!doctype html>
@@ -102,11 +103,11 @@ const { title, description = "Invitaciones Digitales para Eventos Inolvidables."
   </head>
   <body class="bg-white text-gray-900">
     <div class="relative z-10">
-      <Header />
+      {noNavgation ? null : <Header />}
       <main>
         <slot />
       </main>
-      <Footer />
+      {noNavgation ? null : <Footer />}
     </div>
 
     <div
