@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/ui-app/Sidebar";
 import { ZoomControls } from "@/components/ui-app/ZoomControls";
 import { ModalPlantillas } from "@/components/ui-app/ModalPlantillas";
 import { ModalAyuda } from "@/components/ui-app/ModalAyuda";
+import { Mesa, MESA_DIMENSIONS } from "@/components/ui-app/Mesas/Mesa";
 
 const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
 
@@ -40,11 +41,19 @@ export default function App() {
     lastMousePos: { x: 0, y: 0 },
   });
 
+  const [tables, setTables] = useState([]);
+  const [selectedTableId, setSelectedTableId] = useState(null);
+
   const handleCopy = useCallback(() => console.log("Copiando..."), []);
   const handlePaste = useCallback(() => console.log("Pegando..."), []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+
+      const activeEl = document.activeElement;
+        if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA')) {
+        return; // No hacer nada si se está escribiendo
+      }
   
       if (e.code === "Space") {
         setPanState((p) => ({ ...p, isPanning: true }));
@@ -255,6 +264,88 @@ export default function App() {
     }
   };
 
+  // Función para agregar una nueva mesa al estado
+  const addTable = (shape) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const tableDimensions = MESA_DIMENSIONS[shape];
+        const GUEST_AREA_PADDING = 80; // Espacio extra para los invitados y un margen
+        const PADDING = 20; // Espacio mínimo entre las áreas de las mesas
+
+        const checkCollision = (rect1, rect2) => {
+            return (
+                rect1.x < rect2.x + rect2.width + PADDING &&
+                rect1.x + rect1.width + PADDING > rect2.x &&
+                rect1.y < rect2.y + rect2.height + PADDING &&
+                rect1.y + rect1.height + PADDING > rect2.y
+            );
+        };
+
+        let newPos = {
+            x: (canvas.scrollLeft + canvas.clientWidth / 2) - (tableDimensions.width / 2),
+            y: (canvas.scrollTop + canvas.clientHeight / 2) - (tableDimensions.height / 2),
+        };
+
+        let isColliding = true;
+        let attempts = 0;
+        const maxAttempts = 100;
+        const step = 60;
+
+        while (isColliding && attempts < maxAttempts) {
+            isColliding = false;
+            const newRect = { 
+                x: newPos.x, y: newPos.y, 
+                width: tableDimensions.width + GUEST_AREA_PADDING, 
+                height: tableDimensions.height + GUEST_AREA_PADDING 
+            };
+
+            for (const table of tables) {
+                const existingDim = MESA_DIMENSIONS[table.shape];
+                const existingRect = { 
+                    x: table.x, y: table.y, 
+                    width: existingDim.width + GUEST_AREA_PADDING, 
+                    height: existingDim.height + GUEST_AREA_PADDING
+                };
+
+                if (checkCollision(newRect, existingRect)) {
+                    isColliding = true;
+                    const angle = attempts * 0.5;
+                    newPos.x += Math.cos(angle) * step;
+                    newPos.y += Math.sin(angle) * step;
+                    break;
+                }
+            }
+            attempts++;
+        }
+
+        const newTable = {
+            id: Date.now(),
+            shape,
+            label: `Mesa ${tables.length + 1}`,
+            ...newPos,
+            fontSize: '28px', // Tamaño de fuente inicial
+        };
+
+        setTables((currentTables) => [...currentTables, newTable]);
+        setSelectedTableId(newTable.id);
+    };
+
+    const updateTable = (id, updatedData) => {
+        setTables((currentTables) =>
+            currentTables.map((table) =>
+                table.id === id ? { ...table, ...updatedData } : table
+            )
+        );
+    };
+
+    // Corrección: Deseleccionar al hacer clic en el fondo del canvas
+    const handleCanvasClick = (e) => {
+        if (e.target === e.currentTarget) {
+            setSelectedTableId(null);
+        }
+    };
+
   return (
     <>
       <style>{`
@@ -283,6 +374,7 @@ export default function App() {
           activeTool={activeTool}
           setActiveTool={setActiveTool}
           setModalOpen={setModalType}
+          onAddTable={addTable} 
         />
 
         <div
@@ -302,6 +394,7 @@ export default function App() {
           }}
         >
           <div
+            onClick={handleCanvasClick}
             style={{
               width: WORLD_WIDTH * zoom,
               height: WORLD_HEIGHT * zoom,
@@ -311,7 +404,17 @@ export default function App() {
           `,
               backgroundSize: `${20 * zoom}px ${20 * zoom}px`,
             }}
-          />
+          >
+          {tables.map((table) => (
+            <Mesa
+              key={table.id}
+              tableData={table}
+              onUpdate={updateTable}
+              isSelected={table.id === selectedTableId}
+              onSelect={() => setSelectedTableId(table.id)}
+            />
+          ))}
+          </div>
         </div>
 
         <ZoomControls
