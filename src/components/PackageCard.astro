@@ -42,13 +42,13 @@ const remainingFeatures = featuresCount - initialVisibleFeatures;
           {pkg.name}
         </h3>
         <p class="font-sora text-gray-600 text-sm mb-4" set:html={pkg.description}></p>
-        <div class="mb-6">
+        <!-- <div class="mb-6">
           <div class="text-lg text-gray-400 line-through mb-1">{pkg.originalPrice}</div>
           <span class={`font-sora font-bold text-4xl ${ pkg.popular ? 'text-indigo-600' : 'text-gray-900' }`}>
             {pkg.discountedPrice}
           </span>
           <span class="text-gray-600 text-sm ml-2">MXN</span>
-        </div>
+        </div> -->
       </div>
 
       <Button
@@ -58,7 +58,7 @@ const remainingFeatures = featuresCount - initialVisibleFeatures;
         size="md"
         class="w-full js-scroll-to-contact mb-8"
       >
-        Lo quiero
+        Cotizar invitación
       </Button>
 
       <ul class="feature-list space-y-4 mb-8">
