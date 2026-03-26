@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MousePointer2, Table, TextCursorInput, Undo2, Redo2, LayoutTemplate } from 'lucide-react';
 import { Tooltip } from '@/components/ui-app/Tooltip';
-import { SubmenuMesas } from './SubmenuMesas'; // Importamos el nuevo componente
+import { SubmenuMesas } from './SubMenuMesas'; // Importamos el nuevo componente
 
 // La prop 'onAddTable' vendrá desde App.js
 export const Sidebar = ({ activeTool, setActiveTool, setModalOpen, onAddTable }) => {
